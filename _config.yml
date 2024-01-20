@@ -9,7 +9,7 @@ title                       : Introduction to Scientific and High Performance Co
 author                      : William Oquendo  # The author of the book
 email                       : wfoquendop@unal.edu.co  # An email address to contact the author
 copyright                   : "2024"  # Copyright year to be placed in the footer
-logo                        : https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg  # A path to the book logo
+logo                        : https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Nanoscience_High-Performance_Computing_Facility.jpg/1600px-Nanoscience_High-Performance_Computing_Facility.jpg  # A path to the book logo
 # Patterns to skip when building the book. Can be glob-style (e.g. "*skip.ipynb")
 exclude_patterns            : [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints", "VisualizationGL"]
 # Auto-exclude files not in the toc
@@ -45,15 +45,15 @@ launch_buttons:
   binderhub_url             : "https://mybinder.org"  # The URL of the BinderHub (e.g., https://mybinder.org)
   binder_repo_base          : "https://github.com/"  # The site on which the textbook repository is hosted
   binder_repo_org           : "iluvatar1"  # The username or organization that owns this repository
-  binder_repo_name          : "???????"  # The name of the repository on the web
+  binder_repo_name          : "IntroSciComp-HPC-20241s"  # The name of the repository on the web
   binder_repo_branch        : "gh-pages"  # The branch on which your textbook is hosted.
   binderhub_interact_text   : "Interact"  # The text that interact buttons will contain.
   jupyterhub_url            : ""  # The URL of the JupyterHub (e.g., https://datahub.berkeley.edu)
   thebe                     : false  # Add a thebe button to pages (requires the repository to run on Binder)
-  colab_url                 : "https://colab.research.google.com/github/iluvatar1/???????/blob/master" # The URL of Google Colab (https://colab.research.google.com)
+  colab_url                 : "https://colab.research.google.com/github/iluvatar1/IntroSciCompHPC-20241s/blob/master" # The URL of Google Colab (https://colab.research.google.com)
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/iluvatar1/?????????  # Online location of your book
+  url: https://github.com/iluvatar1/IntroSciCompHPC-20241s  # Online location of your book
   #path_to_book: docs  # Optional path to your book, relative to the repository root
   branch: master  # Which branch of the repository should be used when creating links (optional)
 

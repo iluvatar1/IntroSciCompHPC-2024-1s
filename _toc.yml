@@ -7,31 +7,34 @@ root: intro
 title: Introduction to Scientific and High Performance Computing
 
 parts:    
-  - caption: "Introduction to C++"
+  - caption: "Introduction to Scientific Computing"
     numbered: false
     chapters:
-    - file: 01-IntroCPP/BasicCPP.ipynb
-      sections:
-      - file: 01-IntroCPP/Resources.ipynb
-    - file: 01-IntroCPP/CPP-FastPacedIntro.ipynb
-  - caption: "Numerical Calculus"
-    numbered: false
-    chapters:
-    - file: 02-derivatives/NumericalDifferentiation.ipynb
-    - file: 03-integration/NumericalIntegration_Basics.ipynb
-  - caption: "Modern and primitive arrays, and basic Linear Algebra"
-    numbered: false
-    chapters:
-    - file: 04-vector-containers/ModernArrays.ipynb
-    - file: 05-matrixI/2D-matrices-to-1D-arrays.ipynb
-    - file: 06-ArrayComputing/ArrayComputing-Valarray.ipynb
-  - caption: "Linear Algebra and Numerical Libraries"
-    numbered: false
-    chapters:
-    - file: 07-LinearAlgebra/LinearAlgebraEigen.ipynb
-  - caption: "Ordinary differential equations: Initial value problems"
-    numbered: false
-    chapters:
-    - file: 08-ODE-IVP/InitialValueProblem.ipynb
-    - file: 09-ODE-IVP-OOP/IntroMolecularDynamics.ipynb
+    - file: 01-Introduction/01-Introduction.ipynb
+      title: Introduction
+    - file: 02-errorsfpnumbers/ErrorsFPNumbers.ipynb
+      title: Errors in Floating Point Numbers
+  #     sections:
+  #     - file: 01-IntroCPP/Resources.ipynb
+  #   - file: 01-IntroCPP/CPP-FastPacedIntro.ipynb
+  # - caption: "Numerical Calculus"
+  #   numbered: false
+  #   chapters:
+  #   - file: 02-derivatives/NumericalDifferentiation.ipynb
+  #   - file: 03-integration/NumericalIntegration_Basics.ipynb
+  # - caption: "Modern and primitive arrays, and basic Linear Algebra"
+  #   numbered: false
+  #   chapters:
+  #   - file: 04-vector-containers/ModernArrays.ipynb
+  #   - file: 05-matrixI/2D-matrices-to-1D-arrays.ipynb
+  #   - file: 06-ArrayComputing/ArrayComputing-Valarray.ipynb
+  # - caption: "Linear Algebra and Numerical Libraries"
+  #   numbered: false
+  #   chapters:
+  #   - file: 07-LinearAlgebra/LinearAlgebraEigen.ipynb
+  # - caption: "Ordinary differential equations: Initial value problems"
+  #   numbered: false
+  #   chapters:
+  #   - file: 08-ODE-IVP/InitialValueProblem.ipynb
+  #   - file: 09-ODE-IVP-OOP/IntroMolecularDynamics.ipynb
   
