@@ -230,7 +230,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/iluvatar1/IntroSciCompHPC-20241s/master?urlpath=lab/tree/02-errorsfpnumbers/ErrorsFPNumbers.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/iluvatar1/IntroSciCompHPC-2024-1s/master?urlpath=lab/tree/02-errorsfpnumbers/ErrorsFPNumbers.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onBinder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -248,7 +248,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/iluvatar1/IntroSciCompHPC-20241s/blob/master/github/iluvatar1/IntroSciCompHPC-20241s/blob/master/02-errorsfpnumbers/ErrorsFPNumbers.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/iluvatar1/IntroSciCompHPC-2024-1s/blob/master/github/iluvatar1/IntroSciCompHPC-2024-1s/blob/master/02-errorsfpnumbers/ErrorsFPNumbers.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -279,7 +279,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-20241s" target="_blank"
+      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-2024-1s" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -296,7 +296,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-20241s/issues/new?title=Issue%20on%20page%20%2F02-errorsfpnumbers/ErrorsFPNumbers.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-2024-1s/issues/new?title=Issue%20on%20page%20%2F02-errorsfpnumbers/ErrorsFPNumbers.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -673,8 +673,8 @@ $<span class="math notranslate nohighlight">\(e^{-x} = \sum_{i=0}^{\infty} (-1)^
 <section id="exercise-sum-ups-and-down">
 <h3>Exercise: Sum ups and down<a class="headerlink" href="#exercise-sum-ups-and-down" title="Permalink to this heading">#</a></h3>
 <p>Is there any computation difference between the following sums?</p>
-<div class="amsmath math notranslate nohighlight" id="equation-54d14200-958b-4a44-b363-804c39ddbc97">
-<span class="eqno">(1)<a class="headerlink" href="#equation-54d14200-958b-4a44-b363-804c39ddbc97" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-630f5907-35c0-465a-97e2-d058953a02e4">
+<span class="eqno">(1)<a class="headerlink" href="#equation-630f5907-35c0-465a-97e2-d058953a02e4" title="Permalink to this equation">#</a></span>\[\begin{align}
 S_{up}(N) &amp;= \sum_{n=1}^{N} \frac{1}{n},\\
 S_{down}(N) &amp;= \sum_{n=N}^{1} \frac{1}{n}.
 \end{align}\]</div>
@@ -716,8 +716,8 @@ Mathematically, this function should give 0 always. Is that true?</p>
 <section id="substractive-cancellation">
 <h3>Substractive cancellation<a class="headerlink" href="#substractive-cancellation" title="Permalink to this heading">#</a></h3>
 <p>Given <span class="math notranslate nohighlight">\(a = b-c\)</span>, then <span class="math notranslate nohighlight">\(a_c = b_c-c_c\)</span>, therefore</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a68d2eeb-2c15-4ba0-a1f6-ce573f078b46">
-<span class="eqno">(2)<a class="headerlink" href="#equation-a68d2eeb-2c15-4ba0-a1f6-ce573f078b46" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-61ff0a51-ef2a-4e54-bed3-d926957c5119">
+<span class="eqno">(2)<a class="headerlink" href="#equation-61ff0a51-ef2a-4e54-bed3-d926957c5119" title="Permalink to this equation">#</a></span>\[\begin{align}
 a_c &amp;= a(1+\epsilon_a ) = b_c - c_c = b(1+\epsilon_b ) - c(1+\epsilon_c )\\
 \frac{a_c}{a} &amp;= 1 + \epsilon_b \frac{b}{a} - \frac{c}{a}\epsilon_c  
 \end{align}\]</div>
@@ -740,8 +740,8 @@ and
 <section id="total-errors-in-algorithms-and-their-computational-implementation">
 <h2>Total errors in algorithms and their computational implementation<a class="headerlink" href="#total-errors-in-algorithms-and-their-computational-implementation" title="Permalink to this heading">#</a></h2>
 <p>As you can see, there are several source for errors in computation. Some come from the mathematical approximation, , called <span class="math notranslate nohighlight">\(\epsilon_a\)</span>, and some others are intrinsic from the numerical representation, and we can call them <span class="math notranslate nohighlight">\(\epsilon_r\)</span>. Sometimes, the rounding/truncation error are modeled as a random walk, <span class="math notranslate nohighlight">\(\epsilon_r \simeq \sqrt{N} \epsilon_m\)</span>, where <span class="math notranslate nohighlight">\(\epsilon_m\)</span> is the machine precision, and <span class="math notranslate nohighlight">\(N\)</span> is the representative number of “steps”.  From here, the total error can be estimated as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ebf3d4a8-ed20-4eaa-8ce8-2f3dbe746f30">
-<span class="eqno">(3)<a class="headerlink" href="#equation-ebf3d4a8-ed20-4eaa-8ce8-2f3dbe746f30" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8f7ca562-3455-4a6f-9668-dabbd99e2aba">
+<span class="eqno">(3)<a class="headerlink" href="#equation-8f7ca562-3455-4a6f-9668-dabbd99e2aba" title="Permalink to this equation">#</a></span>\[\begin{align}
 \epsilon_{\rm tot} &amp;= \epsilon_a + \epsilon_r \\
 &amp;= \frac{\alpha}{N^\beta} + \sqrt{N} \epsilon_m.
 \end{align}\]</div>
