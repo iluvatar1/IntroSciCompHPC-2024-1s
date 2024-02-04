@@ -1,0 +1,1269 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>9. Profiling &#8212; Introduction to Scientific and High Performance Computing</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css?v=03b9d5b1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '10-profiling/10-profiling';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="10. Numerical libraries in Matrix Problems" href="../11-matrices-numericallibs/11-matrices-numericallibs.html" />
+    <link rel="prev" title="8. Optimization" href="../10-optimization/10-optimization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Nanoscience_High-Performance_Computing_Facility.jpg/1600px-Nanoscience_High-Performance_Computing_Facility.jpg" class="logo__image only-light" alt="Introduction to Scientific and High Performance Computing - Home"/>
+    <script>document.write(`<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Nanoscience_High-Performance_Computing_Facility.jpg/1600px-Nanoscience_High-Performance_Computing_Facility.jpg" class="logo__image only-dark" alt="Introduction to Scientific and High Performance Computing - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Scientific and High Performance Computing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to scientific computing and programming tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01-Introduction/01-Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">2. Errors in Floating Point Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">3. Makefiles as automation tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">4. Standard library of functions: math functions, containers and random numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">5. Using software in a hpc environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">6. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">7. Unit Testing : Ensuring fix and correct behavior last</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">8. Optimization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">10. Numerical libraries in Matrix Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Performance measurement for some matrix ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">14. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">15. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">16. HPC resource manager: Slurm</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/iluvatar1/IntroSciCompHPC-2024-1s/master?urlpath=lab/tree/10-profiling/10-profiling.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/iluvatar1/IntroSciCompHPC-2024-1s/blob/master/github/iluvatar1/IntroSciCompHPC-2024-1s/blob/master/10-profiling/10-profiling.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-2024-1s" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-2024-1s/issues/new?title=Issue%20on%20page%20%2F10-profiling/10-profiling.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/10-profiling/10-profiling.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Profiling</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-profile">9.1. Why profile?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-elapsed-time">9.2. Measuring elapsed time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profilers">9.3. Profilers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gprof">9.4. gprof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perf">9.5. perf</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-perf">9.5.1. Installing perf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-perf">9.5.2. Using perf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hotstop-gui-for-perf">9.5.3. Hotstop: Gui for perf</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-with-valgrind-cachegrind-and-callgrind">9.6. Profiling with valgrind: cachegrind and callgrind</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cache-checker-cachegrind">9.6.1. Cache checker : cachegrind</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callgrind">9.6.2. Callgrind</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-performance-tools">9.7. Google Performance Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.8. Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><a class="reference external" href="https://docs.python.org/3.12/howto/perf_profiling.html">https://docs.python.org/3.12/howto/perf_profiling.html</a>
+<a class="reference external" href="https://pkolaczk.github.io/server-slower-than-a-laptop/">https://pkolaczk.github.io/server-slower-than-a-laptop/</a>
+<a class="reference external" href="http://www.brendangregg.com/flamegraphs.html">http://www.brendangregg.com/flamegraphs.html</a>
+<a class="github reference external" href="https://github.com/wolfpld/tracy">wolfpld/tracy</a> <a class="reference external" href="https://www.kdab.com/hotspot-video/">https://www.kdab.com/hotspot-video/</a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="profiling">
+<h1><span class="section-number">9. </span>Profiling<a class="headerlink" href="#profiling" title="Link to this heading">#</a></h1>
+<p>After debugging your code and writing several tests to avoid repeating
+the same bug, you want to start optimizing it to make it fast (but
+keeping it correct). To do this, you need to measure. You need to detect
+functions which take most of the time. Optimizing a function that takes
+only 5% of the time will give you only marginal benefits. Finding the
+functions that take most of the time is called profiling , and there are
+several tools ready to help you. In the following we ill learn to use
+these tools to detect the hotspots/bottlenecks in our codes.</p>
+<section id="why-profile">
+<h2><span class="section-number">9.1. </span>Why profile?<a class="headerlink" href="#why-profile" title="Link to this heading">#</a></h2>
+<p>Profiling allows you to learn how the computation time was spent and how
+the data flows in your program. This can be achieved by just printing
+the time spent on each section using some internal timers, or, better,
+by using a tool called “profiler” that shows you how time was spent in
+your program and which functions called which other functions.</p>
+<p>Using a profiler is something that comes very handy when you want to
+verify that your program does what you want it to do, especially when it
+is not easy to analyze (it may contain many functions or many calls to
+different functions and so on).</p>
+<p>Remember, WE ARE SCIENTISTS, so we want to profile code to optimize the
+computation time taken by our program. The key idea then becomes finding
+where (which function/subroutine) is the computation time spent and
+attack it using optimization techniques (studied in a previous session
+of this course, check
+<a class="reference external" href="https://www.dropbox.com/s/z71cz13fzce05x7/UsualOptimization.pdf">this</a>).</p>
+</section>
+<section id="measuring-elapsed-time">
+<h2><span class="section-number">9.2. </span>Measuring elapsed time<a class="headerlink" href="#measuring-elapsed-time" title="Link to this heading">#</a></h2>
+<p>The first approach is to just add timers to your code. This is a good
+practice and it is useful for a code to report the time spent on
+different parts. The following example is extracted from
+<a class="reference external" href="https://github.com/thehackerwithin/PyTrieste/tree/master/valgrind">here</a>
+and modified to make it a bit simpler:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+
+<span class="cm">/*</span>
+<span class="cm">  Tests cache misses.</span>
+<span class="cm">*/</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">){</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Usage: cacheTest sizeI sizeJ</span><span class="se">\n</span><span class="s">In first input.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="kt">long</span><span class="w"> </span><span class="n">sI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">  </span><span class="kt">long</span><span class="w"> </span><span class="n">sJ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Operating on matrix of size %ld by %ld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sI</span><span class="p">,</span><span class="w"> </span><span class="n">sJ</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">long</span><span class="p">[</span><span class="n">sI</span><span class="o">*</span><span class="n">sJ</span><span class="p">];</span><span class="w"> </span><span class="c1">// double array.</span>
+
+<span class="w">  </span><span class="c1">// option 1</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sI</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sJ</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span>
+<span class="w">      </span><span class="n">arr</span><span class="p">[(</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">sJ</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// option 2</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sI</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sJ</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span>
+<span class="w">      </span><span class="n">arr</span><span class="p">[(</span><span class="n">j</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">sI</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// option 3</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sI</span><span class="o">*</span><span class="n">sJ</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%ld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now let’s add some timers using the <code class="docutils literal notranslate"><span class="pre">chrono</span> <span class="pre">c++11</span></code> library (you can see
+more eamples
+<a class="reference external" href="https://www.techiedelight.com/measure-elapsed-time-program-chrono-library/">here</a>
+and <a class="reference external" href="https://en.cppreference.com/w/cpp/chrono/duration">here</a> .</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="cm">/*</span>
+<span class="cm">   Tests cache misses.</span>
+<span class="cm">*/</span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">){</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Usage: cacheTest sizeI sizeJ</span><span class="se">\n</span><span class="s">In first input.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="kt">long</span><span class="w"> </span><span class="n">sI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">  </span><span class="kt">long</span><span class="w"> </span><span class="n">sJ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Operating on matrix of size %ld by %ld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sI</span><span class="p">,</span><span class="w"> </span><span class="n">sJ</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">  </span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">long</span><span class="p">[</span><span class="n">sI</span><span class="o">*</span><span class="n">sJ</span><span class="p">];</span><span class="w"> </span><span class="c1">// double array.</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">  </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// option 1</span>
+<span class="w">  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sI</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sJ</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span>
+<span class="w">      </span><span class="n">arr</span><span class="p">[(</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">sJ</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">  </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// option 2</span>
+<span class="w">  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sI</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sJ</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span>
+<span class="w">         </span><span class="n">arr</span><span class="p">[(</span><span class="n">j</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">sI</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">  </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// option 3</span>
+<span class="w">  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sI</span><span class="o">*</span><span class="n">sJ</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">  </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%ld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Elapsed time in ms: &quot;</span>
+<span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">).</span><span class="n">count</span><span class="p">()</span>
+<span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Analyze the results.</p>
+</section>
+<section id="profilers">
+<h2><span class="section-number">9.3. </span>Profilers<a class="headerlink" href="#profilers" title="Link to this heading">#</a></h2>
+<p>There are many types of profilers from many different sources, commonly,
+a profiler is associated to a compiler, so that for example, GNU (the
+community around gcc compiler) has the profiler ‘gprof’, intel
+(corporation behind icc) has iprof, PGI has pgprof, etc. Valgrind is
+also a useful profiler through the cachegrind tool, which has been shown
+at the debugging section.</p>
+<p>This crash course (more like mini tutorial) will focus on using gprof.
+Note that gprof supports (to some extend) compiled code by other
+compilers such as icc and pgcc. At the end we will briefly review perf,
+and the google performance tools.</p>
+<blockquote>
+<div><p><strong>FACT 1:</strong> According to Thiel, “gprof … revolutionized the
+performance analysis field and quickly became the tool of choice for
+developers around the world …, the tool is still actively maintained
+and remains relevant in the modern world.” (from Wikipedia).</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>FACT 2:</strong> Top 50 most influential papers on PLDI (from Wikipedia).</p>
+</div></blockquote>
+</section>
+<section id="gprof">
+<h2><span class="section-number">9.4. </span>gprof<a class="headerlink" href="#gprof" title="Link to this heading">#</a></h2>
+<p>Inthe following we will use the following code as example: Example 1:
+Basic gprof (compile with <code class="docutils literal notranslate"><span class="pre">gcc</span></code>)</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">//test_gprof.c</span>
+<span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">new_func1</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">func1</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">func2</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">new_func1</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s"> Inside main()</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="p">(;</span><span class="n">i</span><span class="o">&lt;</span><span class="mh">0xffffff</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">);</span>
+<span class="w">  </span><span class="n">func1</span><span class="p">();</span>
+<span class="w">  </span><span class="n">func2</span><span class="p">();</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">new_func1</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">func1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s"> Inside func1 </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="p">(;</span><span class="n">i</span><span class="o">&lt;</span><span class="mh">0xffffffff</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">);</span>
+<span class="w">  </span><span class="n">new_func1</span><span class="p">();</span>
+
+<span class="w">  </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">func2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s"> Inside func2 </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="p">(;</span><span class="n">i</span><span class="o">&lt;</span><span class="mh">0xffffffaa</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">new_func1</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s"> Inside new_func1()</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="p">(;</span><span class="n">i</span><span class="o">&lt;</span><span class="mh">0xffffffee</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+</pre></div>
+</div>
+<p>Para usar gprof:</p>
+<ol class="arabic">
+<li><p>Compilar con <code class="docutils literal notranslate"><span class="pre">-pg</span></code></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>-Wall<span class="w"> </span>-pg<span class="w"> </span>-g<span class="w"> </span>test_gprof.c<span class="w"> </span>-o<span class="w"> </span>test_gprof
+</pre></div>
+</div>
+</li>
+<li><p>Ejecutar normalmente. Esto crea o sobreescribe un archivo <code class="docutils literal notranslate"><span class="pre">gmon.out</span></code></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./test_gprof
+</pre></div>
+</div>
+</li>
+<li><p>Abrir el reporte usando</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gprof<span class="w"> </span>test_gprof<span class="w"> </span>gmon.out<span class="w"> </span>&gt;<span class="w"> </span>analysis.txt
+</pre></div>
+</div>
+</li>
+</ol>
+<p>This produces a file called ‘analysis.txt’ which contains the profiling
+information in a human-readable form. The output of this file should be
+something like the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Flat<span class="w"> </span>profile:
+
+Each<span class="w"> </span>sample<span class="w"> </span>counts<span class="w"> </span>as<span class="w"> </span><span class="m">0</span>.01<span class="w"> </span>seconds.
+<span class="w">  </span>%<span class="w">   </span>cumulative<span class="w">   </span>self<span class="w">              </span>self<span class="w">     </span>total
+<span class="w"> </span><span class="nb">time</span><span class="w">   </span>seconds<span class="w">   </span>seconds<span class="w">    </span>calls<span class="w">   </span>s/call<span class="w">   </span>s/call<span class="w">  </span>name
+<span class="w"> </span><span class="m">39</span>.64<span class="w">      </span><span class="m">9</span>.43<span class="w">     </span><span class="m">9</span>.43<span class="w">        </span><span class="m">1</span><span class="w">     </span><span class="m">9</span>.43<span class="w">    </span><span class="m">16</span>.79<span class="w">  </span>func1
+<span class="w"> </span><span class="m">30</span>.89<span class="w">     </span><span class="m">16</span>.79<span class="w">     </span><span class="m">7</span>.35<span class="w">        </span><span class="m">1</span><span class="w">     </span><span class="m">7</span>.35<span class="w">     </span><span class="m">7</span>.35<span class="w">  </span>new_func1
+<span class="w"> </span><span class="m">30</span>.46<span class="w">     </span><span class="m">24</span>.04<span class="w">     </span><span class="m">7</span>.25<span class="w">        </span><span class="m">1</span><span class="w">     </span><span class="m">7</span>.25<span class="w">     </span><span class="m">7</span>.25<span class="w">  </span>func2
+<span class="w">  </span><span class="m">0</span>.13<span class="w">     </span><span class="m">24</span>.07<span class="w">     </span><span class="m">0</span>.03<span class="w">                             </span>main
+
+<span class="w"> </span>%<span class="w">         </span>the<span class="w"> </span>percentage<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>total<span class="w"> </span>running<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>the
+<span class="nb">time</span><span class="w">       </span>program<span class="w"> </span>used<span class="w"> </span>by<span class="w"> </span>this<span class="w"> </span><span class="k">function</span>.
+
+cumulative<span class="w"> </span>a<span class="w"> </span>running<span class="w"> </span>sum<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>seconds<span class="w"> </span>accounted
+<span class="w"> </span>seconds<span class="w">   </span><span class="k">for</span><span class="w"> </span>by<span class="w"> </span>this<span class="w"> </span><span class="k">function</span><span class="w"> </span>and<span class="w"> </span>those<span class="w"> </span>listed<span class="w"> </span>above<span class="w"> </span>it.
+
+<span class="w"> </span>self<span class="w">      </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>seconds<span class="w"> </span>accounted<span class="w"> </span><span class="k">for</span><span class="w"> </span>by<span class="w"> </span>this
+seconds<span class="w">    </span><span class="k">function</span><span class="w"> </span>alone.<span class="w">  </span>This<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>major<span class="w"> </span>sort<span class="w"> </span><span class="k">for</span><span class="w"> </span>this
+<span class="w">           </span>listing.
+
+calls<span class="w">      </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span><span class="nb">times</span><span class="w"> </span>this<span class="w"> </span><span class="k">function</span><span class="w"> </span>was<span class="w"> </span>invoked,<span class="w"> </span><span class="k">if</span>
+<span class="w">           </span>this<span class="w"> </span><span class="k">function</span><span class="w"> </span>is<span class="w"> </span>profiled,<span class="w"> </span><span class="k">else</span><span class="w"> </span>blank.
+
+<span class="w"> </span>self<span class="w">      </span>the<span class="w"> </span>average<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>milliseconds<span class="w"> </span>spent<span class="w"> </span><span class="k">in</span><span class="w"> </span>this
+ms/call<span class="w">    </span><span class="k">function</span><span class="w"> </span>per<span class="w"> </span>call,<span class="w"> </span><span class="k">if</span><span class="w"> </span>this<span class="w"> </span><span class="k">function</span><span class="w"> </span>is<span class="w"> </span>profiled,
+<span class="w">       </span><span class="k">else</span><span class="w"> </span>blank.
+
+<span class="w"> </span>total<span class="w">     </span>the<span class="w"> </span>average<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>milliseconds<span class="w"> </span>spent<span class="w"> </span><span class="k">in</span><span class="w"> </span>this
+ms/call<span class="w">    </span><span class="k">function</span><span class="w"> </span>and<span class="w"> </span>its<span class="w"> </span>descendents<span class="w"> </span>per<span class="w"> </span>call,<span class="w"> </span><span class="k">if</span><span class="w"> </span>this
+<span class="w">       </span><span class="k">function</span><span class="w"> </span>is<span class="w"> </span>profiled,<span class="w"> </span><span class="k">else</span><span class="w"> </span>blank.
+
+name<span class="w">       </span>the<span class="w"> </span>name<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span><span class="k">function</span>.<span class="w">  </span>This<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>minor<span class="w"> </span>sort
+<span class="w">           </span><span class="k">for</span><span class="w"> </span>this<span class="w"> </span>listing.<span class="w"> </span>The<span class="w"> </span>index<span class="w"> </span>shows<span class="w"> </span>the<span class="w"> </span>location<span class="w"> </span>of
+<span class="w">       </span>the<span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>gprof<span class="w"> </span>listing.<span class="w"> </span>If<span class="w"> </span>the<span class="w"> </span>index<span class="w"> </span>is
+<span class="w">       </span><span class="k">in</span><span class="w"> </span>parenthesis<span class="w"> </span>it<span class="w"> </span>shows<span class="w"> </span>where<span class="w"> </span>it<span class="w"> </span>would<span class="w"> </span>appear<span class="w"> </span><span class="k">in</span>
+<span class="w">       </span>the<span class="w"> </span>gprof<span class="w"> </span>listing<span class="w"> </span><span class="k">if</span><span class="w"> </span>it<span class="w"> </span>were<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>printed.
+<span class="w"></span>
+<span class="w">             </span>Call<span class="w"> </span>graph<span class="w"> </span><span class="o">(</span>explanation<span class="w"> </span>follows<span class="o">)</span>
+
+
+granularity:<span class="w"> </span>each<span class="w"> </span>sample<span class="w"> </span>hit<span class="w"> </span>covers<span class="w"> </span><span class="m">2</span><span class="w"> </span>byte<span class="o">(</span>s<span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="m">0</span>.04%<span class="w"> </span>of<span class="w"> </span><span class="m">24</span>.07<span class="w"> </span>seconds
+
+index<span class="w"> </span>%<span class="w"> </span><span class="nb">time</span><span class="w">    </span>self<span class="w">  </span>children<span class="w">    </span>called<span class="w">     </span>name
+<span class="w">                                                 </span>&lt;spontaneous&gt;
+<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w">    </span><span class="m">100</span>.0<span class="w">    </span><span class="m">0</span>.03<span class="w">   </span><span class="m">24</span>.04<span class="w">                 </span>main<span class="w"> </span><span class="o">[</span><span class="m">1</span><span class="o">]</span>
+<span class="w">                </span><span class="m">9</span>.43<span class="w">    </span><span class="m">7</span>.35<span class="w">       </span><span class="m">1</span>/1<span class="w">           </span>func1<span class="w"> </span><span class="o">[</span><span class="m">2</span><span class="o">]</span>
+<span class="w">                </span><span class="m">7</span>.25<span class="w">    </span><span class="m">0</span>.00<span class="w">       </span><span class="m">1</span>/1<span class="w">           </span>func2<span class="w"> </span><span class="o">[</span><span class="m">4</span><span class="o">]</span>
+-----------------------------------------------
+<span class="w">                </span><span class="m">9</span>.43<span class="w">    </span><span class="m">7</span>.35<span class="w">       </span><span class="m">1</span>/1<span class="w">           </span>main<span class="w"> </span><span class="o">[</span><span class="m">1</span><span class="o">]</span>
+<span class="o">[</span><span class="m">2</span><span class="o">]</span><span class="w">     </span><span class="m">69</span>.7<span class="w">    </span><span class="m">9</span>.43<span class="w">    </span><span class="m">7</span>.35<span class="w">       </span><span class="m">1</span><span class="w">         </span>func1<span class="w"> </span><span class="o">[</span><span class="m">2</span><span class="o">]</span>
+<span class="w">                </span><span class="m">7</span>.35<span class="w">    </span><span class="m">0</span>.00<span class="w">       </span><span class="m">1</span>/1<span class="w">           </span>new_func1<span class="w"> </span><span class="o">[</span><span class="m">3</span><span class="o">]</span>
+-----------------------------------------------
+<span class="w">                </span><span class="m">7</span>.35<span class="w">    </span><span class="m">0</span>.00<span class="w">       </span><span class="m">1</span>/1<span class="w">           </span>func1<span class="w"> </span><span class="o">[</span><span class="m">2</span><span class="o">]</span>
+<span class="o">[</span><span class="m">3</span><span class="o">]</span><span class="w">     </span><span class="m">30</span>.5<span class="w">    </span><span class="m">7</span>.35<span class="w">    </span><span class="m">0</span>.00<span class="w">       </span><span class="m">1</span><span class="w">         </span>new_func1<span class="w"> </span><span class="o">[</span><span class="m">3</span><span class="o">]</span>
+-----------------------------------------------
+<span class="w">                </span><span class="m">7</span>.25<span class="w">    </span><span class="m">0</span>.00<span class="w">       </span><span class="m">1</span>/1<span class="w">           </span>main<span class="w"> </span><span class="o">[</span><span class="m">1</span><span class="o">]</span>
+<span class="o">[</span><span class="m">4</span><span class="o">]</span><span class="w">     </span><span class="m">30</span>.1<span class="w">    </span><span class="m">7</span>.25<span class="w">    </span><span class="m">0</span>.00<span class="w">       </span><span class="m">1</span><span class="w">         </span>func2<span class="w"> </span><span class="o">[</span><span class="m">4</span><span class="o">]</span>
+-----------------------------------------------
+
+<span class="w"> </span>This<span class="w"> </span>table<span class="w"> </span>describes<span class="w"> </span>the<span class="w"> </span>call<span class="w"> </span>tree<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>program,<span class="w"> </span>and<span class="w"> </span>was<span class="w"> </span>sorted<span class="w"> </span>by
+<span class="w"> </span>the<span class="w"> </span>total<span class="w"> </span>amount<span class="w"> </span>of<span class="w"> </span><span class="nb">time</span><span class="w"> </span>spent<span class="w"> </span><span class="k">in</span><span class="w"> </span>each<span class="w"> </span><span class="k">function</span><span class="w"> </span>and<span class="w"> </span>its<span class="w"> </span>children.
+
+<span class="w"> </span>Each<span class="w"> </span>entry<span class="w"> </span><span class="k">in</span><span class="w"> </span>this<span class="w"> </span>table<span class="w"> </span>consists<span class="w"> </span>of<span class="w"> </span>several<span class="w"> </span>lines.<span class="w">  </span>The<span class="w"> </span>line<span class="w"> </span>with<span class="w"> </span>the
+<span class="w"> </span>index<span class="w"> </span>number<span class="w"> </span>at<span class="w"> </span>the<span class="w"> </span>left<span class="w"> </span>hand<span class="w"> </span>margin<span class="w"> </span>lists<span class="w"> </span>the<span class="w"> </span>current<span class="w"> </span><span class="k">function</span>.
+<span class="w"> </span>The<span class="w"> </span>lines<span class="w"> </span>above<span class="w"> </span>it<span class="w"> </span>list<span class="w"> </span>the<span class="w"> </span>functions<span class="w"> </span>that<span class="w"> </span>called<span class="w"> </span>this<span class="w"> </span><span class="k">function</span>,
+<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>lines<span class="w"> </span>below<span class="w"> </span>it<span class="w"> </span>list<span class="w"> </span>the<span class="w"> </span>functions<span class="w"> </span>this<span class="w"> </span>one<span class="w"> </span>called.
+<span class="w"> </span>This<span class="w"> </span>line<span class="w"> </span>lists:
+<span class="w">     </span>index<span class="w">  </span>A<span class="w"> </span>unique<span class="w"> </span>number<span class="w"> </span>given<span class="w"> </span>to<span class="w"> </span>each<span class="w"> </span>element<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>table.
+<span class="w">        </span>Index<span class="w"> </span>numbers<span class="w"> </span>are<span class="w"> </span>sorted<span class="w"> </span>numerically.
+<span class="w">        </span>The<span class="w"> </span>index<span class="w"> </span>number<span class="w"> </span>is<span class="w"> </span>printed<span class="w"> </span>next<span class="w"> </span>to<span class="w"> </span>every<span class="w"> </span><span class="k">function</span><span class="w"> </span>name<span class="w"> </span>so
+<span class="w">        </span>it<span class="w"> </span>is<span class="w"> </span>easier<span class="w"> </span>to<span class="w"> </span>look<span class="w"> </span>up<span class="w"> </span>where<span class="w"> </span>the<span class="w"> </span><span class="k">function</span><span class="w"> </span>is<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>table.
+
+<span class="w">     </span>%<span class="w"> </span><span class="nb">time</span><span class="w"> </span>This<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>percentage<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span><span class="sb">`</span>total<span class="s1">&#39; time that was spent</span>
+<span class="s1">        in this function and its children.  Note that due to</span>
+<span class="s1">        different viewpoints, functions excluded by options, etc,</span>
+<span class="s1">        these numbers will NOT add up to 100%.</span>
+
+<span class="s1">     self   This is the total amount of time spent in this function.</span>
+
+<span class="s1">     children   This is the total amount of time propagated into this</span>
+<span class="s1">        function by its children.</span>
+
+<span class="s1">     called This is the number of times the function was called.</span>
+<span class="s1">        If the function called itself recursively, the number</span>
+<span class="s1">        only includes non-recursive calls, and is followed by</span>
+<span class="s1">        a `+&#39;</span><span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span>recursive<span class="w"> </span>calls.
+
+<span class="w">     </span>name<span class="w">   </span>The<span class="w"> </span>name<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>current<span class="w"> </span><span class="k">function</span>.<span class="w">  </span>The<span class="w"> </span>index<span class="w"> </span>number<span class="w"> </span>is
+<span class="w">        </span>printed<span class="w"> </span>after<span class="w"> </span>it.<span class="w">  </span>If<span class="w"> </span>the<span class="w"> </span><span class="k">function</span><span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>member<span class="w"> </span>of<span class="w"> </span>a
+<span class="w">        </span>cycle,<span class="w"> </span>the<span class="w"> </span>cycle<span class="w"> </span>number<span class="w"> </span>is<span class="w"> </span>printed<span class="w"> </span>between<span class="w"> </span>the
+<span class="w">        </span><span class="k">function</span><span class="s1">&#39;s name and the index number.</span>
+
+
+<span class="s1"> For the function&#39;</span>s<span class="w"> </span>parents,<span class="w"> </span>the<span class="w"> </span>fields<span class="w"> </span>have<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>meanings:
+
+<span class="w">     </span>self<span class="w">   </span>This<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>amount<span class="w"> </span>of<span class="w"> </span><span class="nb">time</span><span class="w"> </span>that<span class="w"> </span>was<span class="w"> </span>propagated<span class="w"> </span>directly
+<span class="w">        </span>from<span class="w"> </span>the<span class="w"> </span><span class="k">function</span><span class="w"> </span>into<span class="w"> </span>this<span class="w"> </span>parent.
+
+<span class="w">     </span>children<span class="w">   </span>This<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>amount<span class="w"> </span>of<span class="w"> </span><span class="nb">time</span><span class="w"> </span>that<span class="w"> </span>was<span class="w"> </span>propagated<span class="w"> </span>from
+<span class="w">        </span>the<span class="w"> </span><span class="k">function</span><span class="s1">&#39;s children into this parent.</span>
+
+<span class="s1">     called This is the number of times this parent called the</span>
+<span class="s1">        function `/&#39;</span><span class="w"> </span>the<span class="w"> </span>total<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span><span class="nb">times</span><span class="w"> </span>the<span class="w"> </span><span class="k">function</span>
+<span class="w">        </span>was<span class="w"> </span>called.<span class="w">  </span>Recursive<span class="w"> </span>calls<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span><span class="k">function</span><span class="w"> </span>are<span class="w"> </span>not
+<span class="w">        </span>included<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>after<span class="w"> </span>the<span class="w"> </span><span class="sb">`</span>/<span class="s1">&#39;.</span>
+
+<span class="s1">     name   This is the name of the parent.  The parent&#39;</span>s<span class="w"> </span>index
+<span class="w">        </span>number<span class="w"> </span>is<span class="w"> </span>printed<span class="w"> </span>after<span class="w"> </span>it.<span class="w">  </span>If<span class="w"> </span>the<span class="w"> </span>parent<span class="w"> </span>is<span class="w"> </span>a
+<span class="w">        </span>member<span class="w"> </span>of<span class="w"> </span>a<span class="w"> </span>cycle,<span class="w"> </span>the<span class="w"> </span>cycle<span class="w"> </span>number<span class="w"> </span>is<span class="w"> </span>printed<span class="w"> </span>between
+<span class="w">        </span>the<span class="w"> </span>name<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>index<span class="w"> </span>number.
+
+<span class="w"> </span>If<span class="w"> </span>the<span class="w"> </span>parents<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span><span class="k">function</span><span class="w"> </span>cannot<span class="w"> </span>be<span class="w"> </span>determined,<span class="w"> </span>the<span class="w"> </span>word
+<span class="w"> </span><span class="sb">`</span>&lt;spontaneous&gt;<span class="s1">&#39; is printed in the `name&#39;</span><span class="w"> </span>field,<span class="w"> </span>and<span class="w"> </span>all<span class="w"> </span>the<span class="w"> </span>other
+<span class="w"> </span>fields<span class="w"> </span>are<span class="w"> </span>blank.
+
+<span class="w"> </span>For<span class="w"> </span>the<span class="w"> </span><span class="k">function</span><span class="s1">&#39;s children, the fields have the following meanings:</span>
+
+<span class="s1">     self   This is the amount of time that was propagated directly</span>
+<span class="s1">        from the child into the function.</span>
+
+<span class="s1">     children   This is the amount of time that was propagated from the</span>
+<span class="s1">        child&#39;</span>s<span class="w"> </span>children<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span><span class="k">function</span>.
+
+<span class="w">     </span>called<span class="w"> </span>This<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span><span class="nb">times</span><span class="w"> </span>the<span class="w"> </span><span class="k">function</span><span class="w"> </span>called
+<span class="w">        </span>this<span class="w"> </span>child<span class="w"> </span><span class="sb">`</span>/<span class="s1">&#39; the total number of times the child</span>
+<span class="s1">        was called.  Recursive calls by the child are not</span>
+<span class="s1">        listed in the number after the `/&#39;</span>.
+
+<span class="w">     </span>name<span class="w">   </span>This<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>name<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>child.<span class="w">  </span>The<span class="w"> </span>child<span class="s1">&#39;s index</span>
+<span class="s1">        number is printed after it.  If the child is a</span>
+<span class="s1">        member of a cycle, the cycle number is printed</span>
+<span class="s1">        between the name and the index number.</span>
+
+<span class="s1"> If there are any cycles (circles) in the call graph, there is an</span>
+<span class="s1"> entry for the cycle-as-a-whole.  This entry shows who called the</span>
+<span class="s1"> cycle (as parents) and the members of the cycle (as children.)</span>
+<span class="s1"> The `+&#39;</span><span class="w"> </span>recursive<span class="w"> </span>calls<span class="w"> </span>entry<span class="w"> </span>shows<span class="w"> </span>the<span class="w"> </span>number<span class="w"> </span>of<span class="w"> </span><span class="k">function</span><span class="w"> </span>calls<span class="w"> </span>that
+<span class="w"> </span>were<span class="w"> </span>internal<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>cycle,<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>calls<span class="w"> </span>entry<span class="w"> </span><span class="k">for</span><span class="w"> </span>each<span class="w"> </span>member<span class="w"> </span>shows,
+<span class="w"> </span><span class="k">for</span><span class="w"> </span>that<span class="w"> </span>member,<span class="w"> </span>how<span class="w"> </span>many<span class="w"> </span><span class="nb">times</span><span class="w"> </span>it<span class="w"> </span>was<span class="w"> </span>called<span class="w"> </span>from<span class="w"> </span>other<span class="w"> </span>members<span class="w"> </span>of
+<span class="w"> </span>the<span class="w"> </span>cycle.
+
+<span class="w"></span>
+Index<span class="w"> </span>by<span class="w"> </span><span class="k">function</span><span class="w"> </span>name
+
+<span class="w">   </span><span class="o">[</span><span class="m">2</span><span class="o">]</span><span class="w"> </span>func1<span class="w">                   </span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>main
+<span class="w">   </span><span class="o">[</span><span class="m">4</span><span class="o">]</span><span class="w"> </span>func2<span class="w">                   </span><span class="o">[</span><span class="m">3</span><span class="o">]</span><span class="w"> </span>new_func1
+</pre></div>
+</div>
+<p>The output has two sections: &gt;*Flat profile:* The flat profile shows
+the total amount of time your program spent executing each function.</p>
+<blockquote>
+<div><p><strong>Call graph:</strong> The call graph shows how much time was spent in each
+function and its children.</p>
+</div></blockquote>
+</section>
+<section id="perf">
+<h2><span class="section-number">9.5. </span>perf<a class="headerlink" href="#perf" title="Link to this heading">#</a></h2>
+<p>See <a class="reference external" href="https://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html">https://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html</a></p>
+<section id="installing-perf">
+<h3><span class="section-number">9.5.1. </span>Installing perf<a class="headerlink" href="#installing-perf" title="Link to this heading">#</a></h3>
+<p>Perf is a kernel module, so you will need to install it from the kernel
+source. As root, the command used to install perl in the computer room
+was</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/usr/src/linux/tools/perf/<span class="p">;</span><span class="w"> </span>make<span class="w"> </span>-j<span class="w"> </span><span class="k">$(</span>nproc<span class="k">)</span><span class="p">;</span><span class="w"> </span>cp<span class="w"> </span>perf<span class="w"> </span>/usr/local/bin
+</pre></div>
+</div>
+<p>This will copy the perf executable into the path.</p>
+</section>
+<section id="using-perf">
+<h3><span class="section-number">9.5.2. </span>Using perf<a class="headerlink" href="#using-perf" title="Link to this heading">#</a></h3>
+<p>Perf is a hardware counter available on linux platforms.</p>
+<p>Its use is very simple: Just run, For a profile summary,</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>perf<span class="w"> </span>stat<span class="w"> </span>./a.out<span class="w"> </span>&gt;<span class="w"> </span>profile_summary
+</pre></div>
+</div>
+<p>For gprof-like info, use</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">perf</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="n">a</span><span class="p">.</span><span class="n">out</span>
+<span class="n">perf</span><span class="w"> </span><span class="n">report</span>
+</pre></div>
+</div>
+</section>
+<section id="hotstop-gui-for-perf">
+<h3><span class="section-number">9.5.3. </span>Hotstop: Gui for perf<a class="headerlink" href="#hotstop-gui-for-perf" title="Link to this heading">#</a></h3>
+<p><a class="github reference external" href="https://github.com/KDAB/hotspot">KDAB/hotspot</a> Install with the appimage: Download
+it, make it executable, run.</p>
+<p>In the computer room you can also use spack:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>load<span class="w"> </span>hotspot-perf
+</pre></div>
+</div>
+<p>And then just use the command <code class="docutils literal notranslate"><span class="pre">hotspot</span></code> .</p>
+</section>
+</section>
+<section id="profiling-with-valgrind-cachegrind-and-callgrind">
+<h2><span class="section-number">9.6. </span>Profiling with valgrind: cachegrind and callgrind<a class="headerlink" href="#profiling-with-valgrind-cachegrind-and-callgrind" title="Link to this heading">#</a></h2>
+<p>Valgrind allows not only to debug a code but also to profile it. Here we
+will see how to use cachegrind, to check for cache misses, and
+callgrind, for a calling graph much like tools like perf and gprof.</p>
+<section id="cache-checker-cachegrind">
+<h3><span class="section-number">9.6.1. </span>Cache checker : cachegrind<a class="headerlink" href="#cache-checker-cachegrind" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>From
+<a class="reference external" href="http://valgrind.org/docs/manual/cg-manual.html#cg-manual.overview">cachegrind</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Cachegrind<span class="w"> </span>simulates<span class="w"> </span>how<span class="w"> </span>your<span class="w"> </span>program<span class="w"> </span>interacts<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>machine<span class="err">&#39;</span>s
+</pre></div>
+</div>
+<p>cache hierarchy and (optionally) branch predictor. It simulates a
+machine with independent first-level instruction and data caches (I1
+and D1), backed by a unified second-level cache (L2). This exactly
+matches the configuration of many modern machines.</p>
+</div></blockquote>
+<blockquote>
+<div><p>However, some modern machines have three levels of cache. For these
+machines (in the cases where Cachegrind can auto-detect the cache
+configuration) Cachegrind simulates the first-level and third-level
+caches. The reason for this choice is that the L3 cache has the most
+influence on runtime, as it masks accesses to main memory.
+Furthermore, the L1 caches often have low associativity, so simulating
+them can detect cases where the code interacts badly with this cache
+(eg. traversing a matrix column-wise with the row length being a power
+of 2).</p>
+</div></blockquote>
+<blockquote>
+<div><p>Therefore, Cachegrind always refers to the I1, D1 and LL (last-level)
+caches.</p>
+</div></blockquote>
+<p>To use cachegrind, you will need to invoke valgrind as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>valgrind<span class="w"> </span>--tool<span class="o">=</span>cachegrind<span class="w"> </span>prog
+</pre></div>
+</div>
+<p>Take into account that execution will be (possibly very) slow.</p>
+<p>Typical output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">==</span><span class="nv">31751</span><span class="o">==</span><span class="w"> </span>I<span class="w">   </span>refs:<span class="w">      </span><span class="m">27</span>,742,716
+<span class="o">==</span><span class="nv">31751</span><span class="o">==</span><span class="w"> </span>I1<span class="w">  </span>misses:<span class="w">           </span><span class="nv">276</span>
+<span class="o">==</span><span class="nv">31751</span><span class="o">==</span><span class="w"> </span>LLi<span class="w"> </span>misses:<span class="w">           </span><span class="nv">275</span>
+<span class="o">==</span><span class="nv">31751</span><span class="o">==</span><span class="w"> </span>I1<span class="w">  </span>miss<span class="w"> </span>rate:<span class="w">        </span><span class="m">0</span>.0%
+<span class="o">==</span><span class="nv">31751</span><span class="o">==</span><span class="w"> </span>LLi<span class="w"> </span>miss<span class="w"> </span>rate:<span class="w">        </span><span class="m">0</span>.0%
+<span class="o">==</span><span class="nv">31751</span><span class="o">==</span>
+<span class="o">==</span><span class="nv">31751</span><span class="o">==</span><span class="w"> </span>D<span class="w">   </span>refs:<span class="w">      </span><span class="m">15</span>,430,290<span class="w">  </span><span class="o">(</span><span class="m">10</span>,955,517<span class="w"> </span>rd<span class="w"> </span>+<span class="w"> </span><span class="m">4</span>,474,773<span class="w"> </span>wr<span class="o">)</span>
+<span class="o">==</span><span class="nv">31751</span><span class="o">==</span><span class="w"> </span>D1<span class="w">  </span>misses:<span class="w">        </span><span class="m">41</span>,185<span class="w">  </span><span class="o">(</span><span class="w">    </span><span class="m">21</span>,905<span class="w"> </span>rd<span class="w"> </span>+<span class="w">    </span><span class="m">19</span>,280<span class="w"> </span>wr<span class="o">)</span>
+<span class="o">==</span><span class="nv">31751</span><span class="o">==</span><span class="w"> </span>LLd<span class="w"> </span>misses:<span class="w">        </span><span class="m">23</span>,085<span class="w">  </span><span class="o">(</span><span class="w">     </span><span class="m">3</span>,987<span class="w"> </span>rd<span class="w"> </span>+<span class="w">    </span><span class="m">19</span>,098<span class="w"> </span>wr<span class="o">)</span>
+<span class="o">==</span><span class="nv">31751</span><span class="o">==</span><span class="w"> </span>D1<span class="w">  </span>miss<span class="w"> </span>rate:<span class="w">        </span><span class="m">0</span>.2%<span class="w"> </span><span class="o">(</span><span class="w">       </span><span class="m">0</span>.1%<span class="w">   </span>+<span class="w">       </span><span class="m">0</span>.4%<span class="o">)</span>
+<span class="o">==</span><span class="nv">31751</span><span class="o">==</span><span class="w"> </span>LLd<span class="w"> </span>miss<span class="w"> </span>rate:<span class="w">        </span><span class="m">0</span>.1%<span class="w"> </span><span class="o">(</span><span class="w">       </span><span class="m">0</span>.0%<span class="w">   </span>+<span class="w">       </span><span class="m">0</span>.4%<span class="o">)</span>
+<span class="o">==</span><span class="nv">31751</span><span class="o">==</span>
+<span class="o">==</span><span class="nv">31751</span><span class="o">==</span><span class="w"> </span>LL<span class="w"> </span>misses:<span class="w">         </span><span class="m">23</span>,360<span class="w">  </span><span class="o">(</span><span class="w">     </span><span class="m">4</span>,262<span class="w"> </span>rd<span class="w"> </span>+<span class="w">    </span><span class="m">19</span>,098<span class="w"> </span>wr<span class="o">)</span>
+<span class="o">==</span><span class="nv">31751</span><span class="o">==</span><span class="w"> </span>LL<span class="w"> </span>miss<span class="w"> </span>rate:<span class="w">         </span><span class="m">0</span>.0%<span class="w"> </span><span class="o">(</span><span class="w">       </span><span class="m">0</span>.0%<span class="w">   </span>+<span class="w">       </span><span class="m">0</span>.4%<span class="o">)</span>
+</pre></div>
+</div>
+<p>The output and more info will be written to <code class="docutils literal notranslate"><span class="pre">cachegrind.out.&lt;pid&gt;</span></code>,
+where pid is the PID of the process. You can open that file with
+valkyrie for better analysis.</p>
+<p>The tool <code class="docutils literal notranslate"><span class="pre">cg_annonate</span></code> allows you postprocess better the file
+<code class="docutils literal notranslate"><span class="pre">cachegrind.out.&lt;pid&gt;</span></code>.</p>
+<p>Compile the file cacheTest.cc,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>g++<span class="w"> </span>-g<span class="w"> </span>cacheTest.cc<span class="w"> </span>-o<span class="w"> </span>cacheTest
+</pre></div>
+</div>
+<p>Now run valgrind on it, with cache checker</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>valgrind<span class="w"> </span>--tool<span class="o">=</span>cachegrind<span class="w"> </span>./cacheTest<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="m">100000</span>
+</pre></div>
+</div>
+<p>Now let’s check the cache-misses per line of source code:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cg_annotate<span class="w"> </span>--auto<span class="o">=</span>yes<span class="w"> </span>cachegrind.out.PID
+</pre></div>
+</div>
+<p>where you have to change <code class="docutils literal notranslate"><span class="pre">PID</span></code> by the actual PID in your results.</p>
+<p>Fix the code.</p>
+<ol class="arabic">
+<li><p>More cache examples</p>
+<p>Please open the file <code class="docutils literal notranslate"><span class="pre">cache.cpp</span></code> which is inside the directory
+valgrind. Read it. Comment the line</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>std::sort<span class="o">(</span>data,<span class="w"> </span>data<span class="w"> </span>+<span class="w"> </span>arraySize<span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Compile the program and run it, measuring the execution time (if you
+wish, you can use optimization):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>g++<span class="w"> </span>-g<span class="w"> </span>cache.cpp<span class="w"> </span>-o<span class="w"> </span>cache.x
+$<span class="w"> </span><span class="nb">time</span><span class="w"> </span>./cache.x
+</pre></div>
+</div>
+<p>The output will be something like</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">26</span>.6758
+<span class="nv">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">312426300000</span>
+
+real<span class="w">    </span>0m32.272s
+user<span class="w">    </span>0m26.560s
+sys<span class="w"> </span>0m0.122s
+</pre></div>
+</div>
+<p>Now uncomment the same line, re-compile and re-run. You will get
+something like</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">5</span>.37881
+<span class="nv">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">312426300000</span>
+
+real<span class="w">    </span>0m6.180s
+user<span class="w">    </span>0m5.360s
+sys<span class="w"> </span>0m0.026s
+</pre></div>
+</div>
+<p>The difference is big. You can verify that this happens even with
+compiler optimisations enabled. What it is going on here?</p>
+<p>Try to figure out an explanation before continuing.</p>
+<p>Now let’s use valgrind to track the problem. Run the code (with the
+sort line commented) with cachegrind:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>valgrind<span class="w"> </span>--tool<span class="o">=</span>cachegrind<span class="w"> </span>./a.out
+</pre></div>
+</div>
+<p>And now let’s annotate the code (remember to change PID for your
+actual number):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cg_annonate<span class="w"> </span>--auto<span class="o">=</span>yes<span class="w"> </span>cachegrind.out.PID
+</pre></div>
+</div>
+<p>We can see that we have something similar to <a class="reference external" href="http://goo.gl/gVwlj">stackoverflow
+analysis</a></p>
+<p>Understand why.</p>
+</li>
+</ol>
+</section>
+<section id="callgrind">
+<h3><span class="section-number">9.6.2. </span>Callgrind<a class="headerlink" href="#callgrind" title="Link to this heading">#</a></h3>
+<p>Now, we are using valgrind to get a calling profile by using the tool
+<code class="docutils literal notranslate"><span class="pre">callgrind</span></code>. It is done as follows: Use the same programa as in other
+modules. First, compile with debugging enabled, something like</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>-g<span class="w"> </span>-ggdb<span class="w"> </span>name.c<span class="w"> </span>-o<span class="w"> </span>name.x<span class="w"> </span>
+</pre></div>
+</div>
+<p>and now execute with valgrind as</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>valgrind<span class="w"> </span>--tool<span class="o">=</span>callgrind<span class="w"> </span>name.x<span class="w"> </span><span class="o">[</span>possible<span class="w"> </span>options<span class="o">]</span>
+</pre></div>
+</div>
+<p>Results will be stored on the files <code class="docutils literal notranslate"><span class="pre">callgrind.out.PID</span></code>, where <code class="docutils literal notranslate"><span class="pre">PID</span></code> is
+the process identifier.</p>
+<p>You can read the previous file with a text editor, by using the
+instructions</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>callgrind_annotate<span class="w"> </span>--auto<span class="o">=</span>yes<span class="w"> </span>callgrind.out.PID
+</pre></div>
+</div>
+<p>and you can also use the tool KCachegrind,</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>kcachegrind<span class="w"> </span>callgrind.out.PID
+</pre></div>
+</div>
+<p>(<strong>do not forget to replace PID by the actual number</strong>). The first view
+presents the list of the profiled functions. If you click on a function,
+other views appear with more info, as callers, calling map, source code,
+etc.</p>
+<p><em>NOTE</em>: If you want to see correct function names, you can use the
+command</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>valgrind<span class="w"> </span>--tool<span class="o">=</span>callgrind<span class="w"> </span>--dump-instr<span class="o">=</span>yes<span class="w"> </span>--collect-jumps<span class="o">=</span>yes<span class="w"> </span>./program<span class="w"> </span>program_parameters
+</pre></div>
+</div>
+<p>Please run and use callgrind to study the previous programs and also a
+program using eigen library. In the later, it is easy to profile?</p>
+</section>
+</section>
+<section id="google-performance-tools">
+<h2><span class="section-number">9.7. </span>Google Performance Tools<a class="headerlink" href="#google-performance-tools" title="Link to this heading">#</a></h2>
+<p>See <a class="github reference external" href="https://github.com/gperftools/gperftools">gperftools/gperftools</a></p>
+<p>From <a class="reference external" href="http://code.google.com/p/gperftools/?redir=1">Google performance
+tools</a> : These tools are
+for use by developers so that they can create more robust applications.
+Especially of use to those developing multi-threaded applications in C++
+with templates. Includes TCMalloc, heap-checker, heap-profiler and
+cpu-profiler.</p>
+<p>In brief:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>TC<span class="w"> </span>Malloc:
+
+gcc<span class="w"> </span><span class="o">[</span>...<span class="o">]</span><span class="w"> </span>-ltcmalloc
+Heap<span class="w"> </span>Checker:
+
+gcc<span class="w"> </span><span class="o">[</span>...<span class="o">]</span><span class="w"> </span>-o<span class="w"> </span>myprogram<span class="w"> </span>-ltcmalloc
+<span class="nv">HEAPCHECK</span><span class="o">=</span>normal<span class="w"> </span>./myprogram
+Heap<span class="w"> </span>Profiler:
+
+gcc<span class="w"> </span><span class="o">[</span>...<span class="o">]</span><span class="w"> </span>-o<span class="w"> </span>myprogram<span class="w"> </span>-ltcmalloc
+<span class="nv">HEAPPROFILE</span><span class="o">=</span>/tmp/netheap<span class="w"> </span>./myprogram
+Cpu<span class="w"> </span>Profiler:
+
+gcc<span class="w"> </span><span class="o">[</span>...<span class="o">]</span><span class="w"> </span>-o<span class="w"> </span>myprogram<span class="w"> </span>-lprofiler
+<span class="nv">CPUPROFILE</span><span class="o">=</span>/tmp/profile<span class="w"> </span>./myprogram
+</pre></div>
+</div>
+<p>Basically, when ypu compile, you link with the required library. Then,
+you can generate a callgraph with profiler info. Try to install the
+google performance tool on your home and test them with the previous
+codes. Please review the detailed info for each tool: for example, for
+the cpu profiler, check <a class="reference external" href="http://google-perftools.googlecode.com/svn/trunk/doc/cpuprofile.html">Cpu profiler
+info</a></p>
+</section>
+<section id="exercises">
+<h2><span class="section-number">9.8. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Take <a class="reference external" href="https://bitbucket.org/iluvatar/scientific-computing-part-01/raw/9e1e2822cf7a6012b56708294eda1a5d3e0553b1/optimization/cache_lines.c">this
+code</a>
+and modify it (separate its behaviour into functions) to be able to
+profile it.</p></li>
+<li><p>Download
+<a class="reference external" href="https://bitbucket.org/iluvatar/scientific-computing-part-01/downloads/CodigosIvan.zip">https://bitbucket.org/iluvatar/scientific-computing-part-01/downloads/CodigosIvan.zip</a>,
+run , and optimize them.</p></li>
+<li><p>Experiment: Take <a class="reference external" href="https://www.dropbox.com/s/qpphj2vzizzr7cl/oscilador.cpp">this
+code</a>,
+profile it and try to optimize it in any way.</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./10-profiling"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../10-optimization/10-optimization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Optimization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../11-matrices-numericallibs/11-matrices-numericallibs.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Numerical libraries in Matrix Problems</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-profile">9.1. Why profile?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-elapsed-time">9.2. Measuring elapsed time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profilers">9.3. Profilers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gprof">9.4. gprof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perf">9.5. perf</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-perf">9.5.1. Installing perf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-perf">9.5.2. Using perf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hotstop-gui-for-perf">9.5.3. Hotstop: Gui for perf</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-with-valgrind-cachegrind-and-callgrind">9.6. Profiling with valgrind: cachegrind and callgrind</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cache-checker-cachegrind">9.6.1. Cache checker : cachegrind</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callgrind">9.6.2. Callgrind</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-performance-tools">9.7. Google Performance Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.8. Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By William Oquendo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

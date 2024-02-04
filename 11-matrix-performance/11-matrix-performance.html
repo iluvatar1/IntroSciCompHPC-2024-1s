@@ -1,0 +1,922 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>11. Performance measurement for some matrix ops &#8212; Introduction to Scientific and High Performance Computing</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css?v=03b9d5b1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '11-matrix-performance/11-matrix-performance';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="12. Introduction to High Performance Computing" href="../12-IntroHPC/ParallelProgramming-Intro.html" />
+    <link rel="prev" title="10. Numerical libraries in Matrix Problems" href="../11-matrices-numericallibs/11-matrices-numericallibs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Nanoscience_High-Performance_Computing_Facility.jpg/1600px-Nanoscience_High-Performance_Computing_Facility.jpg" class="logo__image only-light" alt="Introduction to Scientific and High Performance Computing - Home"/>
+    <script>document.write(`<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Nanoscience_High-Performance_Computing_Facility.jpg/1600px-Nanoscience_High-Performance_Computing_Facility.jpg" class="logo__image only-dark" alt="Introduction to Scientific and High Performance Computing - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Scientific and High Performance Computing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to scientific computing and programming tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01-Introduction/01-Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">2. Errors in Floating Point Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">3. Makefiles as automation tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">4. Standard library of functions: math functions, containers and random numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">5. Using software in a hpc environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">6. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">7. Unit Testing : Ensuring fix and correct behavior last</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">8. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">9. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">10. Numerical libraries in Matrix Problems</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">11. Performance measurement for some matrix ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">14. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">15. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">16. HPC resource manager: Slurm</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/iluvatar1/IntroSciCompHPC-2024-1s/master?urlpath=lab/tree/11-matrix-performance/11-matrix-performance.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/iluvatar1/IntroSciCompHPC-2024-1s/blob/master/github/iluvatar1/IntroSciCompHPC-2024-1s/blob/master/11-matrix-performance/11-matrix-performance.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-2024-1s" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-2024-1s/issues/new?title=Issue%20on%20page%20%2F11-matrix-performance/11-matrix-performance.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/11-matrix-performance/11-matrix-performance.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Performance measurement for some matrix ops</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lu-operations-to-solve-ax-b">11.1. LU operations to solve Ax = b</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filling-the-matrix-randomly">11.1.1. Filling the matrix randomly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-processing-time-only-both-wall-and-cpu-time">11.1.2. Measuring processing time only (both wall and cpu time)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stats">11.1.3. Stats</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#threads">11.1.4. Threads</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization">11.2. Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="performance-measurement-for-some-matrix-ops">
+<h1><span class="section-number">11. </span>Performance measurement for some matrix ops<a class="headerlink" href="#performance-measurement-for-some-matrix-ops" title="Link to this heading">#</a></h1>
+<p>In this section we will learn how to perform some benchmarks on some
+matrix operations to get an idea of the operations performance. This
+will be done manually, but in the future you can use specialized tools
+like google benchmark, <a class="github reference external" href="https://github.com/google/benchmark">google/benchmark</a>, or
+nanobench, <a class="reference external" href="https://nanobench.ankerl.com/">https://nanobench.ankerl.com/</a> , etc.</p>
+<section id="lu-operations-to-solve-ax-b">
+<h2><span class="section-number">11.1. </span>LU operations to solve Ax = b<a class="headerlink" href="#lu-operations-to-solve-ax-b" title="Link to this heading">#</a></h2>
+<p>In the following we want to explore the performance of the following
+program as a function of the system size</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;eigen3/Eigen/Dense&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">solvesystem</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"> </span><span class="c1">// Matrix size</span>
+<span class="w">  </span><span class="n">solvesystem</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">solvesystem</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Random</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Random</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// crono star</span>
+<span class="w">  </span><span class="c1">//Eigen::MatrixXd x = A.fullPivLu().solve(b);</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">lu</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// crono end</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">relative_error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">).</span><span class="n">norm</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">norm</span><span class="p">();</span><span class="w"> </span><span class="c1">// norm() is L2 norm</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The relative error is:</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">relative_error</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// usar chrono para medir el tiempo</span>
+<span class="c1">// gprof</span>
+<span class="c1">// remove printing</span>
+<span class="c1">// modify printing</span>
+</pre></div>
+</div>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>-0.999984</p></td>
+<td><p>-0.562082</p></td>
+<td><p>-0.232996</p></td>
+<td><p>0.0594004</p></td>
+<td><p>-0.165028</p></td>
+</tr>
+<tr class="row-odd"><td><p>-0.736924</p></td>
+<td><p>-0.905911</p></td>
+<td><p>0.0388327</p></td>
+<td><p>0.342299</p></td>
+<td><p>0.373545</p></td>
+</tr>
+<tr class="row-even"><td><p>0.511211</p></td>
+<td><p>0.357729</p></td>
+<td><p>0.661931</p></td>
+<td><p>-0.984604</p></td>
+<td><p>0.177953</p></td>
+</tr>
+<tr class="row-odd"><td><p>-0.0826997</p></td>
+<td><p>0.358593</p></td>
+<td><p>-0.930856</p></td>
+<td><p>-0.233169</p></td>
+<td><p>0.860873</p></td>
+</tr>
+<tr class="row-even"><td><p>0.0655345</p></td>
+<td><p>0.869386</p></td>
+<td><p>-0.893077</p></td>
+<td><p>-0.866316</p></td>
+<td><p>0.692334</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.0538576</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>-0.81607</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>0.307838</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>-0.168001</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>0.402381</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>The</p></td>
+<td><p>relative</p></td>
+<td><p>error</p></td>
+<td><p>is:</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>7.87638e-16</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;eigen3/Eigen/Dense&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">solvesystem</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">M</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"> </span><span class="c1">// Matrix size</span>
+<span class="w">  </span><span class="n">solvesystem</span><span class="p">(</span><span class="n">M</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">solvesystem</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Random</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Random</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// crono star</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">fullPivLu</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// crono end</span>
+<span class="w">  </span><span class="c1">// double relative_error = (A*x - b).norm() / b.norm(); // norm() is L2 norm</span>
+<span class="w">  </span><span class="c1">//std::cout &lt;&lt; A &lt;&lt; std::endl;</span>
+<span class="w">  </span><span class="c1">//std::cout &lt;&lt; b &lt;&lt; std::endl;</span>
+<span class="w">  </span><span class="c1">//std::cout &lt;&lt; &quot;The relative error is:\n&quot; &lt;&lt; relative_error &lt;&lt; std::endl;</span>
+<span class="p">}</span>
+
+<span class="c1">// usar chrono para medir el tiempo</span>
+<span class="c1">// gprof</span>
+<span class="c1">// remove printing</span>
+<span class="c1">// modify testing</span>
+</pre></div>
+</div>
+<p>If you use just</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">time</span><span class="w"> </span>./a.out
+</pre></div>
+</div>
+<p>you will measuring the whole execution time, including the memory
+allocation, the actual operation, and the memory freeing. It is much
+better to actually measure only what we are interesting in, which is the
+actual memory operation.</p>
+<p>To create a reasonable benchmark, we need to</p>
+<ul class="simple">
+<li><p>Fill the matrix randomly, controlling the seed</p></li>
+<li><p>Measure only processing time (wall and cpu times)</p></li>
+<li><p>Statistics</p></li>
+<li><p>Print the time as function of N and plot (run this in the shell)</p></li>
+<li><p>Use threads (openmp)</p></li>
+</ul>
+<section id="filling-the-matrix-randomly">
+<h3><span class="section-number">11.1.1. </span>Filling the matrix randomly<a class="headerlink" href="#filling-the-matrix-randomly" title="Link to this heading">#</a></h3>
+<p>For repeatability, we can control the seed with the <code class="docutils literal notranslate"><span class="pre">srand</span></code> instructions
+(check the manual, and also
+<a class="reference external" href="https://stackoverflow.com/questions/67387539/set-random-seed-in-eigen?noredirect=1&amp;amp;lq=1">https://stackoverflow.com/questions/67387539/set-random-seed-in-eigen?noredirect=1&amp;lq=1</a>
+and
+<a class="reference external" href="https://stackoverflow.com/questions/21292881/matrixxfrandom-always-returning-same-matrices">https://stackoverflow.com/questions/21292881/matrixxfrandom-always-returning-same-matrices</a>
+).</p>
+</section>
+<section id="measuring-processing-time-only-both-wall-and-cpu-time">
+<h3><span class="section-number">11.1.2. </span>Measuring processing time only (both wall and cpu time)<a class="headerlink" href="#measuring-processing-time-only-both-wall-and-cpu-time" title="Link to this heading">#</a></h3>
+<p>To measure only the times associated with the processing , we will use
+the <code class="docutils literal notranslate"><span class="pre">chrono</span></code> library (<a class="reference external" href="https://en.cppreference.com/w/cpp/chrono">https://en.cppreference.com/w/cpp/chrono</a>).
+Before proceeding, please read first the documentation of
+<code class="docutils literal notranslate"><span class="pre">system_clock</span></code>, <code class="docutils literal notranslate"><span class="pre">steady_clock</span></code>, and <code class="docutils literal notranslate"><span class="pre">high_resolution_clock</span></code>, and decide
+which one to use. Also, consider if they measure the cpu time. If not,
+how to measure it? Check:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/20167685/measuring-cpu-time-in-c">https://stackoverflow.com/questions/20167685/measuring-cpu-time-in-c</a></p></li>
+<li><p><a class="reference external" href="https://en.cppreference.com/w/cpp/chrono/c/clock">https://en.cppreference.com/w/cpp/chrono/c/clock</a></p></li>
+</ul>
+<p>To check:</p>
+<ul class="simple">
+<li><p>[ ] What happens i you comment out the printing and compile with
+<code class="docutils literal notranslate"><span class="pre">-O3</span></code>?</p></li>
+<li><p>[ ] Compare the times you are getting with <code class="docutils literal notranslate"><span class="pre">/usr/bin/time</span></code>.</p></li>
+</ul>
+</section>
+<section id="stats">
+<h3><span class="section-number">11.1.3. </span>Stats<a class="headerlink" href="#stats" title="Link to this heading">#</a></h3>
+<p>Now introduce the ability to repeat the timing many times and compute
+statistics. The number of reps will be a parameter.</p>
+</section>
+<section id="threads">
+<h3><span class="section-number">11.1.4. </span>Threads<a class="headerlink" href="#threads" title="Link to this heading">#</a></h3>
+<p>Eigen c++ includes parallelization with openmp threads. To do so, you
+need to compile with the <code class="docutils literal notranslate"><span class="pre">-fopenmp</span></code> flag and then execute as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span>n<span class="w"> </span>./a.out<span class="w"> </span>...
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of threads. Check the following to see the kind
+of ops that can be parallelized:
+<a class="reference external" href="https://eigen.tuxfamily.org/dox/TopicMultiThreading.html">https://eigen.tuxfamily.org/dox/TopicMultiThreading.html</a></p>
+</section>
+</section>
+<section id="exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization">
+<h2><span class="section-number">11.2. </span>Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization<a class="headerlink" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization" title="Link to this heading">#</a></h2>
+<p>Now do the same study but with matrix multiplication. Implement the
+matrix matmul with eigen (see the code snippet at the end). Always
+compile with the flags “-fopenmp -O3”. And now execute in the following
+way</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span>VAR<span class="w"> </span>./a.out<span class="w"> </span>...
+</pre></div>
+</div>
+<p>where VAR takes values from 1, 2, 3, 4, … up the output from the command
+<code class="docutils literal notranslate"><span class="pre">nproc</span></code>. This means that you are starting to use parallelization. You
+must run this in a multicore system (or give your virtual machine enough
+resources) with a least 8 threads. Plot the time (with error bars) as a
+function of the system size, and you will have four curves on that
+graph, each one for each VAR value.</p>
+<p>Basic snippet for matmul in eigen:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// create matrices</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Random</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Random</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">C</span><span class="p">{</span><span class="n">A</span><span class="o">*</span><span class="n">B</span><span class="p">};</span><span class="w"> </span><span class="c1">// MULTIPLY</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// use the matrix to make eigen compute it</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">clog</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="c1">// use the matrix to make eigen compute it</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">elapsed_seconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">elapsed_secons</span><span class="p">.</span><span class="n">count</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#include &lt;iostream&gt;
+#include &lt;chrono&gt;
+#include &lt;ctime&gt;
+#include &lt;cmath&gt;
+#include &lt;eigen3/Eigen/Dense&gt;
+
+
+void multiply(const int size, double &amp; wtime, double &amp; ctime); // store time spent multiplying
+void stats(const int size, const int reps,
+           double &amp; mean_wtime, double &amp; sigma_wtime,
+           double &amp; mean_ctime, double &amp; sigma_ctime);
+
+int main(int argc, char ** argv)
+{
+  const int M = atoi(argv[1]); // Matrix size
+  const int R = atoi(argv[2]); // Repetitions
+
+  double mean_wtime, sigma_wtime;
+  double mean_ctime, sigma_ctime;
+  stats(M, R, mean_wtime, sigma_wtime, mean_ctime, sigma_ctime);
+  std::cout &lt;&lt; M
+            &lt;&lt; &quot;\t&quot; &lt;&lt; mean_wtime &lt;&lt; &quot;\t&quot; &lt;&lt; sigma_wtime
+            &lt;&lt; &quot;\t&quot; &lt;&lt; mean_ctime &lt;&lt; &quot;\t&quot; &lt;&lt; sigma_ctime
+            &lt;&lt; std::endl;
+
+  return 0;
+}
+void stats(const int size, const int reps,
+           double &amp; mean_wtime, double &amp; sigma_wtime,
+           double &amp; mean_ctime, double &amp; sigma_ctime)
+{
+  double wsum = 0, wsum2 = 0, csum = 0, csum2 = 0;
+  double wtime = 0, ctime = 0;
+  for (int rep = 0; rep &lt; reps; ++rep) {
+    srand(rep+1); // change seed for each repetition
+    multiply(size, wtime, ctime);
+    wsum  += wtime;
+    wsum2 += wtime*wtime;
+    csum  += ctime;
+    csum2 += ctime*ctime;
+  }
+  mean_wtime = wsum/reps;
+  sigma_wtime = std::sqrt(reps*(wsum2/reps - mean_wtime*mean_wtime)/(reps-1));
+  mean_ctime = csum/reps;
+  sigma_ctime = std::sqrt(reps*(csum2/reps - mean_ctime*mean_ctime)/(reps-1));
+}
+
+
+void multiply(const int size, double &amp; wtime, double &amp; ctime)
+{
+  // create matrices
+  Eigen::MatrixXd A = Eigen::MatrixXd::Random(size, size);
+  Eigen::MatrixXd B = Eigen::MatrixXd::Random(size, size);
+
+  auto start = std::chrono::system_clock::now(); // measures wall time
+  std::clock_t c1 = std::clock(); // measures cpu time
+  auto C{A*B}; // MULTIPLY
+  double tmp = C(0, 0); // use the matrix to make eigen compute it
+  auto end = std::chrono::system_clock::now(); // wall time
+  std::clock_t c2 = std::clock(); // cpu time
+
+  std::clog &lt;&lt; tmp &lt;&lt; std::endl; // use the matrix to make eigen compute it
+
+  ctime = 1.0*(c2-c1)/CLOCKS_PER_SEC;
+  std::chrono::duration&lt;double&gt; elapsed_seconds = end-start;
+  wtime = elapsed_seconds.count();
+}
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./11-matrix-performance"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../11-matrices-numericallibs/11-matrices-numericallibs.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Numerical libraries in Matrix Problems</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../12-IntroHPC/ParallelProgramming-Intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Introduction to High Performance Computing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lu-operations-to-solve-ax-b">11.1. LU operations to solve Ax = b</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filling-the-matrix-randomly">11.1.1. Filling the matrix randomly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-processing-time-only-both-wall-and-cpu-time">11.1.2. Measuring processing time only (both wall and cpu time)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stats">11.1.3. Stats</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#threads">11.1.4. Threads</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-measuring-time-for-matrix-matrix-multiplication-with-optimization-and-parallelization">11.2. Exercise: Measuring time for matrix-matrix multiplication, with optimization and parallelization</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By William Oquendo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

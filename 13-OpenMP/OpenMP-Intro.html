@@ -1,0 +1,1292 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>13. Introduction to OpenMp (Shared memory) &#8212; Introduction to Scientific and High Performance Computing</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css?v=03b9d5b1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '13-OpenMP/OpenMP-Intro';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="14. Introduction to MPI (distributed memory)" href="../14-MPI/MPI-Intro.html" />
+    <link rel="prev" title="12. Introduction to High Performance Computing" href="../12-IntroHPC/ParallelProgramming-Intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Nanoscience_High-Performance_Computing_Facility.jpg/1600px-Nanoscience_High-Performance_Computing_Facility.jpg" class="logo__image only-light" alt="Introduction to Scientific and High Performance Computing - Home"/>
+    <script>document.write(`<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Nanoscience_High-Performance_Computing_Facility.jpg/1600px-Nanoscience_High-Performance_Computing_Facility.jpg" class="logo__image only-dark" alt="Introduction to Scientific and High Performance Computing - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Scientific and High Performance Computing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to scientific computing and programming tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01-Introduction/01-Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">2. Errors in Floating Point Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">3. Makefiles as automation tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">4. Standard library of functions: math functions, containers and random numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">5. Using software in a hpc environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">6. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">7. Unit Testing : Ensuring fix and correct behavior last</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">8. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">9. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">10. Numerical libraries in Matrix Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Performance measurement for some matrix ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">14. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">15. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">16. HPC resource manager: Slurm</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/iluvatar1/IntroSciCompHPC-2024-1s/master?urlpath=lab/tree/13-OpenMP/OpenMP-Intro.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/iluvatar1/IntroSciCompHPC-2024-1s/blob/master/github/iluvatar1/IntroSciCompHPC-2024-1s/blob/master/13-OpenMP/OpenMP-Intro.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-2024-1s" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-2024-1s/issues/new?title=Issue%20on%20page%20%2F13-OpenMP/OpenMP-Intro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/13-OpenMP/OpenMP-Intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to OpenMp (Shared memory)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-hello-world-and-threadid">13.1. Introduction: Hello world and threadid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#private-and-shared-variables">13.2. Private and shared variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelizing-a-for-loop">13.3. Parallelizing a for loop</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manually">13.3.1. Manually</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-omp-parallel-for">13.3.2. Using <code class="docutils literal notranslate"><span class="pre">omp</span> <span class="pre">parallel</span> <span class="pre">for</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-reductions">13.3.3. Using reductions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.4. Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <ul class="simple">
+<li><p><a class="reference external" href="https://researchcomputing.princeton.edu/education/external-online-resources/openmp">https://researchcomputing.princeton.edu/education/external-online-resources/openmp</a></p></li>
+<li><p><a class="reference external" href="https://cvw.cac.cornell.edu/openmp/default">https://cvw.cac.cornell.edu/openmp/default</a></p></li>
+<li><p>Scheduling:</p>
+<ul>
+<li><p><a class="reference external" href="https://610yilingliu.github.io/2020/07/15/ScheduleinOpenMP/">https://610yilingliu.github.io/2020/07/15/ScheduleinOpenMP/</a></p></li>
+<li><p><a class="reference external" href="https://www.openmp.org/wp-content/uploads/SC17-Kale-LoopSchedforOMP_BoothTalk.pdf">https://www.openmp.org/wp-content/uploads/SC17-Kale-LoopSchedforOMP_BoothTalk.pdf</a></p></li>
+<li><p><a class="reference external" href="http://jakascorner.com/blog/2016/06/omp-for-scheduling.html">http://jakascorner.com/blog/2016/06/omp-for-scheduling.html</a></p></li>
+</ul>
+</li>
+</ul>
+<p>Parallel STL
+<a class="reference external" href="https://www.modernescpp.com/index.php?option=com_content&amp;amp;view=article&amp;amp;id=572&amp;amp;catid=49">https://www.modernescpp.com/index.php?option=com_content&amp;view=article&amp;id=572&amp;catid=49</a>
+<a class="reference external" href="https://www.modernescpp.com/index.php?option=com_content&amp;amp;view=article&amp;amp;id=573&amp;amp;catid=49">https://www.modernescpp.com/index.php?option=com_content&amp;view=article&amp;id=573&amp;catid=49</a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction-to-openmp-shared-memory">
+<h1><span class="section-number">13. </span>Introduction to OpenMp (Shared memory)<a class="headerlink" href="#introduction-to-openmp-shared-memory" title="Link to this heading">#</a></h1>
+<p>This is an extension for languages like C/C++. It is targeted for
+<strong>multi-threaded, shared memory</strong> parallelism. It is very simple, you
+just add some pragma directives which, if not supported, are deactivated
+and then completely ignored. It is ideal for a machine with several
+cores, and shared memory. For much more info, see
+<a class="reference external" href="http://www.openmp.org/">http://www.openmp.org/</a> and <a class="reference external" href="https://hpc-tutorials.llnl.gov/openmp/">https://hpc-tutorials.llnl.gov/openmp/</a></p>
+<section id="introduction-hello-world-and-threadid">
+<h2><span class="section-number">13.1. </span>Introduction: Hello world and threadid<a class="headerlink" href="#introduction-hello-world-and-threadid" title="Link to this heading">#</a></h2>
+<p>Typical Hello world,</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;omp.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">9.0</span><span class="p">;</span>
+<span class="c1">//#pragma omp parallel num_threads(4)</span>
+<span class="cp">#pragma omp parallel</span>
+<span class="w">    </span><span class="p">{</span><span class="c1">// se generan los threads</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello, world.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello, world2.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// mueren los threads</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This makes a parallel version if you compile with the <code class="docutils literal notranslate"><span class="pre">-fopemp</span></code> flag.
+Test it. What happens if you write</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="m">8</span>
+</pre></div>
+</div>
+<p>and then you run the executable?</p>
+<p>The actual directive is like</p>
+<div class="highlight-example notranslate"><div class="highlight"><pre><span></span>#pragma omp parallel [clause ...]  newline 
+                   if (scalar_expression) 
+                   private (list) 
+                   shared (list) 
+                   default (shared | none) 
+                   firstprivate (list) 
+                   reduction (operator: list) 
+                   copyin (list) 
+                   num_threads (integer-expression)
+ structured_block  
+</pre></div>
+</div>
+<p>But we will keep things simple.</p>
+<p>What is really important to keep in mind is what variables are going to
+be shared and what are going to be private, to avoid errors, reca
+conditions, etc.</p>
+<p>If you want to know the thread id, you can use</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">nth</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">omp_get_num_threads</span><span class="p">();</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">tid</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>inside your code, as in the following,</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span><span class="c1"> // printf</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">9.0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">nth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_num_threads</span><span class="p">();</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">thid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello world from thid: %d, out of %d .</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="n">thid</span><span class="p">,</span><span class="w"> </span><span class="n">nth</span><span class="p">);</span>
+
+<span class="c1">//#pragma omp parallel num_threads(4)</span>
+<span class="cp">#pragma omp parallel</span>
+<span class="w">  </span><span class="p">{</span><span class="c1">// se generan los threads</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">nth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_num_threads</span><span class="p">();</span><span class="w"> </span><span class="c1">// al declarar aca, son privados</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">thid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello world from thid: %d, out of %d .</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">thid</span><span class="p">,</span><span class="w"> </span><span class="n">nth</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="c1">// mueren los threads</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello world from thid: %d, out of %d .</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="n">thid</span><span class="p">,</span><span class="w"> </span><span class="n">nth</span><span class="p">);</span>
+
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Please use the thread sanitize:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>g++<span class="w"> </span>-fopenmp<span class="w"> </span>-g<span class="w"> </span>-fsanitize<span class="o">=</span>thread<span class="w"> </span>code.cpp
+</pre></div>
+</div>
+<p>There are some other env variables that could be useful:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="m">4</span>
+<span class="nv">OMP_DISPLAY_ENV</span><span class="o">=</span>TRUE
+<span class="nv">OMP_DISPLAY_AFFINITY</span><span class="o">=</span>TRUE
+<span class="nv">OMP_STACK_SIZE</span><span class="o">=</span><span class="m">1000000</span>
+</pre></div>
+</div>
+</section>
+<section id="private-and-shared-variables">
+<h2><span class="section-number">13.2. </span>Private and shared variables<a class="headerlink" href="#private-and-shared-variables" title="Link to this heading">#</a></h2>
+<p>Shared and private</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">9.0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">nth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_num_threads</span><span class="p">();</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">thid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello world from thid: %d, out of %d .</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="n">thid</span><span class="p">,</span><span class="w"> </span><span class="n">nth</span><span class="p">);</span>
+
+<span class="c1">//#pragma omp parallel num_threads(4)</span>
+<span class="cp">#pragma omp parallel private(thid, nth)</span>
+<span class="w">  </span><span class="p">{</span><span class="c1">// se generan los threads</span>
+<span class="w">    </span><span class="n">thid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">    </span><span class="n">nth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_num_threads</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello world from thid: %d, out of %d .</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">thid</span><span class="p">,</span><span class="w"> </span><span class="n">nth</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="c1">// mueren los threads</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">nthreads</span><span class="p">,</span><span class="w"> </span><span class="n">tid</span><span class="p">;</span>
+
+<span class="w">  </span><span class="cm">/* Fork a team of threads with each thread having a private tid variable */</span>
+<span class="cp">#pragma omp parallel private(tid)</span>
+<span class="w">  </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/* Obtain and print thread id */</span>
+<span class="w">    </span><span class="n">tid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World from thread = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tid</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* Only master thread does this */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tid</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">nthreads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_num_threads</span><span class="p">();</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Number of threads = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nthreads</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">  </span><span class="p">}</span><span class="w">  </span><span class="cm">/* All threads join master thread and terminate */</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example we see the memory address for shared and private
+variables to illustrate those concepts:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">nthreads</span><span class="p">,</span><span class="w"> </span><span class="n">tid</span><span class="p">;</span>
+
+<span class="w">  </span><span class="cm">/* Fork a team of threads with each thread having a private tid variable */</span>
+<span class="cp">#pragma omp parallel private(tid)</span>
+<span class="w">  </span><span class="p">{</span>
+
+<span class="w">    </span><span class="cm">/* Obtain and print thread id */</span>
+<span class="w">    </span><span class="n">tid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World from thread = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tid</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Memory address for tid = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tid</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Memory address for nthreads = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nthreads</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* Only master thread does this */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tid</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="n">nthreads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_num_threads</span><span class="p">();</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Number of threads = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nthreads</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+
+<span class="w">  </span><span class="p">}</span><span class="w">  </span><span class="cm">/* All threads join master thread and terminate */</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="parallelizing-a-for-loop">
+<h2><span class="section-number">13.3. </span>Parallelizing a for loop<a class="headerlink" href="#parallelizing-a-for-loop" title="Link to this heading">#</a></h2>
+<p>Condiciones del problema:</p>
+<ul class="simple">
+<li><p>Arreglo de tamanho N.</p></li>
+<li><p>Tenemos nth threads.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Nlocal</span> <span class="pre">=</span> <span class="pre">N/nth</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">imin</span> <span class="pre">=</span> <span class="pre">tid*Nlocal,</span> <span class="pre">imax</span> <span class="pre">=</span> <span class="pre">(tid+1)*Nlocal</span> <span class="pre">=</span> <span class="pre">imin</span> <span class="pre">+</span> <span class="pre">Nlocal</span></code></p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<section id="manually">
+<h3><span class="section-number">13.3.1. </span>Manually<a class="headerlink" href="#manually" title="Link to this heading">#</a></h3>
+<p>The following code assigns the elements of a vector in parallel:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;numeric&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">fill</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">array</span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">suma</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">array</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// llenar el arreglo</span>
+<span class="w">  </span><span class="n">fill</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//std::cout &lt;&lt; data[0] &lt;&lt; &quot;\n&quot;;</span>
+
+<span class="w">  </span><span class="c1">// calcular la suma y el promedio</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">suma</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">total</span><span class="o">/</span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">fill</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">array</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">array</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="cp">#pragma omp parallel</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">thid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">nth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_num_threads</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Nlocal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="n">nth</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">iimin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thid</span><span class="o">*</span><span class="n">Nlocal</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">iimax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iimin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Nlocal</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iimin</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">iimax</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">array</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">ii</span><span class="o">*</span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ii</span><span class="o">/</span><span class="mf">56.7</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pow</span><span class="p">(</span><span class="mf">1.0</span><span class="o">*</span><span class="n">ii</span><span class="o">*</span><span class="n">ii</span><span class="o">/</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">suma</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">array</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">array</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sumaparcial</span><span class="p">;</span>
+<span class="cp">#pragma omp parallel</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">thid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">nth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_num_threads</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">thid</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">sumaparcial</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">nth</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#pragma omp barrier</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">localsum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">Nlocal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="n">nth</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">iimin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thid</span><span class="o">*</span><span class="n">Nlocal</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">iimax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iimin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Nlocal</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iimin</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">iimax</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">localsum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">array</span><span class="p">[</span><span class="n">ii</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">sumaparcial</span><span class="p">[</span><span class="n">thid</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">localsum</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">accumulate</span><span class="p">(</span><span class="n">sumaparcial</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">sumaparcial</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+</pre></div>
+</div>
+<p>OLD</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80000000</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="kt">double</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+
+<span class="cp">#pragma omp parallel private(i)</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">thid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">nth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_num_threads</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">localsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">N</span><span class="o">/</span><span class="n">nth</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">iimin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thid</span><span class="o">*</span><span class="n">localsize</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">iimax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iimin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">localsize</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iimin</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">iimax</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mf">56.7</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pow</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="using-omp-parallel-for">
+<h3><span class="section-number">13.3.2. </span>Using <code class="docutils literal notranslate"><span class="pre">omp</span> <span class="pre">parallel</span> <span class="pre">for</span></code><a class="headerlink" href="#using-omp-parallel-for" title="Link to this heading">#</a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;numeric&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">fill</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">array</span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">suma</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">array</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// llenar el arreglo</span>
+<span class="w">  </span><span class="n">fill</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//std::cout &lt;&lt; data[0] &lt;&lt; &quot;\n&quot;;</span>
+
+<span class="w">  </span><span class="c1">// calcular la suma y el promedio</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">suma</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">total</span><span class="o">/</span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">fill</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">array</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">array</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="cp">#pragma omp parallel for</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">array</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">ii</span><span class="o">*</span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ii</span><span class="o">/</span><span class="mf">56.7</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pow</span><span class="p">(</span><span class="mf">1.0</span><span class="o">*</span><span class="n">ii</span><span class="o">*</span><span class="n">ii</span><span class="o">/</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">suma</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">array</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">array</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">suma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="cp">#pragma omp parallel for reduction(+:suma)</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">suma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">array</span><span class="p">[</span><span class="n">ii</span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">suma</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+</pre></div>
+</div>
+<p>OLD</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">fill</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">array</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">average</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">array</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="kt">double</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+
+<span class="w">  </span><span class="n">fill</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">//std::cout &lt;&lt; average(a, N) &lt;&lt; &quot;\n&quot;;</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">suma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="cp">#pragma omp parallel for reduction(+:suma)</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">suma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w">  </span><span class="n">suma</span><span class="o">/</span><span class="n">N</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">fill</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">array</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="cp">#pragma omp parallel for</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mf">56.7</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pow</span><span class="p">(</span><span class="mf">1.0</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">average</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">array</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">suma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="cp">#pragma omp parallel for reduction(+:suma)</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">suma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">suma</span><span class="o">/</span><span class="n">size</span><span class="p">;</span>
+<span class="p">}</span>
+
+</pre></div>
+</div>
+<p><strong>Exercise:</strong> Modify the code to be able to compute the mean in
+parallel. Play with larger and larger arrays and also with increasing
+the number of processors. Can you compute any parallel metric?</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">fill_data</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">average</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">.</span><span class="n">precision</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">.</span><span class="n">setf</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">scientific</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80000000</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+
+<span class="w">    </span><span class="n">fill_data</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">average</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">avg</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">fill_data</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="cp">#pragma omp parallel for</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mf">56.7</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pow</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">average</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="cp">#pragma omp parallel for reduction(+:result)</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">ii</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="using-reductions">
+<h3><span class="section-number">13.3.3. </span>Using reductions<a class="headerlink" href="#using-reductions" title="Link to this heading">#</a></h3>
+<p>This example shows how to reduce a variable using the <code class="docutils literal notranslate"><span class="pre">reduction</span></code>
+keyword:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000000</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">;</span>
+<span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">suma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="cp">#pragma omp parallel for reduction(+:suma)</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mf">35.6</span><span class="p">);</span>
+<span class="w">    </span><span class="n">suma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">suma</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now read the following code, try to predict its outcome, and then run it
+and test your prediction (from
+<a class="reference external" href="https://computing.llnl.gov/tutorials/openMP/#Introduction">https://computing.llnl.gov/tutorials/openMP/#Introduction</a>) :</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#define N 1000</span>
+<span class="cp">#define CHUNKSIZE 100</span>
+
+<span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">chunk</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+
+<span class="w">  </span><span class="cm">/* Some initializations */</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1.0</span><span class="p">;</span>
+<span class="w">  </span><span class="n">chunk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CHUNKSIZE</span><span class="p">;</span>
+
+<span class="cp">#pragma omp parallel shared(a,b,c,chunk) private(i)</span>
+<span class="w">  </span><span class="p">{</span>
+
+<span class="cp">#pragma omp for schedule(dynamic,chunk) nowait</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+<span class="w">  </span><span class="p">}</span><span class="w">   </span><span class="cm">/* end of parallel region */</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="exercises">
+<h2><span class="section-number">13.4. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<p>Refs: CT-LAB openmp exercises;
+<a class="reference external" href="https://computing.llnl.gov/tutorials/openMP/exercise.html">https://computing.llnl.gov/tutorials/openMP/exercise.html</a></p>
+<ol class="arabic">
+<li><p>Write a program to compute the mean and the standard deviation for a
+large array using OpenMP, with only one reduction. Also compute the
+parallel metrics.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// stats.cpp</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;numeric&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">fill</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">array</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">stats</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">array</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mean</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sigma</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// llenar el arreglo</span>
+<span class="w">  </span><span class="n">fill</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// calcular stats</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">mean</span><span class="p">{</span><span class="mf">0.0</span><span class="p">},</span><span class="w"> </span><span class="n">sigma</span><span class="p">{</span><span class="mf">0.0</span><span class="p">};</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+<span class="w">  </span><span class="n">stats</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%.15le</span><span class="se">\t\t</span><span class="s">%.15le</span><span class="se">\t\t</span><span class="s">%.15le</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">fill</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">array</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">array</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="cp">#pragma omp parallel for</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">array</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">ii</span><span class="o">*</span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ii</span><span class="o">/</span><span class="mf">56.7</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pow</span><span class="p">(</span><span class="mf">1.0</span><span class="o">*</span><span class="n">ii</span><span class="o">*</span><span class="n">ii</span><span class="o">/</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">stats</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">array</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">mean</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">sigma</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">array</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">suma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="cp">#pragma omp parallel for reduction(+:suma)</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">suma</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">array</span><span class="p">[</span><span class="n">ii</span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">suma</span><span class="o">/</span><span class="n">N</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Write a program to compute the integral of the function <span class="math notranslate nohighlight">\(y =
+  x^{2}\)</span>, for $ x  ∈ [0,10]$. Fill the following table:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p># Threads</p></th>
+<th class="head"><p>Runtime [s]</p></th>
+<th class="head"><p>Speedup</p></th>
+<th class="head"><p>Efficiency</p></th>
+</tr>
+</thead>
+</table>
+<p>Explain your results in terms of the number of processors available.
+Use <span class="math notranslate nohighlight">\(N=12000\)</span>. Do it in two ways:</p>
+<ol class="arabic simple">
+<li><p>Distributing the N intervals across all threads, so each one has
+a smaller part.</p></li>
+<li><p>Keeping constant the resolution per thread, that is , each
+trhead has N intervals.</p></li>
+</ol>
+<p>What is the difference between the two cases, regarding the
+precision and the time?</p>
+</li>
+</ol>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">fptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">double</span><span class="p">(</span><span class="kt">double</span><span class="p">);</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">integral_serial</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">fptr</span><span class="w"> </span><span class="n">f</span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">integral_openmp</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">fptr</span><span class="w"> </span><span class="n">f</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// declare vars</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">XA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span><span class="w"> </span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">XB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0</span><span class="p">;</span><span class="w"> </span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000000</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// print result</span>
+<span class="w">  </span><span class="c1">//std::cout &lt;&lt; &quot;Serial integral: &quot; &lt;&lt; integral_serial(XA, XB, N, f) &lt;&lt; &quot;\n&quot;;</span>
+<span class="w">  </span><span class="c1">//std::cout &lt;&lt; &quot;Serial openmp  : &quot; &lt;&lt; integral_openmp(XA, XB, N, f) &lt;&lt; &quot;\n&quot;;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+<span class="w">  </span><span class="n">integral_openmp</span><span class="p">(</span><span class="n">XA</span><span class="p">,</span><span class="w"> </span><span class="n">XB</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_wtime</span><span class="p">();</span>
+
+<span class="cp">#pragma omp parallel</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">omp_get_num_threads</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">integral_serial</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">fptr</span><span class="w"> </span><span class="n">f</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">N</span><span class="p">;</span><span class="w"> </span>
+<span class="w">  </span><span class="c1">// compute integral</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ii</span><span class="o">*</span><span class="n">dx</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">dx</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">integral_openmp</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">fptr</span><span class="w"> </span><span class="n">f</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">TODO</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p>Parallelize a Matrix-Matrix multiplication. Compare the performance
+when you use one, two, three, for threads.</p></li>
+<li><p>Is this loop parallelizable? If not, why?</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma omp parallel for</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="err">–</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="err">–</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Parallelize a matrix-vector multiplication. What must be shared?
+what should be private?</p></li>
+<li><p>Parallelize the matrix transposition.</p></li>
+<li><p>Check and solve the exercises on
+<a class="reference external" href="https://computing.llnl.gov/tutorials/openMP/exercise.html">https://computing.llnl.gov/tutorials/openMP/exercise.html</a> .</p></li>
+<li><p>Check and solve <a class="reference external" href="http://www.hpc.cineca.it/content/training-openmp">http://www.hpc.cineca.it/content/training-openmp</a> .</p></li>
+<li><p>Some other examples are at
+<a class="reference external" href="https://www.archer.ac.uk/training/course-material/2015/03/thread_prog/">https://www.archer.ac.uk/training/course-material/2015/03/thread_prog/</a>
+.</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./13-OpenMP"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../12-IntroHPC/ParallelProgramming-Intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Introduction to High Performance Computing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../14-MPI/MPI-Intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Introduction to MPI (distributed memory)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-hello-world-and-threadid">13.1. Introduction: Hello world and threadid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#private-and-shared-variables">13.2. Private and shared variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelizing-a-for-loop">13.3. Parallelizing a for loop</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manually">13.3.1. Manually</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-omp-parallel-for">13.3.2. Using <code class="docutils literal notranslate"><span class="pre">omp</span> <span class="pre">parallel</span> <span class="pre">for</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-reductions">13.3.3. Using reductions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.4. Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By William Oquendo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

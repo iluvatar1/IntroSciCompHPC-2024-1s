@@ -1,15 +1,14 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Errors in numerical computation: Floating point numbers &#8212; Introduction to Scientific and High Performance Computing</title>
+    <title>2. Errors in numerical computation: Floating point numbers &#8212; Introduction to Scientific and High Performance Computing</title>
   
   
   
@@ -29,47 +28,52 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css?v=03b9d5b1" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '02-errorsfpnumbers/ErrorsFPNumbers';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Introduction" href="../01-Introduction/01-Introduction.html" />
+    <link rel="next" title="3. Makefiles" href="../04-Makefiles/04-Makefiles.html" />
+    <link rel="prev" title="1. Introduction" href="../01-Introduction/01-Introduction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -163,7 +167,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -173,10 +188,27 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Scientific Computing</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to scientific computing and programming tools</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../01-Introduction/01-Introduction.html">Introduction</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Errors in Floating Point Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01-Introduction/01-Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Errors in Floating Point Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">3. Makefiles as automation tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">4. Standard library of functions: math functions, containers and random numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">5. Using software in a hpc environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">6. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">7. Unit Testing : Ensuring fix and correct behavior last</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">8. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">9. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">10. Numerical libraries in Matrix Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Performance measurement for some matrix ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">14. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">15. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">16. HPC resource manager: Slurm</a></li>
 </ul>
 
     </div>
@@ -421,25 +453,25 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overflow-for-integers">Overflow for integers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#underflow-and-overflow-for-floats">Underflow and overflow for floats</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-for-associativity">Test for associativity</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-eps">Machine eps</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-series-expansion-of-e-x">Practical example: Series expansion of <span class="math notranslate nohighlight">\(e^{-x}\)</span></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-substractive-cancellation-with-the-quadratic-equation">Exercise: Substractive cancellation with the Quadratic equation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-sum-ups-and-down">Exercise: Sum ups and down</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overflow-for-integers">2.1. Overflow for integers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#underflow-and-overflow-for-floats">2.2. Underflow and overflow for floats</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-for-associativity">2.3. Test for associativity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-eps">2.4. Machine eps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-series-expansion-of-e-x">2.5. Practical example: Series expansion of <span class="math notranslate nohighlight">\(e^{-x}\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-substractive-cancellation-with-the-quadratic-equation">2.5.1. Exercise: Substractive cancellation with the Quadratic equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-sum-ups-and-down">2.5.2. Exercise: Sum ups and down</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">Errors</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roundoff-truncation-example">Roundoff/truncation example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#substractive-cancellation">Substractive cancellation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-substrative-cancellation">Example of substrative cancellation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">2.6. Errors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roundoff-truncation-example">2.6.1. Roundoff/truncation example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#substractive-cancellation">2.6.2. Substractive cancellation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-substrative-cancellation">2.6.2.1. Example of substrative cancellation</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-errors-in-algorithms-and-their-computational-implementation">Total errors in algorithms and their computational implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-minimize-numerical-errors">How to minimize numerical errors?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-errors-in-algorithms-and-their-computational-implementation">2.7. Total errors in algorithms and their computational implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-minimize-numerical-errors">2.8. How to minimize numerical errors?</a></li>
 </ul>
             </nav>
         </div>
@@ -452,7 +484,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="errors-in-numerical-computation-floating-point-numbers">
-<h1>Errors in numerical computation: Floating point numbers<a class="headerlink" href="#errors-in-numerical-computation-floating-point-numbers" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">2. </span>Errors in numerical computation: Floating point numbers<a class="headerlink" href="#errors-in-numerical-computation-floating-point-numbers" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p>Numbers are represented in bits https://en.wikipedia.org/wiki/Byte?useskin=vector</p></li>
 <li><p>There is not way to assign infinite bits for infinite precission. A finite number of bits is assigned, some of them spent on the exponent, others on the mantissa, and one on the sign. https://en.wikipedia.org/wiki/Floating-point_arithmetic?useskin=vector</p></li>
@@ -519,7 +551,7 @@ document.write(`
 <li><p>https://stackoverflow.com/questions/2732845/real-life-example-fo-floating-point-error</p></li>
 </ul>
 <section id="overflow-for-integers">
-<h2>Overflow for integers<a class="headerlink" href="#overflow-for-integers" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.1. </span>Overflow for integers<a class="headerlink" href="#overflow-for-integers" title="Link to this heading">#</a></h2>
 <p>We will add 1 until some error occurs</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 
@@ -535,7 +567,7 @@ document.write(`
 </div>
 </section>
 <section id="underflow-and-overflow-for-floats">
-<h2>Underflow and overflow for floats<a class="headerlink" href="#underflow-and-overflow-for-floats" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.2. </span>Underflow and overflow for floats<a class="headerlink" href="#underflow-and-overflow-for-floats" title="Link to this heading">#</a></h2>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
 
@@ -560,7 +592,7 @@ document.write(`
 </div>
 </section>
 <section id="test-for-associativity">
-<h2>Test for associativity<a class="headerlink" href="#test-for-associativity" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.3. </span>Test for associativity<a class="headerlink" href="#test-for-associativity" title="Link to this heading">#</a></h2>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
@@ -575,7 +607,7 @@ document.write(`
 </div>
 </section>
 <section id="machine-eps">
-<h2>Machine eps<a class="headerlink" href="#machine-eps" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.4. </span>Machine eps<a class="headerlink" href="#machine-eps" title="Link to this heading">#</a></h2>
 <p>You can also compute/verify the machine precision <span class="math notranslate nohighlight">\(\epsilon_m\)</span> of your machine according to different types. The machine precision is a number that basically rounds to zero and in opertation. It can be represented as <span class="math notranslate nohighlight">\(1_c + \epsilon_m = 1_c\)</span>, where <span class="math notranslate nohighlight">\(1_c\)</span> is the computational representation of the number 1. Actually, that means than any real number <span class="math notranslate nohighlight">\(x\)</span> is actually represented as
 $<span class="math notranslate nohighlight">\(x_c = x(1+\epsilon), |\epsilon| \le \epsilon_m .\)</span>$</p>
 <p>Implement the following algorithm to compute it and report your results:</p>
@@ -611,7 +643,7 @@ begin<span class="w"> </span><span class="k">do</span><span class="w"> </span>N<
 </div>
 </section>
 <section id="practical-example-series-expansion-of-e-x">
-<h2>Practical example: Series expansion of <span class="math notranslate nohighlight">\(e^{-x}\)</span><a class="headerlink" href="#practical-example-series-expansion-of-e-x" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.5. </span>Practical example: Series expansion of <span class="math notranslate nohighlight">\(e^{-x}\)</span><a class="headerlink" href="#practical-example-series-expansion-of-e-x" title="Link to this heading">#</a></h2>
 <p>The function <span class="math notranslate nohighlight">\(e^{-x}\)</span> can be expanded as
 $<span class="math notranslate nohighlight">\(e^{-x} = \sum_{i=0}^{\infty} (-1)^i \frac{x^i}{i!} = 1 -  x + \frac{x^2}{2} - \frac{x^3}{6} + \ldots \ (|x| &lt; \infty)\)</span>$</p>
 <p>This is a great expansion, valid for all finite values of <span class="math notranslate nohighlight">\(x\)</span>. But, <strong>what numerical problems do you see?</strong></p>
@@ -666,13 +698,13 @@ $<span class="math notranslate nohighlight">\(e^{-x} = \sum_{i=0}^{\infty} (-1)^
 </pre></div>
 </div>
 <section id="exercise-substractive-cancellation-with-the-quadratic-equation">
-<h3>Exercise: Substractive cancellation with the Quadratic equation<a class="headerlink" href="#exercise-substractive-cancellation-with-the-quadratic-equation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.5.1. </span>Exercise: Substractive cancellation with the Quadratic equation<a class="headerlink" href="#exercise-substractive-cancellation-with-the-quadratic-equation" title="Link to this heading">#</a></h3>
 </section>
 <section id="exercise-sum-ups-and-down">
-<h3>Exercise: Sum ups and down<a class="headerlink" href="#exercise-sum-ups-and-down" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.5.2. </span>Exercise: Sum ups and down<a class="headerlink" href="#exercise-sum-ups-and-down" title="Link to this heading">#</a></h3>
 <p>Is there any computation difference between the following sums?</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a1351319-85ce-4119-9043-f7bc91980cea">
-<span class="eqno">(1)<a class="headerlink" href="#equation-a1351319-85ce-4119-9043-f7bc91980cea" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c6406944-7c93-4b07-b03f-73a92bf2e2ea">
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-c6406944-7c93-4b07-b03f-73a92bf2e2ea" title="Permalink to this equation">#</a></span>\[\begin{align}
 S_{up}(N) &amp;= \sum_{n=1}^{N} \frac{1}{n},\\
 S_{down}(N) &amp;= \sum_{n=N}^{1} \frac{1}{n}.
 \end{align}\]</div>
@@ -681,7 +713,7 @@ S_{down}(N) &amp;= \sum_{n=N}^{1} \frac{1}{n}.
 </section>
 </section>
 <section id="errors">
-<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.6. </span>Errors<a class="headerlink" href="#errors" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>FP is well defined through the IEEE754 standard.</p></li>
 <li><p>A simple substraction could destroy 15 decimal places of precision</p></li>
@@ -706,16 +738,16 @@ S_{down}(N) &amp;= \sum_{n=N}^{1} \frac{1}{n}.
 <li><p>Roundoff and truncation of a number in the computer representation</p></li>
 </ul>
 <section id="roundoff-truncation-example">
-<h3>Roundoff/truncation example<a class="headerlink" href="#roundoff-truncation-example" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.6.1. </span>Roundoff/truncation example<a class="headerlink" href="#roundoff-truncation-example" title="Link to this heading">#</a></h3>
 <p>Let’s compute the following sum as a function of <span class="math notranslate nohighlight">\(k\)</span>,
 $<span class="math notranslate nohighlight">\(f(k) = \left|\frac{k}{10} - \sum_{i=1}^k 0.1\right|\)</span>$
 Mathematically, this function should give 0 always. Is that true?</p>
 </section>
 <section id="substractive-cancellation">
-<h3>Substractive cancellation<a class="headerlink" href="#substractive-cancellation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.6.2. </span>Substractive cancellation<a class="headerlink" href="#substractive-cancellation" title="Link to this heading">#</a></h3>
 <p>Given <span class="math notranslate nohighlight">\(a = b-c\)</span>, then <span class="math notranslate nohighlight">\(a_c = b_c-c_c\)</span>, therefore</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7eee357e-c03b-404d-934c-bbc26bc37c15">
-<span class="eqno">(2)<a class="headerlink" href="#equation-7eee357e-c03b-404d-934c-bbc26bc37c15" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d59b4ff6-bbf0-4f8d-a8a9-d9ce1fa9a4fa">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-d59b4ff6-bbf0-4f8d-a8a9-d9ce1fa9a4fa" title="Permalink to this equation">#</a></span>\[\begin{align}
 a_c &amp;= a(1+\epsilon_a ) = b_c - c_c = b(1+\epsilon_b ) - c(1+\epsilon_c )\\
 \frac{a_c}{a} &amp;= 1 + \epsilon_b \frac{b}{a} - \frac{c}{a}\epsilon_c  
 \end{align}\]</div>
@@ -723,7 +755,7 @@ a_c &amp;= a(1+\epsilon_a ) = b_c - c_c = b(1+\epsilon_b ) - c(1+\epsilon_c )\\
 $<span class="math notranslate nohighlight">\(\epsilon_a = \frac{b}{a}(\epsilon_b - \epsilon_c), \)</span><span class="math notranslate nohighlight">\( 
 which is much larger, when \)</span>b<span class="math notranslate nohighlight">\( and \)</span>c<span class="math notranslate nohighlight">\( are close (so \)</span>a$ is small).</p>
 <section id="example-of-substrative-cancellation">
-<h4>Example of substrative cancellation<a class="headerlink" href="#example-of-substrative-cancellation" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">2.6.2.1. </span>Example of substrative cancellation<a class="headerlink" href="#example-of-substrative-cancellation" title="Link to this heading">#</a></h4>
 <p>The following series,
 $<span class="math notranslate nohighlight">\(S_N^{(1)} = \sum_{n=1}^{2N} (-1)^n \frac{n}{n+1},\)</span><span class="math notranslate nohighlight">\(
 can be written in two mathematically equivalent ways:
@@ -736,10 +768,10 @@ and
 </section>
 </section>
 <section id="total-errors-in-algorithms-and-their-computational-implementation">
-<h2>Total errors in algorithms and their computational implementation<a class="headerlink" href="#total-errors-in-algorithms-and-their-computational-implementation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.7. </span>Total errors in algorithms and their computational implementation<a class="headerlink" href="#total-errors-in-algorithms-and-their-computational-implementation" title="Link to this heading">#</a></h2>
 <p>As you can see, there are several source for errors in computation. Some come from the mathematical approximation, , called <span class="math notranslate nohighlight">\(\epsilon_a\)</span>, and some others are intrinsic from the numerical representation, and we can call them <span class="math notranslate nohighlight">\(\epsilon_r\)</span>. Sometimes, the rounding/truncation error are modeled as a random walk, <span class="math notranslate nohighlight">\(\epsilon_r \simeq \sqrt{N} \epsilon_m\)</span>, where <span class="math notranslate nohighlight">\(\epsilon_m\)</span> is the machine precision, and <span class="math notranslate nohighlight">\(N\)</span> is the representative number of “steps”.  From here, the total error can be estimated as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a468369b-68c8-481b-9d93-f2adde7534fb">
-<span class="eqno">(3)<a class="headerlink" href="#equation-a468369b-68c8-481b-9d93-f2adde7534fb" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ecc41d8a-b9fc-48c6-baf1-c7608c21dde4">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-ecc41d8a-b9fc-48c6-baf1-c7608c21dde4" title="Permalink to this equation">#</a></span>\[\begin{align}
 \epsilon_{\rm tot} &amp;= \epsilon_a + \epsilon_r \\
 &amp;= \frac{\alpha}{N^\beta} + \sqrt{N} \epsilon_m.
 \end{align}\]</div>
@@ -747,7 +779,7 @@ and
 <img alt="under-over-truncation" class="centerimg80" src="../_images/totalerrors.png" />
 </section>
 <section id="how-to-minimize-numerical-errors">
-<h2>How to minimize numerical errors?<a class="headerlink" href="#how-to-minimize-numerical-errors" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.8. </span>How to minimize numerical errors?<a class="headerlink" href="#how-to-minimize-numerical-errors" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Use numerical libraries: lapack, eigen, standard c++ lib
 (<a class="reference external" href="https://en.cppreference.com/w/">https://en.cppreference.com/w/</a>,
@@ -802,8 +834,17 @@ between very large and/or very small numbers, normalize your models</p></li>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introduction</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Introduction</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../04-Makefiles/04-Makefiles.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Makefiles</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -821,25 +862,25 @@ between very large and/or very small numbers, normalize your models</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overflow-for-integers">Overflow for integers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#underflow-and-overflow-for-floats">Underflow and overflow for floats</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-for-associativity">Test for associativity</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-eps">Machine eps</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-series-expansion-of-e-x">Practical example: Series expansion of <span class="math notranslate nohighlight">\(e^{-x}\)</span></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-substractive-cancellation-with-the-quadratic-equation">Exercise: Substractive cancellation with the Quadratic equation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-sum-ups-and-down">Exercise: Sum ups and down</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overflow-for-integers">2.1. Overflow for integers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#underflow-and-overflow-for-floats">2.2. Underflow and overflow for floats</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-for-associativity">2.3. Test for associativity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-eps">2.4. Machine eps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-series-expansion-of-e-x">2.5. Practical example: Series expansion of <span class="math notranslate nohighlight">\(e^{-x}\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-substractive-cancellation-with-the-quadratic-equation">2.5.1. Exercise: Substractive cancellation with the Quadratic equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-sum-ups-and-down">2.5.2. Exercise: Sum ups and down</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">Errors</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roundoff-truncation-example">Roundoff/truncation example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#substractive-cancellation">Substractive cancellation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-substrative-cancellation">Example of substrative cancellation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">2.6. Errors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roundoff-truncation-example">2.6.1. Roundoff/truncation example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#substractive-cancellation">2.6.2. Substractive cancellation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-substrative-cancellation">2.6.2.1. Example of substrative cancellation</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-errors-in-algorithms-and-their-computational-implementation">Total errors in algorithms and their computational implementation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-minimize-numerical-errors">How to minimize numerical errors?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-errors-in-algorithms-and-their-computational-implementation">2.7. Total errors in algorithms and their computational implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-minimize-numerical-errors">2.8. How to minimize numerical errors?</a></li>
 </ul>
   </nav></div>
 

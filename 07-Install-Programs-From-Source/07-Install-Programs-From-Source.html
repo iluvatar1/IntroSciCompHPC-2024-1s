@@ -1,0 +1,1183 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5. Using software in a hpc environment &#8212; Introduction to Scientific and High Performance Computing</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css?v=03b9d5b1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '07-Install-Programs-From-Source/07-Install-Programs-From-Source';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. Debugging" href="../09-Debugging/09-Debugging.html" />
+    <link rel="prev" title="4. Standard library of functions: math functions, containers and random numbers" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Nanoscience_High-Performance_Computing_Facility.jpg/1600px-Nanoscience_High-Performance_Computing_Facility.jpg" class="logo__image only-light" alt="Introduction to Scientific and High Performance Computing - Home"/>
+    <script>document.write(`<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Nanoscience_High-Performance_Computing_Facility.jpg/1600px-Nanoscience_High-Performance_Computing_Facility.jpg" class="logo__image only-dark" alt="Introduction to Scientific and High Performance Computing - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Scientific and High Performance Computing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to scientific computing and programming tools</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01-Introduction/01-Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">2. Errors in Floating Point Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">3. Makefiles as automation tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">4. Standard library of functions: math functions, containers and random numbers</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Using software in a hpc environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">6. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">7. Unit Testing : Ensuring fix and correct behavior last</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">8. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">9. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">10. Numerical libraries in Matrix Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Performance measurement for some matrix ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">14. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">15. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">16. HPC resource manager: Slurm</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/iluvatar1/IntroSciCompHPC-2024-1s/master?urlpath=lab/tree/07-Install-Programs-From-Source/07-Install-Programs-From-Source.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/iluvatar1/IntroSciCompHPC-2024-1s/blob/master/github/iluvatar1/IntroSciCompHPC-2024-1s/blob/master/07-Install-Programs-From-Source/07-Install-Programs-From-Source.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-2024-1s" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-2024-1s/issues/new?title=Issue%20on%20page%20%2F07-Install-Programs-From-Source/07-Install-Programs-From-Source.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/07-Install-Programs-From-Source/07-Install-Programs-From-Source.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Using software in a hpc environment</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spack-automatic-load-for-programs-and-containers">5.1. Spack: automatic load for programs and containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">5.1.1. Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-some-tools-with-spack">5.1.2. Installing some tools with spack</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-programs-from-source">5.2. How to install programs from source</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-concepts">5.2.1. Preliminary concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-version-for-already-installed-programs">5.2.2. Checking the version for already installed programs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-local-places-to-install-the-utilities">5.2.3. Preparing the local places to install the utilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-installation-algorithm">5.2.4. Typical installation algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop">5.2.5. Workshop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-programs">5.2.6. Test Programs</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fftw">5.2.6.1. fftw</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c">5.2.6.2. Eigen C++</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voro">5.2.7. Voro++</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-9-2">5.2.8. g++ 9.2</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="using-software-in-a-hpc-environment">
+<h1><span class="section-number">5. </span>Using software in a hpc environment<a class="headerlink" href="#using-software-in-a-hpc-environment" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="http://hpctoolkit.org/software-instructions.html">http://hpctoolkit.org/software-instructions.html</a>
+<a class="reference external" href="https://apptainer.org/docs/user/main/index.html">https://apptainer.org/docs/user/main/index.html</a></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ashki23.github.io/spack.html">https://ashki23.github.io/spack.html</a></p></li>
+<li><p><a class="reference external" href="https://developer.amd.com/spack/build-customization/">https://developer.amd.com/spack/build-customization/</a></p></li>
+<li></li>
+</ul>
+<section id="spack-automatic-load-for-programs-and-containers">
+<h2><span class="section-number">5.1. </span>Spack: automatic load for programs and containers<a class="headerlink" href="#spack-automatic-load-for-programs-and-containers" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://spack.readthedocs.io/en/latest/">Spack</a> was designed by llnl
+and is targeted to simplify the installation and managment of HPC
+programs with many possible versions and dependencies. Check the docs at
+<a class="reference external" href="https://spack.readthedocs.io/en/latest/tutorial.html">https://spack.readthedocs.io/en/latest/tutorial.html</a> or
+<a class="reference external" href="https://bluewaters.ncsa.illinois.edu/webinars/software-ecosystems/spack">https://bluewaters.ncsa.illinois.edu/webinars/software-ecosystems/spack</a>
+. For now let’s just install it, configure it, and install some simple
+tools.</p>
+<section id="installation">
+<h3><span class="section-number">5.1.1. </span>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
+<p>Following the official docs, just clone the repository</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/spack/spack.git<span class="w"> </span><span class="c1"># clones the repo</span>
+<span class="nb">cd</span><span class="w"> </span>spack
+<span class="c1">#git checkout releases/v0.17 # Checkout the latest stable release</span>
+<span class="nb">source</span><span class="w"> </span>share/spack/setup-env.sh<span class="w"> </span><span class="c1"># Setup the environment , this command should go in ~/.bashrc</span>
+</pre></div>
+</div>
+<p>Now you can check what can be installed</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>list
+</pre></div>
+</div>
+<p>To be able to use spack easily in the future, it is recommended to add
+the source command to your <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>, so just add the following at the
+end of the file</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>source $HOME/PATHTOREPO/share/spack/setup-env.sh
+</pre></div>
+</div>
+<p>and then close and open the terminal.</p>
+<p>In our computer room there has been a problem with spack and openssl. It
+is better to instruct spack to use the local openssl version instead of
+building one. To do so, add the following to your spack package config
+file, <code class="docutils literal notranslate"><span class="pre">$SPACK_REPO/etc/spack/packages.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">packages</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">openssl</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">externals</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">spec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openssl@1.1.1m</span>
+<span class="w">          </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/usr</span>
+<span class="w">        </span><span class="nt">buildable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+</pre></div>
+</div>
+<p>You can check the correct version with <span class="math notranslate nohighlight">\(openssl version\)</span>. Furthermore,
+to be able to run your installed programs on several computers with
+different processors, use the flag <code class="docutils literal notranslate"><span class="pre">target=x86_64</span></code> .</p>
+</section>
+<section id="installing-some-tools-with-spack">
+<h3><span class="section-number">5.1.2. </span>Installing some tools with spack<a class="headerlink" href="#installing-some-tools-with-spack" title="Link to this heading">#</a></h3>
+<p>Now let’s just install the <code class="docutils literal notranslate"><span class="pre">gsl</span></code> scientific library and some <code class="docutils literal notranslate"><span class="pre">eigen</span></code>
+alternative versions:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>info<span class="w"> </span>gsl<span class="w"> </span><span class="c1"># Get some information about versions, deps, etc</span>
+spack<span class="w"> </span>install<span class="w"> </span>gsl@2.5
+spack<span class="w"> </span>install<span class="w"> </span>gsl@2.4
+module<span class="w"> </span>avail
+</pre></div>
+</div>
+<p>To check the installed software, you can use the <code class="docutils literal notranslate"><span class="pre">module</span></code> command as
+(installed when you used <code class="docutils literal notranslate"><span class="pre">bootstrap</span></code>)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>avail
+</pre></div>
+</div>
+<p>Now you will see that you have two versions of the gsl. If you want to
+use one of them, you will load it with spack. The check the change in
+environment, first check the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, then load, then compare</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$C_INCLUDE_PATH</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$LD_LIBRARY_PATH</span>
+</pre></div>
+</div>
+<p>Now load the gsl version 2.5,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>load<span class="w"> </span>gsl@2.5
+</pre></div>
+</div>
+<p>and check the new paths</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$C_INCLUDE_PATH</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$LD_LIBRARY_PATH</span>
+</pre></div>
+</div>
+<p>If you unload the gsl 2.5, everything goes back to normal,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>unload<span class="w"> </span>gsl@2.5
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$C_INCLUDE_PATH</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$LD_LIBRARY_PATH</span>
+</pre></div>
+</div>
+<p>To learn more about spack, check the official docs and tutorials. In the
+following we will use it to play with several packages in parallel
+programming. Is voro++ available? what about eigen?</p>
+</section>
+</section>
+<section id="how-to-install-programs-from-source">
+<h2><span class="section-number">5.2. </span>How to install programs from source<a class="headerlink" href="#how-to-install-programs-from-source" title="Link to this heading">#</a></h2>
+<p>In this workshop we will learn how to install a program or library from
+source to the home directory of the user. This is useful when you need a
+programa but it is not available in the system you are working on. Also,
+It could be that you actually need a newer version than the installed
+one. We will use the following programs, some of them already available
+at the computer room:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>installed version</p></th>
+<th class="head"><p>latest version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.fftw.org/">fftw</a></p></td>
+<td><p>3.3.4</p></td>
+<td><p>3.3.8</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://eigen.tuxfamily.org/index.php?title%3DMain_Page">Eigen C++</a></p></td>
+<td><p>3.2.7</p></td>
+<td><p>3.3.7</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://math.lbl.gov/voro%2B%2B/">voro++</a></p></td>
+<td><p>Not installed</p></td>
+<td><p>0.4.6</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://gcc.gnu.org/">g++ 9.x</a></p></td>
+<td><p>Not installed</p></td>
+<td><p>9.2</p></td>
+</tr>
+</tbody>
+</table>
+<p>We will learn how to do it by compiling a package directly, something
+very useful to know, and also using a new tool aimed for supercomputers,
+called <a class="reference external" href="https://spack.readthedocs.io/en/latest/">spack</a> , that
+simplifies the installation of software and also allows to have many
+versions of the same library, something not easy done manually.</p>
+<section id="preliminary-concepts">
+<h3><span class="section-number">5.2.1. </span>Preliminary concepts<a class="headerlink" href="#preliminary-concepts" title="Link to this heading">#</a></h3>
+<p>It is important for you to know a little how your operating system and
+the shell look for commands. In general, the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable stores the
+directories where the shell interpreter will look for a given command.
+To check its contents, you can run the following,</p>
+<p>If, for instance, you want to add another directory to the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, like
+the directory <code class="docutils literal notranslate"><span class="pre">$HOME/local/bin</span></code>, you can run the following</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$HOME</span>/bin
+</pre></div>
+</div>
+<p>This appends the special directory to the old content of the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
+<p>When you want to compile a given program that uses some other libraries,
+you must specify any extra folder to look for include files, done with
+the <code class="docutils literal notranslate"><span class="pre">-I</span></code> flag, and for libraries, done with the <code class="docutils literal notranslate"><span class="pre">-L</span></code> and <code class="docutils literal notranslate"><span class="pre">-l</span></code> flags. For
+instance, let’s assume that you installed some programs in your
+<code class="docutils literal notranslate"><span class="pre">HOME/local</span></code>, the include files inside <code class="docutils literal notranslate"><span class="pre">$HOME/local/include</span></code>, and the
+libraries inside <code class="docutils literal notranslate"><span class="pre">$HOME/local/lib</span></code>. If you want to tell the compiler to
+use those, you must compile as</p>
+<p>Finally, whenever you are installing a program from source you must be
+aware that this reduces to basically the following steps:</p>
+<ol class="arabic">
+<li><p>Download and untar the file. Enter the unpacked directory.</p></li>
+<li><p>Read the README/INSTALL files for any important info.</p></li>
+<li><p>If the program uses cmake, create a build dir and then use cmake to
+generate the Makefiles:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>../<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="nv">$HOME</span>/local
+</pre></div>
+</div>
+<p>On the other hand, if the program uses <code class="docutils literal notranslate"><span class="pre">configure</span></code>, then configure
+the system to install on the required path</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./configure<span class="w"> </span>--prefix<span class="o">=</span><span class="nv">$HOME</span>/local
+</pre></div>
+</div>
+</li>
+<li><p>Compile and install the program, maybe using many threads</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>-j<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="c1"># uses for threads to compile</span>
+make<span class="w"> </span>install
+</pre></div>
+</div>
+<p>Done. The program is installed.</p>
+<p>Finally, when compiling, do not forget to use the flags <code class="docutils literal notranslate"><span class="pre">-L</span></code> and
+<code class="docutils literal notranslate"><span class="pre">-I</span></code> appropriately.</p>
+</li>
+</ol>
+<p>Setting all the flags and making sure to use the right version is
+sometimes difficult, so tools like <code class="docutils literal notranslate"><span class="pre">spack</span></code> aim to manage and simplify
+this.</p>
+</section>
+<section id="checking-the-version-for-already-installed-programs">
+<h3><span class="section-number">5.2.2. </span>Checking the version for already installed programs<a class="headerlink" href="#checking-the-version-for-already-installed-programs" title="Link to this heading">#</a></h3>
+<p>If you are used to <code class="docutils literal notranslate"><span class="pre">apt-get</span></code> or something related, you can use the
+package manager to check. But, in general, you can check the versions by
+looking at the appropriate places on your system. Typically, if you are
+looking for a library, they are installed under <code class="docutils literal notranslate"><span class="pre">/usr/lib</span></code> or
+<code class="docutils literal notranslate"><span class="pre">/usr/local/lib</span></code>, while include files are installed under <code class="docutils literal notranslate"><span class="pre">/usr/include</span></code>
+or <code class="docutils literal notranslate"><span class="pre">/usr/local/include</span></code> . For instance, if you are looking for library
+<code class="docutils literal notranslate"><span class="pre">foo</span></code>, then you should look for the file <code class="docutils literal notranslate"><span class="pre">libfoo.a</span></code> or <code class="docutils literal notranslate"><span class="pre">libfoo.so</span></code> . One
+useful utility for this is the command <code class="docutils literal notranslate"><span class="pre">locate</span></code> or <code class="docutils literal notranslate"><span class="pre">find</span></code> .</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>locate<span class="w"> </span>libfoo
+find<span class="w"> </span>/usr/lib<span class="w"> </span>-iname<span class="w"> </span><span class="s2">&quot;*libfoo*&quot;</span>
+</pre></div>
+</div>
+<p>Execute these commands to check the actual versions for fftw, eigen, and
+git. What versions do you have? If you a re looking for a program, or an
+specific version of program, you must check if the program exists by
+executing it. For command line programs you usually can check the
+version by using the following</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">programname</span></code> is the name of the command.</p>
+</section>
+<section id="preparing-the-local-places-to-install-the-utilities">
+<h3><span class="section-number">5.2.3. </span>Preparing the local places to install the utilities<a class="headerlink" href="#preparing-the-local-places-to-install-the-utilities" title="Link to this heading">#</a></h3>
+<p>In this case we will install everything under the <code class="docutils literal notranslate"><span class="pre">$HOME/local</span></code>
+subdirectory inside your home, so please create it. Remember that the
+symbol <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> means your home directory. The utilies will then create
+the appropriate folders there. <strong>NOTE:</strong> Better use the <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> var
+instead of <code class="docutils literal notranslate"><span class="pre">~</span></code>, which is another way to state the name of your home.</p>
+</section>
+<section id="typical-installation-algorithm">
+<h3><span class="section-number">5.2.4. </span>Typical installation algorithm<a class="headerlink" href="#typical-installation-algorithm" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Download the source from the project page. This normally implies
+downloading a tarball (file ending with <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> or <code class="docutils literal notranslate"><span class="pre">.tar.bz2</span></code>) .</p></li>
+<li><p>Un-compress the downloaded file. For a tarball, the command will be</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>xf<span class="w"> </span>filename.tar.gz
+</pre></div>
+</div>
+</li>
+<li><p>Enter to the newly uncompressed folder (almost always usually <code class="docutils literal notranslate"><span class="pre">cd</span>&#160;&#160; <span class="pre">filename</span></code>).</p></li>
+<li><p><strong>READ</strong> the <code class="docutils literal notranslate"><span class="pre">README</span></code> and/or the <code class="docutils literal notranslate"><span class="pre">INSTALL</span></code> file to check for
+important info regarding the program. SOmetimes these files tell you
+that the installation is special and that you are required to follow
+some special steps (that will happen with <code class="docutils literal notranslate"><span class="pre">voro++</span></code> )</p></li>
+<li><p><strong>CONFIGURATION:</strong> You have two options, each one independent on the
+other:</p>
+<ol class="arabic">
+<li><p>If the program has a configure script, then just run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./configure<span class="w"> </span>--help
+</pre></div>
+</div>
+</li>
+</ol>
+<p>to check all the available options. Since we want to install on the
+<code class="docutils literal notranslate"><span class="pre">$HOME/local</span></code> directory, then we need to run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./configure<span class="w"> </span>--prefix<span class="o">=</span><span class="nv">$HOME</span>/local
+</pre></div>
+</div>
+<p>If you don’t specify the prefix, then the program will be installed
+on the <code class="docutils literal notranslate"><span class="pre">/usr/bin</span></code> or <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code> directories, whatever is the
+default. If these commands ends successfully, it will print some
+info to the screen and will tell you to go to the next step.
+Otherwise you will need to read the log and fix the errors (like
+installing a dependency).</p>
+<ol class="arabic simple">
+<li><p>If the program uses <code class="docutils literal notranslate"><span class="pre">cmake</span></code>, a makefile generator and</p></li>
+</ol>
+<p>configurator, then you need to do the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>build<span class="w"> </span><span class="c1"># creates a build directory to put there the temporary built files</span>
+<span class="nb">cd</span><span class="w"> </span>build<span class="w"> </span>
+cmake<span class="w"> </span>../<span class="w"> </span>-DCMAKE_INSTALL_PREFIX:PATH<span class="o">=</span><span class="nv">$HOME</span>/local<span class="w"> </span><span class="c1"># configure the building process for the source code located on the parent directory</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>COMPILATION:</strong> Now that you have configured your installation, you
+need to compile by using the GNU make utility (<em>Note:</em> All this
+build utilities come from the gnu organization and are free software
+as in freedom). If you have several cores, you can use them in
+parallel, assuming the that the Makefile and your make versions
+supports it:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>-j<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="c1"># for three cores, but, if you are unsure, just use one core.</span>
+</pre></div>
+</div>
+<p>Any errors in this stage should be fixed before going to the next
+one.</p>
+</li>
+<li><p><strong>INSTALLATION</strong> After successful compilation, you can install by
+using</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>install
+</pre></div>
+</div>
+<p>This will install the program (libraries, binaries, include files,
+manual files, etc) onto the <code class="docutils literal notranslate"><span class="pre">prefix</span></code> directory. If you want to
+instll system-wide (you did not set the <code class="docutils literal notranslate"><span class="pre">prefix</span></code>), then you need to
+use <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code> . In this case you don’t need <code class="docutils literal notranslate"><span class="pre">sudo</span></code> since
+you are installing on your own home.</p>
+</li>
+<li><p><strong>TESTING</strong> In this case use a program to test your installation.
+When you compile your program and you want to use the version that
+you installed, you need to tell the compiler where to find the
+libraries/includes, so you need something like</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>g++<span class="w"> </span>-L<span class="w"> </span><span class="nv">$HOME</span>/local/lib<span class="w"> </span>-I<span class="w"> </span><span class="nv">$HOME</span>/local/include<span class="w">  </span>programname.cpp<span class="w"> </span>-llibname
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-L</span> <span class="pre">$HOME/local/lib</span></code> tells the compiler to look for libraries on</p></li>
+</ul>
+<p>the <code class="docutils literal notranslate"><span class="pre">$HOME/local/lib</span></code> directory.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-I</span> <span class="pre">$HOME/local/include</span></code> tells the compiler to look for include</p></li>
+</ul>
+<p>files on the <code class="docutils literal notranslate"><span class="pre">$HOME/local/include</span></code> directory.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-llibname</span></code> tells the compiler to link with the given</p></li>
+</ul>
+<p>library. Sometimes is not needed. Sometimes is crucial. Be careful,
+if your library is called libfftw, you need to write <code class="docutils literal notranslate"><span class="pre">-lfftw</span></code>, not
+<code class="docutils literal notranslate"><span class="pre">-llibfftw</span></code>.</p>
+</li>
+</ol>
+</section>
+<section id="workshop">
+<h3><span class="section-number">5.2.5. </span>Workshop<a class="headerlink" href="#workshop" title="Link to this heading">#</a></h3>
+<p>For each of the proposed utilities written at the beginning, follow the
+next procedure:</p>
+<ul class="simple">
+<li><p>Check the installed version number and compare with the latest one.</p></li>
+<li><p>Install the latest version on your home directory by following the
+procedure stated above.</p></li>
+<li><p>Run each of the following example program but make sure you a re
+using you installed version. Show to the instructor the compilation
+line.</p></li>
+</ul>
+<p><strong>Important NOTE:</strong> for <code class="docutils literal notranslate"><span class="pre">g++</span></code>, use the prefix <code class="docutils literal notranslate"><span class="pre">-9</span></code> in the configure line
+to put that as suffix to the commands and avoid collisions with the
+compiler already installed in the system. This can be done by adding the
+flag <code class="docutils literal notranslate"><span class="pre">--program-suffix=-9</span></code> to the <code class="docutils literal notranslate"><span class="pre">configure</span></code> command.</p>
+</section>
+<section id="test-programs">
+<h3><span class="section-number">5.2.6. </span>Test Programs<a class="headerlink" href="#test-programs" title="Link to this heading">#</a></h3>
+<section id="fftw">
+<h4><span class="section-number">5.2.6.1. </span>fftw<a class="headerlink" href="#fftw" title="Link to this heading">#</a></h4>
+<p>This is a c code. Save it as testfftw.c and compile with <code class="docutils literal notranslate"><span class="pre">gcc</span></code> instead
+of <code class="docutils literal notranslate"><span class="pre">g++</span></code> .</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// From : https://github.com/undees/fftw-example</span>
+<span class="c1">// This ia a c code (save it as testfftw.c)</span>
+<span class="cm">/* Start reading here */</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fftw3.h&gt;</span>
+
+<span class="cp">#define NUM_POINTS 128</span>
+
+
+<span class="cm">/* Never mind this bit */</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
+
+<span class="cp">#define REAL 0</span>
+<span class="cp">#define IMAG 1</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">acquire_from_somewhere</span><span class="p">(</span><span class="n">fftw_complex</span><span class="o">*</span><span class="w"> </span><span class="n">signal</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="cm">/* Generate two sine waves of different frequencies and</span>
+<span class="cm">   * amplitudes.</span>
+<span class="cm">   */</span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NUM_POINTS</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">i</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">NUM_POINTS</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">M_PI</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">signal</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">REAL</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="mf">10.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">      </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="mf">25.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">theta</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">signal</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">IMAG</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="mf">10.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">      </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="mf">25.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">theta</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">do_something_with</span><span class="p">(</span><span class="n">fftw_complex</span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NUM_POINTS</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">mag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">REAL</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">REAL</span><span class="p">]</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                      </span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">IMAG</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">IMAG</span><span class="p">]);</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%g</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mag</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="cm">/* Resume reading here */</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">fftw_complex</span><span class="w"> </span><span class="n">signal</span><span class="p">[</span><span class="n">NUM_POINTS</span><span class="p">];</span>
+<span class="w">  </span><span class="n">fftw_complex</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="n">NUM_POINTS</span><span class="p">];</span>
+
+<span class="w">  </span><span class="n">fftw_plan</span><span class="w"> </span><span class="n">plan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fftw_plan_dft_1d</span><span class="p">(</span><span class="n">NUM_POINTS</span><span class="p">,</span>
+<span class="w">                                    </span><span class="n">signal</span><span class="p">,</span>
+<span class="w">                                    </span><span class="n">result</span><span class="p">,</span>
+<span class="w">                                    </span><span class="n">FFTW_FORWARD</span><span class="p">,</span>
+<span class="w">                                    </span><span class="n">FFTW_ESTIMATE</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">acquire_from_somewhere</span><span class="p">(</span><span class="n">signal</span><span class="p">);</span>
+<span class="w">  </span><span class="n">fftw_execute</span><span class="p">(</span><span class="n">plan</span><span class="p">);</span>
+<span class="w">  </span><span class="n">do_something_with</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">fftw_destroy_plan</span><span class="p">(</span><span class="n">plan</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="eigen-c">
+<h4><span class="section-number">5.2.6.2. </span>Eigen C++<a class="headerlink" href="#eigen-c" title="Link to this heading">#</a></h4>
+<p>These are <code class="docutils literal notranslate"><span class="pre">C++</span></code> codes. Save them, compile, run and explain what they do.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span>
+<span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Core&gt;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">//std::cout &lt;&lt; EIGEN_MAYOR_VERSION &lt;&lt; std::endl;</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">EIGEN_MINOR_VERSION</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">m</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">      </span><span class="n">m</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">      </span><span class="n">m</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.5</span><span class="p">;</span>
+<span class="w">      </span><span class="n">m</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">      </span><span class="n">m</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">Eigen</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">Matrix2d</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">      </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">      </span><span class="n">MatrixXd</span><span class="w"> </span><span class="n">b</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">      </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">        </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a + b =</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a - b =</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Doing a += b;&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Now a =</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">v</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+<span class="w">      </span><span class="n">Vector3d</span><span class="w"> </span><span class="n">w</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;-v + w - v =</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">Eigen</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">Matrix3f</span><span class="w"> </span><span class="n">A</span><span class="p">;</span>
+<span class="w">      </span><span class="n">Vector3f</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">      </span><span class="n">A</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="w">  </span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="w">  </span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">;</span>
+<span class="w">      </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">      </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Here is the matrix A:</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Here is the vector b:</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="n">Vector3f</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">colPivHouseholderQr</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">      </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The solution is:</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">Eigen</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="n">Matrix2f</span><span class="w"> </span><span class="n">A</span><span class="p">;</span>
+<span class="w">      </span><span class="n">A</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">      </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Here is the matrix A:</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="n">SelfAdjointEigenSolver</span><span class="o">&lt;</span><span class="n">Matrix2f</span><span class="o">&gt;</span><span class="w"> </span><span class="n">eigensolver</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">eigensolver</span><span class="p">.</span><span class="n">info</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Success</span><span class="p">)</span><span class="w"> </span><span class="n">abort</span><span class="p">();</span>
+<span class="w">      </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The eigenvalues of A are:</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">eigensolver</span><span class="p">.</span><span class="n">eigenvalues</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">      </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Here&#39;s a matrix whose columns are eigenvectors of A </span><span class="se">\n</span><span class="s">&quot;</span>
+<span class="w">           </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;corresponding to these eigenvalues:</span><span class="se">\n</span><span class="s">&quot;</span>
+<span class="w">           </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">eigensolver</span><span class="p">.</span><span class="n">eigenvectors</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="voro">
+<h3><span class="section-number">5.2.7. </span>Voro++<a class="headerlink" href="#voro" title="Link to this heading">#</a></h3>
+<p>Use the example
+<a class="reference external" href="http://math.lbl.gov/voro%2B%2B/examples/random_points/"><a class="reference external" href="http://math.lbl.gov/voro++/examples/random_points/">http://math.lbl.gov/voro++/examples/random_points/</a></a></p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Voronoi calculation example code</span>
+<span class="c1">//</span>
+<span class="c1">// Author   : Chris H. Rycroft (LBL / UC Berkeley)</span>
+<span class="c1">// Email    : chr@alum.mit.edu</span>
+<span class="c1">// Date     : August 30th 2011</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;voro++.hh&quot;</span>
+<span class="n">using</span><span class="w"> </span><span class="n">namespace</span><span class="w"> </span><span class="n">voro</span><span class="p">;</span>
+
+<span class="c1">// Set up constants for the container geometry</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x_min</span><span class="o">=</span><span class="mi">-1</span><span class="p">,</span><span class="n">x_max</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y_min</span><span class="o">=</span><span class="mi">-1</span><span class="p">,</span><span class="n">y_max</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">z_min</span><span class="o">=</span><span class="mi">-1</span><span class="p">,</span><span class="n">z_max</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">cvol</span><span class="o">=</span><span class="p">(</span><span class="n">x_max</span><span class="o">-</span><span class="n">x_min</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">y_max</span><span class="o">-</span><span class="n">y_min</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x_max</span><span class="o">-</span><span class="n">x_min</span><span class="p">);</span>
+
+<span class="c1">// Set up the number of blocks that the container is divided into</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n_x</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">n_y</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">n_z</span><span class="o">=</span><span class="mi">6</span><span class="p">;</span>
+
+<span class="c1">// Set the number of particles that are going to be randomly introduced</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">particles</span><span class="o">=</span><span class="mi">20</span><span class="p">;</span>
+
+<span class="c1">// This function returns a random double between 0 and 1</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">rnd</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="kt">double</span><span class="p">(</span><span class="n">rand</span><span class="p">())</span><span class="o">/</span><span class="n">RAND_MAX</span><span class="p">;}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// Create a container with the geometry given above, and make it</span>
+<span class="w">  </span><span class="c1">// non-periodic in each of the three coordinates. Allocate space for</span>
+<span class="w">  </span><span class="c1">// eight particles within each computational block</span>
+<span class="w">  </span><span class="n">container</span><span class="w"> </span><span class="n">con</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span><span class="n">x_max</span><span class="p">,</span><span class="n">y_min</span><span class="p">,</span><span class="n">y_max</span><span class="p">,</span><span class="n">z_min</span><span class="p">,</span><span class="n">z_max</span><span class="p">,</span><span class="n">n_x</span><span class="p">,</span><span class="n">n_y</span><span class="p">,</span><span class="n">n_z</span><span class="p">,</span>
+<span class="w">                </span><span class="nb">false</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="nb">false</span><span class="p">,</span><span class="mi">8</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Randomly add particles into the container</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">particles</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="o">=</span><span class="n">x_min</span><span class="o">+</span><span class="n">rnd</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="n">x_max</span><span class="o">-</span><span class="n">x_min</span><span class="p">);</span>
+<span class="w">    </span><span class="n">y</span><span class="o">=</span><span class="n">y_min</span><span class="o">+</span><span class="n">rnd</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="n">y_max</span><span class="o">-</span><span class="n">y_min</span><span class="p">);</span>
+<span class="w">    </span><span class="n">z</span><span class="o">=</span><span class="n">z_min</span><span class="o">+</span><span class="n">rnd</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="n">z_max</span><span class="o">-</span><span class="n">z_min</span><span class="p">);</span>
+<span class="w">    </span><span class="n">con</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Sum up the volumes, and check that this matches the container volume</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">vvol</span><span class="o">=</span><span class="n">con</span><span class="p">.</span><span class="n">sum_cell_volumes</span><span class="p">();</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Container volume : %g</span><span class="se">\n</span><span class="s">&quot;</span>
+<span class="w">         </span><span class="s">&quot;Voronoi volume   : %g</span><span class="se">\n</span><span class="s">&quot;</span>
+<span class="w">         </span><span class="s">&quot;Difference       : %g</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">cvol</span><span class="p">,</span><span class="n">vvol</span><span class="p">,</span><span class="n">vvol</span><span class="o">-</span><span class="n">cvol</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Output the particle positions in gnuplot format</span>
+<span class="w">  </span><span class="n">con</span><span class="p">.</span><span class="n">draw_particles</span><span class="p">(</span><span class="s">&quot;random_points_p.gnu&quot;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Output the Voronoi cells in gnuplot format</span>
+<span class="w">  </span><span class="n">con</span><span class="p">.</span><span class="n">draw_cells_gnuplot</span><span class="p">(</span><span class="s">&quot;random_points_v.gnu&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+</pre></div>
+</div>
+<p>On gnuplot do the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>splot<span class="w"> </span><span class="s2">&quot;random_points_p.gnu&quot;</span><span class="w"> </span>u<span class="w"> </span><span class="m">2</span>:3:4,<span class="w"> </span><span class="s2">&quot;random_points_v.gnu&quot;</span><span class="w"> </span>with<span class="w"> </span>lines
+</pre></div>
+</div>
+</section>
+<section id="g-9-2">
+<h3><span class="section-number">5.2.8. </span>g++ 9.2<a class="headerlink" href="#g-9-2" title="Link to this heading">#</a></h3>
+<p>Just run the command and check the version,</p>
+<p>Now run any of the special functions examples that required <code class="docutils literal notranslate"><span class="pre">-std=c++17</span></code>
+.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./07-Install-Programs-From-Source"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Standard library of functions: math functions, containers and random numbers</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../09-Debugging/09-Debugging.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Debugging</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spack-automatic-load-for-programs-and-containers">5.1. Spack: automatic load for programs and containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">5.1.1. Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-some-tools-with-spack">5.1.2. Installing some tools with spack</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-programs-from-source">5.2. How to install programs from source</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-concepts">5.2.1. Preliminary concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-version-for-already-installed-programs">5.2.2. Checking the version for already installed programs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-local-places-to-install-the-utilities">5.2.3. Preparing the local places to install the utilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-installation-algorithm">5.2.4. Typical installation algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop">5.2.5. Workshop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-programs">5.2.6. Test Programs</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fftw">5.2.6.1. fftw</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c">5.2.6.2. Eigen C++</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voro">5.2.7. Voro++</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-9-2">5.2.8. g++ 9.2</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By William Oquendo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

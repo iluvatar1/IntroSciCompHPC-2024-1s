@@ -1,0 +1,1396 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6. Debugging &#8212; Introduction to Scientific and High Performance Computing</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css?v=03b9d5b1" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '09-Debugging/09-Debugging';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. Unit Testing : Ensuring fix and correct behavior last" href="../09-UnitTest/09-UnitTesting.html" />
+    <link rel="prev" title="5. Using software in a hpc environment" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Nanoscience_High-Performance_Computing_Facility.jpg/1600px-Nanoscience_High-Performance_Computing_Facility.jpg" class="logo__image only-light" alt="Introduction to Scientific and High Performance Computing - Home"/>
+    <script>document.write(`<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Nanoscience_High-Performance_Computing_Facility.jpg/1600px-Nanoscience_High-Performance_Computing_Facility.jpg" class="logo__image only-dark" alt="Introduction to Scientific and High Performance Computing - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction to Scientific and High Performance Computing
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to scientific computing and programming tools</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01-Introduction/01-Introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">2. Errors in Floating Point Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">3. Makefiles as automation tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">4. Standard library of functions: math functions, containers and random numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">5. Using software in a hpc environment</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">7. Unit Testing : Ensuring fix and correct behavior last</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">8. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">9. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">10. Numerical libraries in Matrix Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Performance measurement for some matrix ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">14. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">15. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">16. HPC resource manager: Slurm</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/iluvatar1/IntroSciCompHPC-2024-1s/master?urlpath=lab/tree/09-Debugging/09-Debugging.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/iluvatar1/IntroSciCompHPC-2024-1s/blob/master/github/iluvatar1/IntroSciCompHPC-2024-1s/blob/master/09-Debugging/09-Debugging.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-2024-1s" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/iluvatar1/IntroSciCompHPC-2024-1s/issues/new?title=Issue%20on%20page%20%2F09-Debugging/09-Debugging.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/09-Debugging/09-Debugging.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Debugging</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">6.1. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sanitizers">6.2. Sanitizers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gdb-gnu-debugger">6.3. GDB (Gnu debugger)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-gdb">6.3.1. How to use gdb?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#breakpoints">6.3.2. Breakpoints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-control">6.3.3. Execution Control</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-useful-gdb-commands">6.3.4. Other useful gdb commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catching-a-segfault">6.3.5. Catching a segfault</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-graphical">6.3.6. Interfaces (graphical)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-exercise">6.3.7. Another exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-within-emacs">6.3.8. Debugging within emacs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modern-tools">6.3.9. Modern tools</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-to-debug">6.3.10. Examples to debug</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ddd-data-display-debugger">6.4. DDD : Data Display Debugger</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">6.4.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ddd-data-plotting-with-gnuplot">6.4.2. DDD data plotting with gnuplot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-examples-to-solve">6.5. TODO Examples to solve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valgrind">6.6. Valgrind</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-interfaces">6.6.1. Graphical Interfaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#as-memory-checker">6.6.2. As memory checker</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-homework">6.7. <span class="todo TODO">TODO</span> Homework</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="debugging">
+<h1><span class="section-number">6. </span>Debugging<a class="headerlink" href="#debugging" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=a7qIcIaL4zs">https://www.youtube.com/watch?v=a7qIcIaL4zs</a></p></li>
+<li><p><a class="reference external" href="https://news.ycombinator.com/item?id=37584399">https://news.ycombinator.com/item?id=37584399</a></p></li>
+<li><p><a class="github reference external" href="https://github.com/epasveer/seer">epasveer/seer</a></p></li>
+<li><p><a class="reference external" href="https://news.ycombinator.com/item?id=36114641">https://news.ycombinator.com/item?id=36114641</a></p></li>
+<li><p><a class="reference external" href="https://news.ycombinator.com/item?id=36114641">https://news.ycombinator.com/item?id=36114641</a></p></li>
+<li><p><a class="reference external" href="https://textual.textualize.io/blog/2023/02/11/the-heisenbug-lurking-in-your-async-code/">https://textual.textualize.io/blog/2023/02/11/the-heisenbug-lurking-in-your-async-code/</a></p></li>
+<li><p><a class="reference external" href="https://www.whyprogramsfail.com/">https://www.whyprogramsfail.com/</a></p></li>
+<li><p><a class="reference external" href="http://beza1e1.tuxen.de/lore/index.html">http://beza1e1.tuxen.de/lore/index.html</a></p></li>
+<li><p><a class="reference external" href="https://news.ycombinator.com/item?id=28686016">https://news.ycombinator.com/item?id=28686016</a></p></li>
+<li><p><a class="reference external" href="https://www.chiark.greenend.org.uk/~sgtatham/bugs.html">https://www.chiark.greenend.org.uk/~sgtatham/bugs.html</a></p></li>
+<li><p><a class="reference external" href="https://news.ycombinator.com/item?id=15790812">https://news.ycombinator.com/item?id=15790812</a></p></li>
+<li><p><a class="reference external" href="https://pvs-studio.com/en/blog/posts/cpp/0901/">https://pvs-studio.com/en/blog/posts/cpp/0901/</a></p></li>
+<li><p><a class="reference external" href="https://news.ycombinator.com/item?id=30512302">https://news.ycombinator.com/item?id=30512302</a></p></li>
+<li><p><a class="github reference external" href="https://github.com/hugsy/gef">hugsy/gef</a></p></li>
+<li><p>https://news.ycombinator.com/item?id=39170901</p></li>
+</ul>
+<section id="example">
+<h2><span class="section-number">6.1. </span>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h2>
+<p>Fix the following code</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// declare variables</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">array</span><span class="p">;</span>
+<span class="w">  </span><span class="c1">//reserve memory</span>
+<span class="w">  </span><span class="n">array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="w">  </span><span class="c1">// initialise array</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">array</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="o">++</span><span class="n">ii</span><span class="p">);</span><span class="w"> </span><span class="c1">// != 2*(ii++) ?</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// print some values</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">array</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">array</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="c1">// compiles, but ...</span>
+
+<span class="w">  </span><span class="c1">// free memory</span>
+<span class="w">  </span><span class="c1">//delete [] array;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="sanitizers">
+<h2><span class="section-number">6.2. </span>Sanitizers<a class="headerlink" href="#sanitizers" title="Link to this heading">#</a></h2>
+<p>Besides the typical printing to help debugging, a first helping hand
+would the compiler sanitizers. Try recompiling the previous code using
+the sanitizer flags as</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>g++<span class="w"> </span>-fsanitize<span class="o">=</span>address<span class="w"> </span>-fsanitize<span class="o">=</span>leak<span class="w"> </span>-fsanitize<span class="o">=</span>undefined<span class="w"> </span>source.cpp
+</pre></div>
+</div>
+<p>and then run it</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./a.out
+</pre></div>
+</div>
+<p>Fo you observe something new? sanitizers check your code in runtime and
+help you find errors faster.</p>
+</section>
+<section id="gdb-gnu-debugger">
+<h2><span class="section-number">6.3. </span>GDB (Gnu debugger)<a class="headerlink" href="#gdb-gnu-debugger" title="Link to this heading">#</a></h2>
+<section id="how-to-use-gdb">
+<h3><span class="section-number">6.3.1. </span>How to use gdb?<a class="headerlink" href="#how-to-use-gdb" title="Link to this heading">#</a></h3>
+<p>Let’s use the following c++ code, called <code class="docutils literal notranslate"><span class="pre">gdb_example_01.cpp</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// declare variables</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">array</span><span class="p">;</span>
+<span class="w">  </span><span class="c1">//reserve memory</span>
+<span class="w">  </span><span class="n">array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="w">  </span><span class="c1">// initialise array</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">array</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="o">++</span><span class="n">ii</span><span class="p">);</span><span class="w"> </span><span class="c1">// != 2*(ii++) ?</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// print some values</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">array</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">array</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="c1">// compiles, but ...</span>
+
+<span class="w">  </span><span class="c1">// free memory</span>
+<span class="w">  </span><span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">array</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To compile for debugging, you should use</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>g++<span class="w"> </span>-g<span class="w"> </span>-ggdb<span class="w"> </span>gdb_example_01.cpp<span class="w"> </span>-o<span class="w"> </span>gdb_example_01.x
+</pre></div>
+</div>
+<p>The flag <code class="docutils literal notranslate"><span class="pre">-g</span></code> tells the compiler to generate additional debugging
+symbols to be used by the debugger. In addition, you can also specify
+<code class="docutils literal notranslate"><span class="pre">-ggdb</span></code> to be more specific about the debugger symbols you want
+(specific for gdb). Even more, you can also specify the debug level by
+using <code class="docutils literal notranslate"><span class="pre">-g3</span></code> (or <code class="docutils literal notranslate"><span class="pre">-ggdb3</span></code>). Default is 2. Level 3 allows for debugging fo
+preprocessor macros.</p>
+<p>Now, if you run your code</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./gdb_example_01.x
+</pre></div>
+</div>
+<p>you will get the original output. The code does not have any error, and
+in principle it does not need debugging. But, you can still use the
+debugger to explore what your “correct” code is doing.</p>
+<p>To attach <code class="docutils literal notranslate"><span class="pre">gdb</span></code> to your executable, run gdb as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>gdb<span class="w"> </span>./gdb_example_01.x
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>NOTE:</strong> gdb can also attach to already running process, by using the
+pid. For more info, see <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">gdb</span></code> and maybe <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">ps</span></code> .</p>
+</div></blockquote>
+<p>This will bring to something similar to (this is for a Mountain Lion Mac
+os X machine)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>GNU<span class="w"> </span>gdb<span class="w"> </span><span class="o">(</span>GDB<span class="o">)</span><span class="w"> </span><span class="m">7</span>.5.1
+Copyright<span class="w"> </span><span class="o">(</span>C<span class="o">)</span><span class="w"> </span><span class="m">2012</span><span class="w"> </span>Free<span class="w"> </span>Software<span class="w"> </span>Foundation,<span class="w"> </span>Inc.
+License<span class="w"> </span>GPLv3+:<span class="w"> </span>GNU<span class="w"> </span>GPL<span class="w"> </span>version<span class="w"> </span><span class="m">3</span><span class="w"> </span>or<span class="w"> </span>later<span class="w"> </span>&lt;http://gnu.org/licenses/gpl.html&gt;
+This<span class="w"> </span>is<span class="w"> </span>free<span class="w"> </span>software:<span class="w"> </span>you<span class="w"> </span>are<span class="w"> </span>free<span class="w"> </span>to<span class="w"> </span>change<span class="w"> </span>and<span class="w"> </span>redistribute<span class="w"> </span>it.
+There<span class="w"> </span>is<span class="w"> </span>NO<span class="w"> </span>WARRANTY,<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>extent<span class="w"> </span>permitted<span class="w"> </span>by<span class="w"> </span>law.<span class="w">  </span>Type<span class="w"> </span><span class="s2">&quot;show copying&quot;</span>
+and<span class="w"> </span><span class="s2">&quot;show warranty&quot;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>details.
+This<span class="w"> </span>GDB<span class="w"> </span>was<span class="w"> </span>configured<span class="w"> </span>as<span class="w"> </span><span class="s2">&quot;x86_64-apple-darwin12.2.0&quot;</span>.
+For<span class="w"> </span>bug<span class="w"> </span>reporting<span class="w"> </span>instructions,<span class="w"> </span>please<span class="w"> </span>see:
+&lt;http://www.gnu.org/software/gdb/bugs/&gt;.
+<span class="o">(</span>gdb<span class="o">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>NOTE</strong> From now on, we will be <strong>inside</strong> the gdb console, so in the
+next examples please write the commands inside the gdb console. For
+example, <code class="docutils literal notranslate"><span class="pre">(gdb)</span> <span class="pre">step</span></code> means write <code class="docutils literal notranslate"><span class="pre">step</span></code> <em>inside</em> the gdb console, and
+not <code class="docutils literal notranslate"><span class="pre">(gdb)</span> <span class="pre">step</span></code> inside the shell.</p>
+</div></blockquote>
+<p>Now, you are ready to go. First of all, keep in mind that your program
+is not yet running, it was just attached to gdb and all the debugging
+symbols were loaded. To actually run your program, you must write:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>run
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>NOTE:</strong> If your command needs command line arguments, you can run it
+as <code class="docutils literal notranslate"><span class="pre">(gdb)</span> <span class="pre">run</span> <span class="pre">[arglist]</span></code>, where <code class="docutils literal notranslate"><span class="pre">[arglist]</span></code> is the optional argument
+list.</p>
+</div></blockquote>
+<p>And now you will get … guess … <code class="docutils literal notranslate"><span class="pre">0</span></code> again. Your program just ran up to
+the end without any error. Now let’s get to the interesting part.</p>
+</section>
+<section id="breakpoints">
+<h3><span class="section-number">6.3.2. </span>Breakpoints<a class="headerlink" href="#breakpoints" title="Link to this heading">#</a></h3>
+<p>A breakpoint is a point in your source code where you want to stop the
+execution in order to check whatever condition you want (the value of a
+variable, the change in a variable, etc), or, for example, to continue
+the execution by steps. We will set a breakpoint at line 5 of our source
+code. This is as simple as writting</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="k">break</span><span class="w"> </span><span class="m">5</span>
+</pre></div>
+</div>
+<p>and now run again the executable</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>run
+</pre></div>
+</div>
+<p>As you can see, the code now runs up to line 5, where gdb inform us we
+have reached the breakpoint. If you check the source code, we are in the
+line</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>int<span class="w"> </span>a<span class="p">;</span>
+</pre></div>
+</div>
+<p>that is, we are just declaring the variable <code class="docutils literal notranslate"><span class="pre">a</span></code>. What is its value at
+this point? 0? 1? Let’s check</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>print<span class="w"> </span>a
+</pre></div>
+</div>
+<p>The value should be poor memory garbage, like 0xff2345 or similar. It
+depends on the machine. Now, if we move one step to the next line in the
+execution order</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>next
+</pre></div>
+</div>
+<p>we will be in the line <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">0</span></code>. Let’s check again the value of variable
+<code class="docutils literal notranslate"><span class="pre">a</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>print<span class="w"> </span>a
+</pre></div>
+</div>
+<p>it should now print 0. As we can see, we can check the value of a local
+variable. In general, we will be able to check the value of both local
+and global variables.</p>
+<p>Other examples for setting breakpoints:</p>
+<ul class="simple">
+<li><p>Setting the break point at a given line of a given file:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="k">break</span><span class="w"> </span>gdb_example_XX.cpp:10
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Setting a break point when calling a function:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="k">break</span><span class="w"> </span>function_name
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Checking all breakpoints</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>info<span class="w"> </span>breakpoints
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Deleting a break point (the second one)</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>delete<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Ignore a given breakpoint (<code class="docutils literal notranslate"><span class="pre">3</span></code>) for a number of times (<code class="docutils literal notranslate"><span class="pre">100</span></code>)
+(useful for iterations)</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>ignore<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="m">100</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Conditional break :</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="k">break</span><span class="w"> </span>gdb_example_XX.cpp:5<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nv">localvar</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+</section>
+<section id="execution-control">
+<h3><span class="section-number">6.3.3. </span>Execution Control<a class="headerlink" href="#execution-control" title="Link to this heading">#</a></h3>
+<p>The instruction <code class="docutils literal notranslate"><span class="pre">next</span></code> tells gdb to advance in the execution order,
+which also executes completely functions and returns to the main
+function, while <code class="docutils literal notranslate"><span class="pre">step</span></code> goes inside the function step-by-step. Let’s
+check the difference with another code (gdb<sub>example02</sub>.cpp):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">do_something</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">var</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">do_something</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">do_something</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">var</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">localvar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">  </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Compile it with debugging symbols</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>g++<span class="w"> </span>-g<span class="w"> </span>-ggdb<span class="w"> </span>gdb_example_02.cpp<span class="w"> </span>-o<span class="w"> </span>gdb_example_02.x
+</pre></div>
+</div>
+<p>and attach to gdb</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>gdb<span class="w"> </span>./gdb_example_02.x
+</pre></div>
+</div>
+<p>Let’s make a breakpoint at line 9 and then run the code</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="k">break</span><span class="w"> </span>gdb_example_02.cpp:9
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>run
+</pre></div>
+</div>
+<p>Now advance step by step and explore the variables at local level. Try
+to check the difference between <code class="docutils literal notranslate"><span class="pre">next</span></code> and <code class="docutils literal notranslate"><span class="pre">step</span></code> exactly at the
+function call.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>step
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>step
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>next
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>...
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>print<span class="w"> </span>localvar
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>print<span class="w"> </span><span class="p">&amp;</span>localvar
+</pre></div>
+</div>
+<p>You can also change the output format when printing a variable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>p<span class="w"> </span>/d<span class="w"> </span>a
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>p<span class="w"> </span>/t<span class="w"> </span>a
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>p<span class="w"> </span>/x<span class="w"> </span>a
+</pre></div>
+</div>
+<p>Add a break point at the function <code class="docutils literal notranslate"><span class="pre">do_something</span></code>. Compare the addresses
+of the variables <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">var</span></code> inside the function <code class="docutils literal notranslate"><span class="pre">do_something</span></code>. Are
+they the same or different? why?</p>
+<p>Other control structures:</p>
+<ul class="simple">
+<li><p>Watch for a change on a given variable:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>watch<span class="w"> </span>foo
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Read-Watch for a given variable:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>rwatch<span class="w"> </span>foo
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Read-Write-Watch for a given variable:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>awatch<span class="w"> </span>foo
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Continue until next breakpoint:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="k">continue</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Finish current function:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>finish
+</pre></div>
+</div>
+</section>
+<section id="other-useful-gdb-commands">
+<h3><span class="section-number">6.3.4. </span>Other useful gdb commands<a class="headerlink" href="#other-useful-gdb-commands" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(gdb)</span> <span class="pre">bt</span></code> : Backtrace: display the program stack:</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(gdb)</span> <span class="pre">edit</span> <span class="pre">[file:]function</span></code> : look at the program line where it is
+presently stopped.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(gdb)</span> <span class="pre">help</span> <span class="pre">[name]</span></code> : Show information about GDB command name, or
+general information about using GDB</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(gdb)</span> <span class="pre">quit</span></code> : Exit from GDB.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(gdb)</span> <span class="pre">list</span> <span class="pre">[file:]function</span></code> : type the text of the program in the
+vicinity of where it is presently stopped.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(gdb)</span> <span class="pre">call</span> <span class="pre">localfunction()</span></code> : Calls a function called
+<code class="docutils literal notranslate"><span class="pre">localfunction()</span></code> linked in the code.</p></li>
+</ul>
+</section>
+<section id="catching-a-segfault">
+<h3><span class="section-number">6.3.5. </span>Catching a segfault<a class="headerlink" href="#catching-a-segfault" title="Link to this heading">#</a></h3>
+<p>Sometimes, when you are lazy or sloppy with the memory you use, or when
+you just have bad luck (some strange problems), you could face the
+infamous <code class="docutils literal notranslate"><span class="pre">Segementation</span> <span class="pre">fault</span></code> error. Let’s see how the debugger can
+help us to catch a segfault and to fix it!</p>
+<p>First, please compile the following code (<code class="docutils literal notranslate"><span class="pre">gdb_example_segfault.cpp</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!c++</span>
+<span class="c1">#include &lt;iostream&gt;</span>
+<span class="c1">#include &lt;cstdlib&gt;</span>
+
+int<span class="w"> </span>main<span class="o">(</span>int<span class="w"> </span>argc,<span class="w"> </span>char<span class="w"> </span>**argv<span class="o">)</span>
+<span class="o">{</span>
+<span class="w">  </span>//<span class="w"> </span><span class="nb">declare</span><span class="w"> </span>variables
+<span class="w">  </span>const<span class="w"> </span>int<span class="w"> </span><span class="nv">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">;</span>
+<span class="w">  </span>double<span class="w"> </span>*<span class="w"> </span>array<span class="p">;</span>
+<span class="w">  </span>//reserve<span class="w"> </span>memory
+<span class="w">  </span><span class="nv">array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>new<span class="w"> </span>double<span class="w"> </span><span class="o">[</span>N<span class="o">]</span><span class="p">;</span>
+<span class="w">  </span>//<span class="w"> </span>initialise<span class="w"> </span>array
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="o">(</span>int<span class="w"> </span><span class="nv">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span>ii<span class="w"> </span>&lt;<span class="w"> </span>N<span class="p">;</span><span class="w"> </span>++ii<span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>array<span class="o">[</span>ii<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span>*<span class="o">(</span>++ii<span class="o">)</span><span class="p">;</span><span class="w"> </span>//<span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="m">2</span>*<span class="o">(</span>ii++<span class="o">)</span><span class="w"> </span>?
+<span class="w">  </span><span class="o">}</span>
+<span class="w">  </span>//<span class="w"> </span>print<span class="w"> </span>some<span class="w"> </span>values
+<span class="w">  </span>int<span class="w"> </span><span class="nv">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">;</span>
+<span class="w">  </span>std::cout<span class="w"> </span><span class="s">&lt;&lt; array[idx] &lt;&lt; std::endl;</span>
+<span class="s">  idx = 10;</span>
+<span class="s">  std::cout &lt;&lt; array</span><span class="o">[</span>idx<span class="o">]</span><span class="w"> </span><span class="s">&lt;&lt; std::endl; // compiles</span>,<span class="w"> </span>but<span class="w"> </span>...
+
+<span class="w">  </span>//<span class="w"> </span>free<span class="w"> </span>memory
+<span class="w">  </span>delete<span class="w"> </span><span class="o">[]</span><span class="w"> </span>array<span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span>EXIT_SUCCESS<span class="p">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Now compile and run gdb on it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>g++<span class="w"> </span>-g<span class="w"> </span>gdb_example_segfault.cpp<span class="w"> </span>-o<span class="w"> </span>gdb_example_segfault.x
+$<span class="w"> </span>gdb<span class="w"> </span>./gdb_example_segfault.x
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>run
+</pre></div>
+</div>
+<p>What happens? it runs, but then you are facing the terrible segfault
+error. What is the cause? let’s use gdb:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>where
+</pre></div>
+</div>
+<p>Now it tell us that the problem is on line XXXXX. If we check our source
+code, that is the line where we are accessing element with index 10 on
+an array whose maximum index is 9 (since its size is 10), and therefore
+we are out the fence. Now comment or remove that line, recompile, and
+rerun on gdb. Is there any error?</p>
+<p>You can also check the value of the iteration variables or related to
+track better the error. But <code class="docutils literal notranslate"><span class="pre">where</span></code> is many times enough to point you to
+the problem.</p>
+<p>You can also test the effect of other variable value, by using <code class="docutils literal notranslate"><span class="pre">set</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="k">break</span><span class="w"> </span><span class="m">15</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>run
+...
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span>var<span class="w"> </span><span class="nv">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>step
+</pre></div>
+</div>
+<p>NOTE: If you do not get aby error but just strange results, try
+re-compiling your software with the flag -fsanitize=address
+-fsanitize=leak (only works recent for gnu compilers) and then you will
+catch the errors at running time.</p>
+<ol class="arabic">
+<li><p>Printing an array with gdb</p>
+<p>Please try the following, where <code class="docutils literal notranslate"><span class="pre">array</span></code> is the array name and <code class="docutils literal notranslate"><span class="pre">len</span></code>
+is its lenght. Play with several values for <code class="docutils literal notranslate"><span class="pre">len</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>print<span class="w"> </span>*array@len
+</pre></div>
+</div>
+<p>Do you want to know the array size?</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>ptype<span class="w"> </span>array
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="interfaces-graphical">
+<h3><span class="section-number">6.3.6. </span>Interfaces (graphical)<a class="headerlink" href="#interfaces-graphical" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Tui mode</p>
+<p>gdb -tui mode: Ncurses gui</p>
+</li>
+<li><p>Inside emacs</p>
+<p>When having a file openned in emacs, press <code class="docutils literal notranslate"><span class="pre">M-x</span></code> and write gdb,
+press enter. You will be presented with an example command to run
+gdb, modify it as you wish. Then, emacs will be yor debugger, and
+you can move from frame to frame by using the cursor or <code class="docutils literal notranslate"><span class="pre">C-x</span> <span class="pre">o</span></code> .</p>
+</li>
+<li><p>gdbgui</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.gdbgui.com/">https://www.gdbgui.com/</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=em842geJhfk&amp;amp;t=0s">https://www.youtube.com/watch?v=em842geJhfk&amp;t=0s</a></p></li>
+</ul>
+</li>
+<li><p>gdbfrontend</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://oguzhaneroglu.com/projects/gdb-frontend/">https://oguzhaneroglu.com/projects/gdb-frontend/</a></p></li>
+<li><p><a class="github reference external" href="https://github.com/rohanrhu/gdb-frontend">rohanrhu/gdb-frontend</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=6LNR8u19x6Y">https://www.youtube.com/watch?v=6LNR8u19x6Y</a></p></li>
+</ul>
+</li>
+<li><p>DDD : Data Display Debugger</p>
+<p>Although dated, its great strenght is the ability to plot data with
+the command <code class="docutils literal notranslate"><span class="pre">grap</span> <span class="pre">plot</span> <span class="pre">dataarrayname</span></code> , and check its evilution as
+the you debug.</p>
+</li>
+<li><p>Others</p>
+<p>Codeblocks, geany, clion, etc all them have interfaces for gdb.</p>
+</li>
+<li><p>Online gdb</p>
+<p><a class="reference external" href="https://www.onlinegdb.com/">https://www.onlinegdb.com/</a></p>
+</li>
+</ol>
+</section>
+<section id="another-exercise">
+<h3><span class="section-number">6.3.7. </span>Another exercise<a class="headerlink" href="#another-exercise" title="Link to this heading">#</a></h3>
+<p>Please try to help the poor code called <code class="docutils literal notranslate"><span class="pre">please_fixme.cpp</span></code>. Share your
+experiences. How many bugs did you find?</p>
+<p>#Poor man’s profiler#</p>
+<p><a class="reference external" href="http://readwrite.com/2010/11/01/using-gdb-as-a-poor-mans-profi">Example with
+gdb</a></p>
+<ul class="simple">
+<li><p>Get the process id:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>top
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ps<span class="w"> </span>aux
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Attach the process to gdb (<code class="docutils literal notranslate"><span class="pre">PID</span></code> is the process id):</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>gdb<span class="w"> </span>-p<span class="w"> </span>PID
+</pre></div>
+</div>
+<p>Now the program is paused.</p>
+<ul class="simple">
+<li><p>check the stack:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>thread<span class="w"> </span>apply<span class="w"> </span>all<span class="w"> </span>bt
+</pre></div>
+</div>
+<p>Check what appears first.</p>
+<ul class="simple">
+<li><p>Continue the execution:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span><span class="k">continue</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Repeat previous two steps as many times as you want and make a
+histogram of the most executed functions.</p></li>
+</ul>
+</section>
+<section id="debugging-within-emacs">
+<h3><span class="section-number">6.3.8. </span>Debugging within emacs<a class="headerlink" href="#debugging-within-emacs" title="Link to this heading">#</a></h3>
+<p>Please check <a class="reference external" href="http://www.linuxjournal.com/article/7876">emacs gdb mode</a></p>
+<ul class="simple">
+<li><p>Open your source code with emacs.</p></li>
+<li><p>Compile with <code class="docutils literal notranslate"><span class="pre">M-x</span> <span class="pre">compile</span></code>. <code class="docutils literal notranslate"><span class="pre">M</span></code> is the meta function. By default it
+uses make, but you can modify the compile command.</p></li>
+<li><p>Activate de debugging: <code class="docutils literal notranslate"><span class="pre">M-x</span> <span class="pre">gdb</span></code></p></li>
+<li><p>Debug. To move from one frame to another you can use either the
+mouse or the shortcut <code class="docutils literal notranslate"><span class="pre">ctrl-x</span> <span class="pre">o</span></code> . To close a pane, use <code class="docutils literal notranslate"><span class="pre">ctrl-x</span> <span class="pre">0</span></code>
+when inside that pane.</p></li>
+<li></li>
+</ul>
+</section>
+<section id="modern-tools">
+<h3><span class="section-number">6.3.9. </span>Modern tools<a class="headerlink" href="#modern-tools" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Python</p>
+<p>Gdb version &gt;= 7.x supports python. You can use to explore more
+info about your program, pretty print data, and even plot (although
+blocking).</p>
+<p>To load a c++ var into a python do, inside gdb,</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>py<span class="w"> </span><span class="nv">my_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gdb.parse_and_eval<span class="o">(</span><span class="s2">&quot;my_array&quot;</span><span class="o">)</span>
+py<span class="w"> </span>print<span class="w"> </span>my_array.type
+</pre></div>
+</div>
+<p>Even more, to plot some data structure with matplotlib, you can as
+follows (Based on
+<a class="reference external" href="https://blog.semicolonsoftware.de/debugging-numerical-c-c-fortran-code-with-gdb-and-numpy/">https://blog.semicolonsoftware.de/debugging-numerical-c-c-fortran-code-with-gdb-and-numpy/</a>)</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">nrow</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ncol</span><span class="p">];</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nrow</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ncol</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// BREAK here</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Follow the previous url to install gdb<sub>numpy</sub>.py.</p>
+<p>Compile as</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>ex-01.c<span class="w"> </span>-g<span class="w"> </span>-ggdb
+</pre></div>
+</div>
+<p>and now, run <code class="docutils literal notranslate"><span class="pre">gdb</span></code> and put the following commands</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>br<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="c1"># sets a breakpoint</span>
+run<span class="w"> </span><span class="c1"># to load the program symbols</span>
+py<span class="w"> </span>import<span class="w"> </span>gdb_numpy
+py<span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gdb_numpy.to_array<span class="o">(</span><span class="s2">&quot;(double *)x&quot;</span>,<span class="w"> </span><span class="nv">shape</span><span class="o">=(</span><span class="m">4</span><span class="w"> </span>*<span class="w"> </span><span class="m">3</span>,<span class="o">))</span>.reshape<span class="o">(</span><span class="m">4</span>,<span class="w"> </span><span class="m">3</span><span class="o">)</span>
+py<span class="w"> </span>print<span class="w"> </span>x
+py<span class="w"> </span>import<span class="w"> </span>matplotlib.pyplot<span class="w"> </span>as<span class="w"> </span>plt
+py<span class="w"> </span>plt.imshow<span class="o">(</span>x<span class="o">)</span>
+py<span class="w"> </span>plt.show<span class="o">()</span>
+</pre></div>
+</div>
+<p>Use gdb to execute, step by step, the following code</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="examples-to-debug">
+<h3><span class="section-number">6.3.10. </span>Examples to debug<a class="headerlink" href="#examples-to-debug" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Example 1</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">//double x[10], y[5]; // imprime raro</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span><span class="w"> </span><span class="c1">// imprime 1</span>
+
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="p">(</span><span class="n">ii</span><span class="w"> </span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<section id="ddd-data-display-debugger">
+<h2><span class="section-number">6.4. </span>DDD : Data Display Debugger<a class="headerlink" href="#ddd-data-display-debugger" title="Link to this heading">#</a></h2>
+<p>The <a class="reference external" href="http://www.gnu.org/software/ddd/">Data Display Debugger - ddd</a> is a
+graphical frontend for command line debuggers like gdb, dbx, jdb,
+bashdb, etc, and some modified python debugger. It easies the debug
+processing by adding some capabilities, like visual monitoring of data
+and data plotting (killer feature).</p>
+<p><img alt="" src="http://www.gnu.org/software/ddd/all.png" />
+<img alt="" src="http://www.gnu.org/software/ddd/plots.png" /></p>
+<blockquote>
+<div><p><strong>NOTE</strong>: DDD is hard to configure, it is so rebel. If after
+configuring some options you are having issues, like dd hanging with a
+message “Waiting for gdb to start”, or the plotting window is always
+waiting, then close ddd, delete the config file with <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-rf</span> <span class="pre">~/.ddd</span></code>,
+and start over by configuring ONLY one option at a time (configure one
+option, then close it, then open, then configure other option, then
+close, etc).</p>
+</div></blockquote>
+<section id="exercise">
+<h3><span class="section-number">6.4.1. </span>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<p>Repeat the previous debugging exercises by using ddd. In particular, use
+the <code class="docutils literal notranslate"><span class="pre">display</span></code> and <code class="docutils literal notranslate"><span class="pre">watch</span></code>. Do you find them convenient? and what about
+<code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">display</span> <span class="pre">data</span></code>?</p>
+</section>
+<section id="ddd-data-plotting-with-gnuplot">
+<h3><span class="section-number">6.4.2. </span>DDD data plotting with gnuplot<a class="headerlink" href="#ddd-data-plotting-with-gnuplot" title="Link to this heading">#</a></h3>
+<p>One of the killer features of ddd is its capability to actually plot the
+data with gnuplot. Let’s do an example:</p>
+<ul class="simple">
+<li><p>Compile (with debugging activated, of course) the code <code class="docutils literal notranslate"><span class="pre">array.cpp</span></code>.</p></li>
+<li><p>Now open the executable with ddd.</p></li>
+<li><p>Establish a break point at main.</p></li>
+<li><p>Run the executable under ddd.</p></li>
+<li><p>Now write <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">plot</span> <span class="pre">data</span></code>, or equivalently, you can select <code class="docutils literal notranslate"><span class="pre">data</span></code>
+with the mouse and then click to plot on the menu bar. <strong>NOTE</strong> : If
+you are having issues please try to configure gnuplot helper to be
+on an external window, then close, then re-open, and try again.
+Check also Notes above.</p></li>
+<li><p>Now proceed by steps. You will be able to see a plot of the array
+<code class="docutils literal notranslate"><span class="pre">data</span></code> as it changes its values. Awesome, isn’t it?</p></li>
+<li><p>Do the same for the 2d array. What will you expect now to be
+plotted? a line or a surface?</p></li>
+</ul>
+</section>
+</section>
+<section id="todo-examples-to-solve">
+<h2><span class="section-number">6.5. </span>TODO Examples to solve<a class="headerlink" href="#todo-examples-to-solve" title="Link to this heading">#</a></h2>
+<p>Let’s use ddd to explore some other exercises.</p>
+<p>ICTP examples</p>
+<p>Browse to
+<a class="reference external" href="https://bitbucket.org/iluvatar/scientific-computing-part-01/src">ICTP-examples</a>,
+then go to debugging, then ICTP-gdb<sub>examples</sub> , and download
+each file, or just download all files compressed at <a class="reference external" href="https://bitbucket.org/iluvatar/scientific-computing-part-01/get/master.tar.bz2">example
+files</a></p>
+<p>Other</p>
+<p>These are more examples: <a class="reference external" href="http://www.tutorialspoint.com/gnu_debugger/gdb_debugging_examples.htm">original
+link</a></p>
+</section>
+<section id="valgrind">
+<h2><span class="section-number">6.6. </span>Valgrind<a class="headerlink" href="#valgrind" title="Link to this heading">#</a></h2>
+<p><img alt="Valgrind Logo" src="http://valgrind.org/images/valgrind-100.png" /></p>
+<p><a class="reference external" href="http://valgrind.org/">Valgrind official web page</a></p>
+<p>From Web Page: &gt; Valgrind is an instrumentation framework for building
+dynamic analysis tools. There are Valgrind tools that can automatically
+detect many memory management and threading bugs, and profile your
+programs in detail. You can also use Valgrind to build new tools.</p>
+<blockquote>
+<div><p>The Valgrind distribution currently includes six production-quality
+tools: a memory error detector, two thread error detectors, a cache
+and branch-prediction profiler, a call-graph generating cache and
+branch-prediction profiler, and a heap profiler. It also includes
+three experimental tools: a heap/stack/global array overrun detector,
+a second heap profiler that examines how heap blocks are used, and a
+SimPoint basic block vector generator. It runs on the following
+platforms: X86/Linux, AMD64/Linux, ARM/Linux, PPC32/Linux,
+PPC64/Linux, S390X/Linux, MIPS/Linux, ARM/Android (2.3.x and later),
+X86/Android (4.0 and later), X86/Darwin and AMD64/Darwin (Mac OS X
+10.6 and 10.7, with limited support for 10.8).</p>
+</div></blockquote>
+<section id="graphical-interfaces">
+<h3><span class="section-number">6.6.1. </span>Graphical Interfaces<a class="headerlink" href="#graphical-interfaces" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="http://valgrind.org/downloads/guis.html">Valkyrie</a></p></li>
+<li><p><a class="reference external" href="http://kcachegrind.sourceforge.net/html/Home.html">kcachegrind/qcachegrind</a></p></li>
+</ul>
+</section>
+<section id="as-memory-checker">
+<h3><span class="section-number">6.6.2. </span>As memory checker<a class="headerlink" href="#as-memory-checker" title="Link to this heading">#</a></h3>
+<p>In this section we will focus on valgrind as memory checker tool
+(debugging part). Therefore, we will invoke valgrind with that option:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>valgrind<span class="w"> </span>--tool<span class="o">=</span>memcheck<span class="w"> </span>--leak-check<span class="o">=</span>yes<span class="w"> </span>myprog<span class="w"> </span>arg1<span class="w"> </span>arg2
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">myprog</span></code> is your executable’s name, and <code class="docutils literal notranslate"><span class="pre">arg1</span></code> etc are the
+arguments.</p>
+<p>We will use the files inside <code class="docutils literal notranslate"><span class="pre">valgrind/Valgrind-QuickStart</span></code></p>
+<p>Please compile the file <code class="docutils literal notranslate"><span class="pre">a.c</span></code> (which is also on the compressed file -
+check wiki main page) and run valgrind on it. What do you obtain? Do you
+have memory leaks? Please fix it until you have no memory errors.</p>
+<p>Do the same for <code class="docutils literal notranslate"><span class="pre">b.c</span></code> .</p>
+<ol class="arabic">
+<li><p>Example : Memory leak</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">getmem</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="c1">// declare variables</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10000</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">array</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">getmem</span><span class="p">(</span><span class="n">array</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// free memory</span>
+<span class="w">  </span><span class="c1">// delete [] array;</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">getmem</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+<span class="w">  </span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>More examples : ICTP</p>
+<p><a class="github reference external" href="https://github.com/thehackerwithin/PyTrieste/tree/master/valgrind">thehackerwithin/PyTrieste</a></p>
+<p>Please enter the <code class="docutils literal notranslate"><span class="pre">SoftwareCarpentry-ICTP</span></code> valgrind subfolder and
+locate the source files. Compile <code class="docutils literal notranslate"><span class="pre">simpleTest.cc</span></code> as</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>g++<span class="w"> </span>-g<span class="w"> </span>simpleTest.cc<span class="w"> </span>-o<span class="w"> </span>simpleTest
+</pre></div>
+</div>
+<p>Now run valgrind on it</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>valgrind<span class="w"> </span>--track-origins<span class="o">=</span>yes<span class="w"> </span>--leak-check<span class="o">=</span>full<span class="w"> </span>./simpleTest<span class="w"> </span><span class="m">300</span><span class="w"> </span><span class="m">300</span>
+</pre></div>
+</div>
+<p>Check how the memory leaks depend on the parameters. Fix the code.</p>
+</li>
+</ol>
+</section>
+</section>
+<section id="todo-homework">
+<h2><span class="section-number">6.7. </span><span class="todo TODO">TODO</span> Homework<a class="headerlink" href="#todo-homework" title="Link to this heading">#</a></h2>
+<p>Modularize one of the previous codes into a header a implementation file
+and a main file. This will help when writing tests.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./09-Debugging"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Using software in a hpc environment</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../09-UnitTest/09-UnitTesting.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Unit Testing : Ensuring fix and correct behavior last</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">6.1. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sanitizers">6.2. Sanitizers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gdb-gnu-debugger">6.3. GDB (Gnu debugger)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-gdb">6.3.1. How to use gdb?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#breakpoints">6.3.2. Breakpoints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-control">6.3.3. Execution Control</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-useful-gdb-commands">6.3.4. Other useful gdb commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catching-a-segfault">6.3.5. Catching a segfault</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-graphical">6.3.6. Interfaces (graphical)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-exercise">6.3.7. Another exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-within-emacs">6.3.8. Debugging within emacs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modern-tools">6.3.9. Modern tools</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-to-debug">6.3.10. Examples to debug</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ddd-data-display-debugger">6.4. DDD : Data Display Debugger</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">6.4.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ddd-data-plotting-with-gnuplot">6.4.2. DDD data plotting with gnuplot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-examples-to-solve">6.5. TODO Examples to solve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valgrind">6.6. Valgrind</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-interfaces">6.6.1. Graphical Interfaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#as-memory-checker">6.6.2. As memory checker</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-homework">6.7. <span class="todo TODO">TODO</span> Homework</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By William Oquendo
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
