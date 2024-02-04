@@ -7,34 +7,28 @@ root: intro
 title: Introduction to Scientific and High Performance Computing
 
 parts:    
-  - caption: "Introduction to Scientific Computing"
-    numbered: false
+  - caption: "Introduction to scientific computing and programming tools"
+    numbered: true
     chapters:
     - file: 01-Introduction/01-Introduction.ipynb
       title: Introduction
     - file: 02-errorsfpnumbers/ErrorsFPNumbers.ipynb
       title: Errors in Floating Point Numbers
-  #     sections:
-  #     - file: 01-IntroCPP/Resources.ipynb
-  #   - file: 01-IntroCPP/CPP-FastPacedIntro.ipynb
-  # - caption: "Numerical Calculus"
-  #   numbered: false
-  #   chapters:
-  #   - file: 02-derivatives/NumericalDifferentiation.ipynb
-  #   - file: 03-integration/NumericalIntegration_Basics.ipynb
-  # - caption: "Modern and primitive arrays, and basic Linear Algebra"
-  #   numbered: false
-  #   chapters:
-  #   - file: 04-vector-containers/ModernArrays.ipynb
-  #   - file: 05-matrixI/2D-matrices-to-1D-arrays.ipynb
-  #   - file: 06-ArrayComputing/ArrayComputing-Valarray.ipynb
-  # - caption: "Linear Algebra and Numerical Libraries"
-  #   numbered: false
-  #   chapters:
-  #   - file: 07-LinearAlgebra/LinearAlgebraEigen.ipynb
-  # - caption: "Ordinary differential equations: Initial value problems"
-  #   numbered: false
-  #   chapters:
-  #   - file: 08-ODE-IVP/InitialValueProblem.ipynb
-  #   - file: 09-ODE-IVP-OOP/IntroMolecularDynamics.ipynb
-  
+    - file: 04-Makefiles/04-Makefiles.ipynb
+      title: Makefiles as automation tools
+    - file: 06-stdlib-randomnumbers/06-stdlib-randomnumbers.ipynb
+    - file: 07-Install-Programs-From-Source/07-Install-Programs-From-Source.ipynb
+    - file: 09-Debugging/09-Debugging.ipynb
+    - file: 09-UnitTest/09-UnitTesting.ipynb
+  - caption: "High Performance Computing and Parallel Programming"
+    numbered: true
+    chapters:
+    - file: 10-optimization/10-optimization.ipynb
+    - file: 10-profiling/10-profiling.ipynb
+    - file: 11-matrices-numericallibs/11-matrices-numericallibs.ipynb
+    - file: 11-matrix-performance/11-matrix-performance.ipynb
+    - file: 12-IntroHPC/ParallelProgramming-Intro.ipynb
+    - file: 13-OpenMP/OpenMP-Intro.ipynb
+    - file: 14-MPI/MPI-Intro.ipynb
+    - file: 15-Intro-Cuda/cuda.ipynb
+    - file: 15-Intro-Slurm/Slurm.ipynb
