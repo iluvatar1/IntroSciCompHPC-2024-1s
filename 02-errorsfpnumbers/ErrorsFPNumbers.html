@@ -54,18 +54,10 @@
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '02-errorsfpnumbers/ErrorsFPNumbers';</script>
@@ -703,8 +695,8 @@ $<span class="math notranslate nohighlight">\(e^{-x} = \sum_{i=0}^{\infty} (-1)^
 <section id="exercise-sum-ups-and-down">
 <h3><span class="section-number">2.5.2. </span>Exercise: Sum ups and down<a class="headerlink" href="#exercise-sum-ups-and-down" title="Link to this heading">#</a></h3>
 <p>Is there any computation difference between the following sums?</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c44d2c1b-31f4-4636-ba9f-2d5c412dc2a5">
-<span class="eqno">(2.1)<a class="headerlink" href="#equation-c44d2c1b-31f4-4636-ba9f-2d5c412dc2a5" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-101defa3-5f47-4b04-a4a0-1b833c80962a">
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-101defa3-5f47-4b04-a4a0-1b833c80962a" title="Permalink to this equation">#</a></span>\[\begin{align}
 S_{up}(N) &amp;= \sum_{n=1}^{N} \frac{1}{n},\\
 S_{down}(N) &amp;= \sum_{n=N}^{1} \frac{1}{n}.
 \end{align}\]</div>
@@ -746,8 +738,8 @@ Mathematically, this function should give 0 always. Is that true?</p>
 <section id="substractive-cancellation">
 <h3><span class="section-number">2.6.2. </span>Substractive cancellation<a class="headerlink" href="#substractive-cancellation" title="Link to this heading">#</a></h3>
 <p>Given <span class="math notranslate nohighlight">\(a = b-c\)</span>, then <span class="math notranslate nohighlight">\(a_c = b_c-c_c\)</span>, therefore</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7e600162-e553-48cb-8d3d-b11b39613fd8">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-7e600162-e553-48cb-8d3d-b11b39613fd8" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-91dc58b8-151d-442b-9ce3-91aac1fd1ff8">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-91dc58b8-151d-442b-9ce3-91aac1fd1ff8" title="Permalink to this equation">#</a></span>\[\begin{align}
 a_c &amp;= a(1+\epsilon_a ) = b_c - c_c = b(1+\epsilon_b ) - c(1+\epsilon_c )\\
 \frac{a_c}{a} &amp;= 1 + \epsilon_b \frac{b}{a} - \frac{c}{a}\epsilon_c  
 \end{align}\]</div>
@@ -770,8 +762,8 @@ and
 <section id="total-errors-in-algorithms-and-their-computational-implementation">
 <h2><span class="section-number">2.7. </span>Total errors in algorithms and their computational implementation<a class="headerlink" href="#total-errors-in-algorithms-and-their-computational-implementation" title="Link to this heading">#</a></h2>
 <p>As you can see, there are several source for errors in computation. Some come from the mathematical approximation, , called <span class="math notranslate nohighlight">\(\epsilon_a\)</span>, and some others are intrinsic from the numerical representation, and we can call them <span class="math notranslate nohighlight">\(\epsilon_r\)</span>. Sometimes, the rounding/truncation error are modeled as a random walk, <span class="math notranslate nohighlight">\(\epsilon_r \simeq \sqrt{N} \epsilon_m\)</span>, where <span class="math notranslate nohighlight">\(\epsilon_m\)</span> is the machine precision, and <span class="math notranslate nohighlight">\(N\)</span> is the representative number of “steps”.  From here, the total error can be estimated as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-273cc85e-1b84-44af-ab9c-94c1c6ea953a">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-273cc85e-1b84-44af-ab9c-94c1c6ea953a" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f9571f43-d9db-4b00-b1c2-585d6a81ab47">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-f9571f43-d9db-4b00-b1c2-585d6a81ab47" title="Permalink to this equation">#</a></span>\[\begin{align}
 \epsilon_{\rm tot} &amp;= \epsilon_a + \epsilon_r \\
 &amp;= \frac{\alpha}{N^\beta} + \sqrt{N} \epsilon_m.
 \end{align}\]</div>

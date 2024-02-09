@@ -4,7 +4,10 @@ These lecture notes are a complement to the class and hopefully a good resource 
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/iluvatar1/IntroSciCompHPC-2024-1s/HEAD)
 
-[Google Collab](https://colab.research.google.com/)
+[Google Collab](https://colab.research.google.com/)  [<img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Colaboratory_SVG_Logo.svg" width="20" height="20" alt="Google Collab"/>](https://colab.research.google.com/)
+
+
+<!-- [Google Collab](https://colab.research.google.com/) -->
 
 ```{tableofcontents}
 ```
