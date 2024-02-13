@@ -1,14 +1,15 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>12. Introduction to High Performance Computing &#8212; Introduction to Scientific and High Performance Computing</title>
+    <title>13. Introduction to High Performance Computing &#8212; Introduction to Scientific and High Performance Computing</title>
   
   
   
@@ -28,44 +29,48 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles.css?v=03b9d5b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '12-IntroHPC/ParallelProgramming-Intro';</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="13. Introduction to OpenMp (Shared memory)" href="../13-OpenMP/OpenMP-Intro.html" />
-    <link rel="prev" title="11. Performance measurement for some matrix ops" href="../11-matrix-performance/11-matrix-performance.html" />
+    <link rel="next" title="14. Introduction to OpenMp (Shared memory)" href="../13-OpenMP/OpenMP-Intro.html" />
+    <link rel="prev" title="12. Performance measurement for some matrix ops" href="../11-matrix-performance/11-matrix-performance.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -159,18 +164,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -183,24 +177,25 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to scientific computing and programming tools</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../01-Introduction/01-Introduction.html">1. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">2. Errors in Floating Point Numbers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">3. Makefiles as automation tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">4. Standard library of functions: math functions, containers and random numbers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">5. Using software in a hpc environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">6. Debugging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">7. Unit Testing : Ensuring fix and correct behavior last</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">3. Errors in Floating Point Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">4. Makefiles as automation tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">5. Standard library of functions: math functions, containers and random numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">6. Using software in a hpc environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">7. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Ensuring fix and correct behavior last</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">8. Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">9. Profiling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">10. Numerical libraries in Matrix Problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Performance measurement for some matrix ops</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">14. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">15. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">16. HPC resource manager: Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">9. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">10. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">11. Numerical libraries in Matrix Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">12. Performance measurement for some matrix ops</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">14. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">15. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">16. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">17. HPC resource manager: Slurm</a></li>
 </ul>
 
     </div>
@@ -445,28 +440,28 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">12.1. Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics-of-parallel-metrics">12.2. Basics of parallel metrics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-overview-of-a-cluster-resources-and-use">12.3. Practical overview of a cluster resources and use</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openmp-shared-memory">12.4. Openmp, shared memory</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">12.4.1. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">13.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics-of-parallel-metrics">13.2. Basics of parallel metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-overview-of-a-cluster-resources-and-use">13.3. Practical overview of a cluster resources and use</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openmp-shared-memory">13.4. Openmp, shared memory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.4.1. Exercises</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-distributed-memory">12.5. MPI, distributed memory</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-parallelization-farm-task-and-gnu-parallel-or-xargs">12.6. Simple parallelization: farm task and gnu parallel or xargs</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-gnu-parallel-to-run-several-matmul-and-compute-metrics">12.6.1. Using gnu parallel to run several matmul and compute metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-distributed-memory">13.5. MPI, distributed memory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-parallelization-farm-task-and-gnu-parallel-or-xargs">13.6. Simple parallelization: farm task and gnu parallel or xargs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-gnu-parallel-to-run-several-matmul-and-compute-metrics">13.6.1. Using gnu parallel to run several matmul and compute metrics</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#threads-from-c-11">12.7. Threads from c++11</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">12.7.1. Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#threads-from-c-11">13.7. Threads from c++11</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">13.7.1. Exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-algorithms-in-c">12.8. Parallel algorithms in c++</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-gpu-programming-intro">12.9. <span class="todo TODO">TODO</span> Gpu Programming intro</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup-for-cuda">12.9.1. Environment setup for cuda</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-cuda-intro">12.9.2. <span class="todo TODO">TODO</span> Cuda intro</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-openmp-offload-to-gpu">12.9.3. <span class="todo TODO">TODO</span> Openmp offload to gpu</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-openacc-intro">12.9.4. <span class="todo TODO">TODO</span> OpenACC intro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-algorithms-in-c">13.8. Parallel algorithms in c++</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-class-todo-todo-todo-span-gpu-programming-intro">13.9. <span class="todo TODO">TODO</span> Gpu Programming intro</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup-for-cuda">13.9.1. Environment setup for cuda</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-class-todo-todo-todo-span-cuda-intro">13.9.2. <span class="todo TODO">TODO</span> Cuda intro</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-class-todo-todo-todo-span-openmp-offload-to-gpu">13.9.3. <span class="todo TODO">TODO</span> Openmp offload to gpu</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-class-todo-todo-todo-span-openacc-intro">13.9.4. <span class="todo TODO">TODO</span> OpenACC intro</a></li>
 </ul>
 </li>
 </ul>
@@ -481,7 +476,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-high-performance-computing">
-<h1><span class="section-number">12. </span>Introduction to High Performance Computing<a class="headerlink" href="#introduction-to-high-performance-computing" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">13. </span>Introduction to High Performance Computing<a class="headerlink" href="#introduction-to-high-performance-computing" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.youtube.com/watch?v=PwI0tJHJOlo">https://www.youtube.com/watch?v=PwI0tJHJOlo</a></p></li>
 <li><p><a class="reference external" href="https://www.youtube.com/watch?v=WQTrA4-9ZXk">https://www.youtube.com/watch?v=WQTrA4-9ZXk</a></p></li>
@@ -520,7 +515,7 @@ document.write(`
 <li><p><a class="reference external" href="https://vampir.eu/">https://vampir.eu/</a></p></li>
 </ul>
 <section id="introduction">
-<h2><span class="section-number">12.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>There is a point where a serial version of our code is not the most
 optimal way to exploit our computational resources (but it might be in
 the case of embarrassingly parallel problems where you can just run
@@ -560,7 +555,7 @@ become very relevant (see
 ), where <a class="reference external" href="https://en.wikipedia.org/wiki/CUDA?useskin=vector">CUDA</a> ,
 <a class="reference external" href="https://en.wikipedia.org/wiki/OpenACC?useskin=vector">OpenACC</a>, and
 others, are the relevant technologies.</p>
-<p>In our case, we will be more focused on the <a class="reference external" href="https://en.wikipedia.org/w/index.php?title=Computer_cluster&amp;amp;useskin=vector">cluster
+<p>In our case, we will be more focused on the <a class="reference external" href="https://en.wikipedia.org/w/index.php?title=Computer_cluster&amp;useskin=vector">cluster
 computing</a>
 aspect, while there are more
 <a class="reference external" href="https://en.wikipedia.org/wiki/High-performance_computing?useskin=vector">HPC</a>
@@ -575,7 +570,7 @@ future resources.</p>
 <p><a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/IBM_Blue_Gene_P_supercomputer.jpg/600px-IBM_Blue_Gene_P_supercomputer.jpg">https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/IBM_Blue_Gene_P_supercomputer.jpg/600px-IBM_Blue_Gene_P_supercomputer.jpg</a></p>
 </section>
 <section id="basics-of-parallel-metrics">
-<h2><span class="section-number">12.2. </span>Basics of parallel metrics<a class="headerlink" href="#basics-of-parallel-metrics" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.2. </span>Basics of parallel metrics<a class="headerlink" href="#basics-of-parallel-metrics" title="Permalink to this heading">#</a></h2>
 <p>But, as usual, you should always measure. All programs have a serial
 part that cannot be parallelized and a parallel part than can. Using
 more processors/threads can reduce only the parallel, so a 100% serial
@@ -596,7 +591,7 @@ can see, they are limited by the hardware (and algorithms)</p>
 </ul>
 </section>
 <section id="practical-overview-of-a-cluster-resources-and-use">
-<h2><span class="section-number">12.3. </span>Practical overview of a cluster resources and use<a class="headerlink" href="#practical-overview-of-a-cluster-resources-and-use" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.3. </span>Practical overview of a cluster resources and use<a class="headerlink" href="#practical-overview-of-a-cluster-resources-and-use" title="Permalink to this heading">#</a></h2>
 <p>There are many aspects to take into account in the HPC field. If you are
 a user, you should know abount the type of parallelization (shared
 memory, disitributed memory, gpu programming), the type of hardware you
@@ -620,7 +615,7 @@ example of a typical cluster config and offerings.</p>
 </ul>
 </section>
 <section id="openmp-shared-memory">
-<h2><span class="section-number">12.4. </span>Openmp, shared memory<a class="headerlink" href="#openmp-shared-memory" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.4. </span>Openmp, shared memory<a class="headerlink" href="#openmp-shared-memory" title="Permalink to this heading">#</a></h2>
 <p>The following code shows a very simple parallelization using openmp,
 which allows tu share memory and run on several threads.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
@@ -652,7 +647,7 @@ variable <code class="docutils literal notranslate"><span class="pre">OMP_NUM_TH
 </pre></div>
 </div>
 <section id="exercises">
-<h3><span class="section-number">12.4.1. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.4.1. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Modify the previous exercise to identify the thread which is
 printing. Find a function to get the “thread id”.</p></li>
@@ -663,7 +658,7 @@ make sense?</p></li>
 </section>
 </section>
 <section id="mpi-distributed-memory">
-<h2><span class="section-number">12.5. </span>MPI, distributed memory<a class="headerlink" href="#mpi-distributed-memory" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.5. </span>MPI, distributed memory<a class="headerlink" href="#mpi-distributed-memory" title="Permalink to this heading">#</a></h2>
 <p>MPI, the Message Passing Interface, is a library API that allows process
 to interchange data in a distributed memory context. It is more comple
 that openmp, but also opens the door to a greater scale since we can use
@@ -716,7 +711,7 @@ run in multiple machines (for an introduction, see:
 have configured passwordless access to those machines.</p>
 </section>
 <section id="simple-parallelization-farm-task-and-gnu-parallel-or-xargs">
-<h2><span class="section-number">12.6. </span>Simple parallelization: farm task and gnu parallel or xargs<a class="headerlink" href="#simple-parallelization-farm-task-and-gnu-parallel-or-xargs" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.6. </span>Simple parallelization: farm task and gnu parallel or xargs<a class="headerlink" href="#simple-parallelization-farm-task-and-gnu-parallel-or-xargs" title="Permalink to this heading">#</a></h2>
 <p>Sometimes you do not need to actually parallelize your code, but to run
 it with many parameters combination. Let’s assume that we have a task
 that depend on one parameter and can be executed independent of other
@@ -1335,7 +1330,7 @@ date<span class="w"> </span>+<span class="s2">&quot;%H-%M-%S&quot;</span>
 <p>You can play with the <code class="docutils literal notranslate"><span class="pre">-j</span> <span class="pre">n</span></code> flag to control how many jobs to run with
 parallel. By default it uses all possible threads</p>
 <section id="using-gnu-parallel-to-run-several-matmul-and-compute-metrics">
-<h3><span class="section-number">12.6.1. </span>Using gnu parallel to run several matmul and compute metrics<a class="headerlink" href="#using-gnu-parallel-to-run-several-matmul-and-compute-metrics" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.6.1. </span>Using gnu parallel to run several matmul and compute metrics<a class="headerlink" href="#using-gnu-parallel-to-run-several-matmul-and-compute-metrics" title="Permalink to this heading">#</a></h3>
 <p>Now let’s use the previous matmul with eigen and blas exercise to show
 how to use parallel to run several matrix sizes at the same time and
 also to compute some parallel metrics. The code is</p>
@@ -1527,7 +1522,7 @@ you should use threads that give equal or above 60-70% efficiency.</p>
 </section>
 </section>
 <section id="threads-from-c-11">
-<h2><span class="section-number">12.7. </span>Threads from c++11<a class="headerlink" href="#threads-from-c-11" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.7. </span>Threads from c++11<a class="headerlink" href="#threads-from-c-11" title="Permalink to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">c++11</span></code> standard included, among many other usefull things, the use
 a <strong>thread</strong>. A thread is a lightweight process that can be launched in
 parallel with other threads from a parent process. In the following we
@@ -1758,7 +1753,7 @@ will not be mangled.</p>
 OpenMP, we will stop here. For more info check
 <a class="reference external" href="https://en.cppreference.com/w/cpp/thread/thread">https://en.cppreference.com/w/cpp/thread/thread</a></p>
 <section id="exercise">
-<h3><span class="section-number">12.7.1. </span>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.7.1. </span>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h3>
 <p>Fix the following code, which has a race condition, using a mutex (ref:
 <a class="reference external" href="https://www.classes.cs.uchicago.edu/archive/2013/spring/12300-1/labs/lab6/">https://www.classes.cs.uchicago.edu/archive/2013/spring/12300-1/labs/lab6/</a>)
 :</p>
@@ -1813,7 +1808,7 @@ you will find different results. For instance, repeating the execution
 </section>
 </section>
 <section id="parallel-algorithms-in-c">
-<h2><span class="section-number">12.8. </span>Parallel algorithms in c++<a class="headerlink" href="#parallel-algorithms-in-c" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">13.8. </span>Parallel algorithms in c++<a class="headerlink" href="#parallel-algorithms-in-c" title="Permalink to this heading">#</a></h2>
 <p>Since <code class="docutils literal notranslate"><span class="pre">c++17</span></code>, it is possible to execute some stl algorithms in parallel
 (shared memory), without explictly using threads. See:</p>
 <ul class="simple">
@@ -1938,10 +1933,10 @@ you can add gthe following header</p>
 <li><p><a class="reference external" href="https://en.cppreference.com/w/cpp/algorithm">https://en.cppreference.com/w/cpp/algorithm</a></p></li>
 </ul>
 </section>
-<section id="todo-gpu-programming-intro">
-<h2><span class="section-number">12.9. </span><span class="todo TODO">TODO</span> Gpu Programming intro<a class="headerlink" href="#todo-gpu-programming-intro" title="Link to this heading">#</a></h2>
+<section id="span-class-todo-todo-todo-span-gpu-programming-intro">
+<h2><span class="section-number">13.9. </span><span class="todo TODO">TODO</span> Gpu Programming intro<a class="headerlink" href="#span-class-todo-todo-todo-span-gpu-programming-intro" title="Permalink to this heading">#</a></h2>
 <section id="environment-setup-for-cuda">
-<h3><span class="section-number">12.9.1. </span>Environment setup for cuda<a class="headerlink" href="#environment-setup-for-cuda" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">13.9.1. </span>Environment setup for cuda<a class="headerlink" href="#environment-setup-for-cuda" title="Permalink to this heading">#</a></h3>
 <p>Here I show two ways to setup the dev environment. One is based on a
 local computer with a graphics card, and the other using google collab.</p>
 <ol class="arabic">
@@ -2044,8 +2039,8 @@ contents in the same cell.</p>
 </li>
 </ol>
 </section>
-<section id="todo-cuda-intro">
-<h3><span class="section-number">12.9.2. </span><span class="todo TODO">TODO</span> Cuda intro<a class="headerlink" href="#todo-cuda-intro" title="Link to this heading">#</a></h3>
+<section id="span-class-todo-todo-todo-span-cuda-intro">
+<h3><span class="section-number">13.9.2. </span><span class="todo TODO">TODO</span> Cuda intro<a class="headerlink" href="#span-class-todo-todo-todo-span-cuda-intro" title="Permalink to this heading">#</a></h3>
 <p>REF <a class="reference external" href="https://en.wikipedia.org/wiki/CUDA?useskin=vector">https://en.wikipedia.org/wiki/CUDA?useskin=vector</a> Tutorial1:
 <a class="reference external" href="https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/">https://cuda-tutorial.readthedocs.io/en/latest/tutorials/tutorial01/</a>
 Tutorial2
@@ -2411,8 +2406,8 @@ Total<span class="w"> </span>CPU<span class="w"> </span>Page<span class="w"> </s
 </li>
 </ol>
 </section>
-<section id="todo-openmp-offload-to-gpu">
-<h3><span class="section-number">12.9.3. </span><span class="todo TODO">TODO</span> Openmp offload to gpu<a class="headerlink" href="#todo-openmp-offload-to-gpu" title="Link to this heading">#</a></h3>
+<section id="span-class-todo-todo-todo-span-openmp-offload-to-gpu">
+<h3><span class="section-number">13.9.3. </span><span class="todo TODO">TODO</span> Openmp offload to gpu<a class="headerlink" href="#span-class-todo-todo-todo-span-openmp-offload-to-gpu" title="Permalink to this heading">#</a></h3>
 <p>REF:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.youtube.com/watch?v=uVcvecgdW7g">https://www.youtube.com/watch?v=uVcvecgdW7g</a></p></li>
@@ -2453,7 +2448,7 @@ Total<span class="w"> </span>CPU<span class="w"> </span>Page<span class="w"> </s
 </pre></div>
 </div>
 <p>Does not work in sala2 due to the error</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>OpenMP<span class="w"> </span>GPU<span class="w"> </span>Offload<span class="w"> </span>is<span class="w"> </span>available<span class="w"> </span>only<span class="w"> </span>on<span class="w"> </span>systems<span class="w"> </span>with<span class="w"> </span>NVIDIA<span class="w"> </span>GPUs<span class="w"> </span>with<span class="w"> </span>compute<span class="w"> </span>capability<span class="w"> </span><span class="err">&#39;</span>&gt;<span class="o">=</span><span class="w"> </span>cc70
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>OpenMP GPU Offload is available only on systems with NVIDIA GPUs with compute capability &#39;&gt;= cc70
 </pre></div>
 </div>
 <p>It seems that sala2 compute capability is 6.1. It can be get with</p>
@@ -2502,8 +2497,8 @@ Total<span class="w"> </span>CPU<span class="w"> </span>Page<span class="w"> </s
 </pre></div>
 </div>
 </section>
-<section id="todo-openacc-intro">
-<h3><span class="section-number">12.9.4. </span><span class="todo TODO">TODO</span> OpenACC intro<a class="headerlink" href="#todo-openacc-intro" title="Link to this heading">#</a></h3>
+<section id="span-class-todo-todo-todo-span-openacc-intro">
+<h3><span class="section-number">13.9.4. </span><span class="todo TODO">TODO</span> OpenACC intro<a class="headerlink" href="#span-class-todo-todo-todo-span-openacc-intro" title="Permalink to this heading">#</a></h3>
 <p>REF:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.openacc.org/">https://www.openacc.org/</a></p></li>
@@ -2605,7 +2600,7 @@ Total<span class="w"> </span>CPU<span class="w"> </span>Page<span class="w"> </s
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">11. </span>Performance measurement for some matrix ops</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Performance measurement for some matrix ops</p>
       </div>
     </a>
     <a class="right-next"
@@ -2613,7 +2608,7 @@ Total<span class="w"> </span>CPU<span class="w"> </span>Page<span class="w"> </s
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>Introduction to OpenMp (Shared memory)</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Introduction to OpenMp (Shared memory)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2633,28 +2628,28 @@ Total<span class="w"> </span>CPU<span class="w"> </span>Page<span class="w"> </s
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">12.1. Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics-of-parallel-metrics">12.2. Basics of parallel metrics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-overview-of-a-cluster-resources-and-use">12.3. Practical overview of a cluster resources and use</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openmp-shared-memory">12.4. Openmp, shared memory</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">12.4.1. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">13.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basics-of-parallel-metrics">13.2. Basics of parallel metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-overview-of-a-cluster-resources-and-use">13.3. Practical overview of a cluster resources and use</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openmp-shared-memory">13.4. Openmp, shared memory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">13.4.1. Exercises</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-distributed-memory">12.5. MPI, distributed memory</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-parallelization-farm-task-and-gnu-parallel-or-xargs">12.6. Simple parallelization: farm task and gnu parallel or xargs</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-gnu-parallel-to-run-several-matmul-and-compute-metrics">12.6.1. Using gnu parallel to run several matmul and compute metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-distributed-memory">13.5. MPI, distributed memory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-parallelization-farm-task-and-gnu-parallel-or-xargs">13.6. Simple parallelization: farm task and gnu parallel or xargs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-gnu-parallel-to-run-several-matmul-and-compute-metrics">13.6.1. Using gnu parallel to run several matmul and compute metrics</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#threads-from-c-11">12.7. Threads from c++11</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">12.7.1. Exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#threads-from-c-11">13.7. Threads from c++11</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">13.7.1. Exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-algorithms-in-c">12.8. Parallel algorithms in c++</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-gpu-programming-intro">12.9. <span class="todo TODO">TODO</span> Gpu Programming intro</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup-for-cuda">12.9.1. Environment setup for cuda</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-cuda-intro">12.9.2. <span class="todo TODO">TODO</span> Cuda intro</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-openmp-offload-to-gpu">12.9.3. <span class="todo TODO">TODO</span> Openmp offload to gpu</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-openacc-intro">12.9.4. <span class="todo TODO">TODO</span> OpenACC intro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-algorithms-in-c">13.8. Parallel algorithms in c++</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-class-todo-todo-todo-span-gpu-programming-intro">13.9. <span class="todo TODO">TODO</span> Gpu Programming intro</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup-for-cuda">13.9.1. Environment setup for cuda</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-class-todo-todo-todo-span-cuda-intro">13.9.2. <span class="todo TODO">TODO</span> Cuda intro</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-class-todo-todo-todo-span-openmp-offload-to-gpu">13.9.3. <span class="todo TODO">TODO</span> Openmp offload to gpu</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#span-class-todo-todo-todo-span-openacc-intro">13.9.4. <span class="todo TODO">TODO</span> OpenACC intro</a></li>
 </ul>
 </li>
 </ul>

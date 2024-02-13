@@ -1,14 +1,15 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>9. Profiling &#8212; Introduction to Scientific and High Performance Computing</title>
+    <title>10. Profiling &#8212; Introduction to Scientific and High Performance Computing</title>
   
   
   
@@ -28,42 +29,46 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles.css?v=03b9d5b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '10-profiling/10-profiling';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '10-profiling/10-profiling';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="10. Numerical libraries in Matrix Problems" href="../11-matrices-numericallibs/11-matrices-numericallibs.html" />
-    <link rel="prev" title="8. Optimization" href="../10-optimization/10-optimization.html" />
+    <link rel="next" title="11. Numerical libraries in Matrix Problems" href="../11-matrices-numericallibs/11-matrices-numericallibs.html" />
+    <link rel="prev" title="9. Optimization" href="../10-optimization/10-optimization.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -157,18 +162,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -181,24 +175,25 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to scientific computing and programming tools</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../01-Introduction/01-Introduction.html">1. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">2. Errors in Floating Point Numbers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">3. Makefiles as automation tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">4. Standard library of functions: math functions, containers and random numbers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">5. Using software in a hpc environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">6. Debugging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">7. Unit Testing : Ensuring fix and correct behavior last</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">3. Errors in Floating Point Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">4. Makefiles as automation tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">5. Standard library of functions: math functions, containers and random numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">6. Using software in a hpc environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">7. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Ensuring fix and correct behavior last</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">8. Optimization</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Profiling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">10. Numerical libraries in Matrix Problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Performance measurement for some matrix ops</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">14. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">15. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">16. HPC resource manager: Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">9. Optimization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">11. Numerical libraries in Matrix Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">12. Performance measurement for some matrix ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">13. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">14. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">15. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">16. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">17. HPC resource manager: Slurm</a></li>
 </ul>
 
     </div>
@@ -443,23 +438,23 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-profile">9.1. Why profile?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-elapsed-time">9.2. Measuring elapsed time</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profilers">9.3. Profilers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gprof">9.4. gprof</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perf">9.5. perf</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-perf">9.5.1. Installing perf</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-perf">9.5.2. Using perf</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hotstop-gui-for-perf">9.5.3. Hotstop: Gui for perf</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-profile">10.1. Why profile?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-elapsed-time">10.2. Measuring elapsed time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profilers">10.3. Profilers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gprof">10.4. gprof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perf">10.5. perf</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-perf">10.5.1. Installing perf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-perf">10.5.2. Using perf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hotstop-gui-for-perf">10.5.3. Hotstop: Gui for perf</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-with-valgrind-cachegrind-and-callgrind">9.6. Profiling with valgrind: cachegrind and callgrind</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cache-checker-cachegrind">9.6.1. Cache checker : cachegrind</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callgrind">9.6.2. Callgrind</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-with-valgrind-cachegrind-and-callgrind">10.6. Profiling with valgrind: cachegrind and callgrind</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cache-checker-cachegrind">10.6.1. Cache checker : cachegrind</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callgrind">10.6.2. Callgrind</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-performance-tools">9.7. Google Performance Tools</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.8. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-performance-tools">10.7. Google Performance Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">10.8. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -475,8 +470,14 @@ document.write(`
 <a class="reference external" href="https://pkolaczk.github.io/server-slower-than-a-laptop/">https://pkolaczk.github.io/server-slower-than-a-laptop/</a>
 <a class="reference external" href="http://www.brendangregg.com/flamegraphs.html">http://www.brendangregg.com/flamegraphs.html</a>
 <a class="github reference external" href="https://github.com/wolfpld/tracy">wolfpld/tracy</a> <a class="reference external" href="https://www.kdab.com/hotspot-video/">https://www.kdab.com/hotspot-video/</a></p>
+<ul class="simple">
+<li><p>https://computers-are-fast.github.io/</p></li>
+<li><p>https://github.com/wolfpld/tracy</p></li>
+<li><p>https://perfetto.dev/</p></li>
+<li><p>https://github.com/bloomberg/memray</p></li>
+</ul>
 <section class="tex2jax_ignore mathjax_ignore" id="profiling">
-<h1><span class="section-number">9. </span>Profiling<a class="headerlink" href="#profiling" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">10. </span>Profiling<a class="headerlink" href="#profiling" title="Permalink to this heading">#</a></h1>
 <p>After debugging your code and writing several tests to avoid repeating
 the same bug, you want to start optimizing it to make it fast (but
 keeping it correct). To do this, you need to measure. You need to detect
@@ -486,7 +487,7 @@ functions that take most of the time is called profiling , and there are
 several tools ready to help you. In the following we ill learn to use
 these tools to detect the hotspots/bottlenecks in our codes.</p>
 <section id="why-profile">
-<h2><span class="section-number">9.1. </span>Why profile?<a class="headerlink" href="#why-profile" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.1. </span>Why profile?<a class="headerlink" href="#why-profile" title="Permalink to this heading">#</a></h2>
 <p>Profiling allows you to learn how the computation time was spent and how
 the data flows in your program. This can be achieved by just printing
 the time spent on each section using some internal timers, or, better,
@@ -504,7 +505,7 @@ of this course, check
 <a class="reference external" href="https://www.dropbox.com/s/z71cz13fzce05x7/UsualOptimization.pdf">this</a>).</p>
 </section>
 <section id="measuring-elapsed-time">
-<h2><span class="section-number">9.2. </span>Measuring elapsed time<a class="headerlink" href="#measuring-elapsed-time" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.2. </span>Measuring elapsed time<a class="headerlink" href="#measuring-elapsed-time" title="Permalink to this heading">#</a></h2>
 <p>The first approach is to just add timers to your code. This is a good
 practice and it is useful for a code to report the time spent on
 different parts. The following example is extracted from
@@ -620,7 +621,7 @@ and <a class="reference external" href="https://en.cppreference.com/w/cpp/chrono
 <p>Analyze the results.</p>
 </section>
 <section id="profilers">
-<h2><span class="section-number">9.3. </span>Profilers<a class="headerlink" href="#profilers" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.3. </span>Profilers<a class="headerlink" href="#profilers" title="Permalink to this heading">#</a></h2>
 <p>There are many types of profilers from many different sources, commonly,
 a profiler is associated to a compiler, so that for example, GNU (the
 community around gcc compiler) has the profiler ‘gprof’, intel
@@ -642,7 +643,7 @@ and remains relevant in the modern world.” (from Wikipedia).</p>
 </div></blockquote>
 </section>
 <section id="gprof">
-<h2><span class="section-number">9.4. </span>gprof<a class="headerlink" href="#gprof" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.4. </span>gprof<a class="headerlink" href="#gprof" title="Permalink to this heading">#</a></h2>
 <p>Inthe following we will use the following code as example: Example 1:
 Basic gprof (compile with <code class="docutils literal notranslate"><span class="pre">gcc</span></code>)</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">//test_gprof.c</span>
@@ -875,10 +876,10 @@ function and its children.</p>
 </div></blockquote>
 </section>
 <section id="perf">
-<h2><span class="section-number">9.5. </span>perf<a class="headerlink" href="#perf" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.5. </span>perf<a class="headerlink" href="#perf" title="Permalink to this heading">#</a></h2>
 <p>See <a class="reference external" href="https://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html">https://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html</a></p>
 <section id="installing-perf">
-<h3><span class="section-number">9.5.1. </span>Installing perf<a class="headerlink" href="#installing-perf" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.5.1. </span>Installing perf<a class="headerlink" href="#installing-perf" title="Permalink to this heading">#</a></h3>
 <p>Perf is a kernel module, so you will need to install it from the kernel
 source. As root, the command used to install perl in the computer room
 was</p>
@@ -888,7 +889,7 @@ was</p>
 <p>This will copy the perf executable into the path.</p>
 </section>
 <section id="using-perf">
-<h3><span class="section-number">9.5.2. </span>Using perf<a class="headerlink" href="#using-perf" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.5.2. </span>Using perf<a class="headerlink" href="#using-perf" title="Permalink to this heading">#</a></h3>
 <p>Perf is a hardware counter available on linux platforms.</p>
 <p>Its use is very simple: Just run, For a profile summary,</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>perf<span class="w"> </span>stat<span class="w"> </span>./a.out<span class="w"> </span>&gt;<span class="w"> </span>profile_summary
@@ -901,7 +902,7 @@ was</p>
 </div>
 </section>
 <section id="hotstop-gui-for-perf">
-<h3><span class="section-number">9.5.3. </span>Hotstop: Gui for perf<a class="headerlink" href="#hotstop-gui-for-perf" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.5.3. </span>Hotstop: Gui for perf<a class="headerlink" href="#hotstop-gui-for-perf" title="Permalink to this heading">#</a></h3>
 <p><a class="github reference external" href="https://github.com/KDAB/hotspot">KDAB/hotspot</a> Install with the appimage: Download
 it, make it executable, run.</p>
 <p>In the computer room you can also use spack:</p>
@@ -912,16 +913,16 @@ it, make it executable, run.</p>
 </section>
 </section>
 <section id="profiling-with-valgrind-cachegrind-and-callgrind">
-<h2><span class="section-number">9.6. </span>Profiling with valgrind: cachegrind and callgrind<a class="headerlink" href="#profiling-with-valgrind-cachegrind-and-callgrind" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.6. </span>Profiling with valgrind: cachegrind and callgrind<a class="headerlink" href="#profiling-with-valgrind-cachegrind-and-callgrind" title="Permalink to this heading">#</a></h2>
 <p>Valgrind allows not only to debug a code but also to profile it. Here we
 will see how to use cachegrind, to check for cache misses, and
 callgrind, for a calling graph much like tools like perf and gprof.</p>
 <section id="cache-checker-cachegrind">
-<h3><span class="section-number">9.6.1. </span>Cache checker : cachegrind<a class="headerlink" href="#cache-checker-cachegrind" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.6.1. </span>Cache checker : cachegrind<a class="headerlink" href="#cache-checker-cachegrind" title="Permalink to this heading">#</a></h3>
 <blockquote>
 <div><p>From
 <a class="reference external" href="http://valgrind.org/docs/manual/cg-manual.html#cg-manual.overview">cachegrind</a></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Cachegrind<span class="w"> </span>simulates<span class="w"> </span>how<span class="w"> </span>your<span class="w"> </span>program<span class="w"> </span>interacts<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>machine<span class="err">&#39;</span>s
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Cachegrind simulates how your program interacts with a machine&#39;s
 </pre></div>
 </div>
 <p>cache hierarchy and (optionally) branch predictor. It simulates a
@@ -1037,7 +1038,7 @@ analysis</a></p>
 </ol>
 </section>
 <section id="callgrind">
-<h3><span class="section-number">9.6.2. </span>Callgrind<a class="headerlink" href="#callgrind" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.6.2. </span>Callgrind<a class="headerlink" href="#callgrind" title="Permalink to this heading">#</a></h3>
 <p>Now, we are using valgrind to get a calling profile by using the tool
 <code class="docutils literal notranslate"><span class="pre">callgrind</span></code>. It is done as follows: Use the same programa as in other
 modules. First, compile with debugging enabled, something like</p>
@@ -1073,7 +1074,7 @@ program using eigen library. In the later, it is easy to profile?</p>
 </section>
 </section>
 <section id="google-performance-tools">
-<h2><span class="section-number">9.7. </span>Google Performance Tools<a class="headerlink" href="#google-performance-tools" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.7. </span>Google Performance Tools<a class="headerlink" href="#google-performance-tools" title="Permalink to this heading">#</a></h2>
 <p>See <a class="github reference external" href="https://github.com/gperftools/gperftools">gperftools/gperftools</a></p>
 <p>From <a class="reference external" href="http://code.google.com/p/gperftools/?redir=1">Google performance
 tools</a> : These tools are
@@ -1107,7 +1108,7 @@ the cpu profiler, check <a class="reference external" href="http://google-perfto
 info</a></p>
 </section>
 <section id="exercises">
-<h2><span class="section-number">9.8. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.8. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Take <a class="reference external" href="https://bitbucket.org/iluvatar/scientific-computing-part-01/raw/9e1e2822cf7a6012b56708294eda1a5d3e0553b1/optimization/cache_lines.c">this
 code</a>
@@ -1159,7 +1160,7 @@ profile it and try to optimize it in any way.</p></li>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>Optimization</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Optimization</p>
       </div>
     </a>
     <a class="right-next"
@@ -1167,7 +1168,7 @@ profile it and try to optimize it in any way.</p></li>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">10. </span>Numerical libraries in Matrix Problems</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Numerical libraries in Matrix Problems</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1187,23 +1188,23 @@ profile it and try to optimize it in any way.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-profile">9.1. Why profile?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-elapsed-time">9.2. Measuring elapsed time</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profilers">9.3. Profilers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gprof">9.4. gprof</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perf">9.5. perf</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-perf">9.5.1. Installing perf</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-perf">9.5.2. Using perf</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hotstop-gui-for-perf">9.5.3. Hotstop: Gui for perf</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-profile">10.1. Why profile?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-elapsed-time">10.2. Measuring elapsed time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profilers">10.3. Profilers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gprof">10.4. gprof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perf">10.5. perf</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-perf">10.5.1. Installing perf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-perf">10.5.2. Using perf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hotstop-gui-for-perf">10.5.3. Hotstop: Gui for perf</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-with-valgrind-cachegrind-and-callgrind">9.6. Profiling with valgrind: cachegrind and callgrind</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cache-checker-cachegrind">9.6.1. Cache checker : cachegrind</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callgrind">9.6.2. Callgrind</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-with-valgrind-cachegrind-and-callgrind">10.6. Profiling with valgrind: cachegrind and callgrind</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cache-checker-cachegrind">10.6.1. Cache checker : cachegrind</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callgrind">10.6.2. Callgrind</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-performance-tools">9.7. Google Performance Tools</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">9.8. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-performance-tools">10.7. Google Performance Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">10.8. Exercises</a></li>
 </ul>
   </nav></div>
 

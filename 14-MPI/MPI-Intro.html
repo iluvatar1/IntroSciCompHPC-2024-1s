@@ -1,14 +1,15 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>14. Introduction to MPI (distributed memory) &#8212; Introduction to Scientific and High Performance Computing</title>
+    <title>15. Introduction to MPI (distributed memory) &#8212; Introduction to Scientific and High Performance Computing</title>
   
   
   
@@ -28,44 +29,48 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles.css?v=03b9d5b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '14-MPI/MPI-Intro';</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="15. Ref" href="../15-Intro-Cuda/cuda.html" />
-    <link rel="prev" title="13. Introduction to OpenMp (Shared memory)" href="../13-OpenMP/OpenMP-Intro.html" />
+    <link rel="next" title="16. Ref" href="../15-Intro-Cuda/cuda.html" />
+    <link rel="prev" title="14. Introduction to OpenMp (Shared memory)" href="../13-OpenMP/OpenMP-Intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -159,18 +164,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -183,24 +177,25 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to scientific computing and programming tools</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../01-Introduction/01-Introduction.html">1. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">2. Errors in Floating Point Numbers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">3. Makefiles as automation tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">4. Standard library of functions: math functions, containers and random numbers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">5. Using software in a hpc environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">6. Debugging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">7. Unit Testing : Ensuring fix and correct behavior last</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">3. Errors in Floating Point Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">4. Makefiles as automation tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">5. Standard library of functions: math functions, containers and random numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">6. Using software in a hpc environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">7. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Ensuring fix and correct behavior last</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">8. Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">9. Profiling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">10. Numerical libraries in Matrix Problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Performance measurement for some matrix ops</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">15. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">16. HPC resource manager: Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">9. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">10. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">11. Numerical libraries in Matrix Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">12. Performance measurement for some matrix ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">13. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">14. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">16. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">17. HPC resource manager: Slurm</a></li>
 </ul>
 
     </div>
@@ -445,49 +440,49 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro-mpi">14.1. Intro MPI</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-mpi">14.2. Core MPI</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpigetprocessorname">14.2.1. MPI<sub>Getprocessorname</sub></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-the-mpi-program">14.2.2. Compiling and running the MPI program</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-an-mpi-on-several-machines">14.2.3. Running an mpi on several machines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro-mpi">15.1. Intro MPI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-mpi">15.2. Core MPI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-sub-getprocessorname-sub">15.2.1. MPI<sub>Getprocessorname</sub></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-the-mpi-program">15.2.2. Compiling and running the MPI program</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-an-mpi-on-several-machines">15.2.3. Running an mpi on several machines</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-numerical-integration-send-and-recv-functions">14.3. Application: Numerical Integration (Send and Recv functions)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-implementation-of-the-numerical-integration-by-rectangles">14.3.1. Serial implementation of the numerical integration by rectangles</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-solution-point-to-point-communication-with-mpisend-and-mpirecv">14.3.2. MPI solution: Point to point communication with MPI<sub>Send</sub> and MPI<sub>Recv</sub></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-numerical-integration-send-and-recv-functions">15.3. Application: Numerical Integration (Send and Recv functions)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-implementation-of-the-numerical-integration-by-rectangles">15.3.1. Serial implementation of the numerical integration by rectangles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-solution-point-to-point-communication-with-mpi-sub-send-sub-and-mpi-sub-recv-sub">15.3.2. MPI solution: Point to point communication with MPI<sub>Send</sub> and MPI<sub>Recv</sub></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-point-to-point-exercises">14.4. More Point to point exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ping-pong">14.4.1. Ping-Pong</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bandwitdh-local-and-network">14.4.2. Bandwitdh local and network</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#large-unit-matrix">14.4.3. Large unit matrix</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ring-pattern">14.4.4. Ring pattern</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-point-to-point-exercises">15.4. More Point to point exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ping-pong">15.4.1. Ping-Pong</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bandwitdh-local-and-network">15.4.2. Bandwitdh local and network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#large-unit-matrix">15.4.3. Large unit matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ring-pattern">15.4.4. Ring pattern</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collective-communications">14.5. Collective Communications</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-bcast">14.5.1. MPI Bcast</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpibcast-mpireduce">14.5.2. MPI<sub>Bcast</sub>, MPI<sub>Reduce</sub></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">14.5.2.1. Exercises</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples-mpi-gather-mpi-scatter">14.6. More examples : <code class="docutils literal notranslate"><span class="pre">MPI_Gather</span></code>, <code class="docutils literal notranslate"><span class="pre">MPI_Scatter</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collective-comms-exercises">14.6.1. Collective comms exercises</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-parallel-relaxation-method">14.7. Practical example: Parallel Relaxation method</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-version">14.7.1. Serial version</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelize-both-initial-and-boundary-conditions">14.7.2. Parallelize both initial and boundary conditions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#communication">14.7.3. Communication</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evolution">14.7.4. Evolution</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">14.7.4.1. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collective-communications">15.5. Collective Communications</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-bcast">15.5.1. MPI Bcast</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-sub-bcast-sub-mpi-sub-reduce-sub">15.5.2. MPI<sub>Bcast</sub>, MPI<sub>Reduce</sub></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">15.5.2.1. Exercises</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-in-parallel">14.8. Debugging in parallel</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">14.9. More Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples-mpi-gather-mpi-scatter">15.6. More examples : <code class="docutils literal notranslate"><span class="pre">MPI_Gather</span></code>, <code class="docutils literal notranslate"><span class="pre">MPI_Scatter</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collective-comms-exercises">15.6.1. Collective comms exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-parallel-relaxation-method">15.7. Practical example: Parallel Relaxation method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-version">15.7.1. Serial version</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelize-both-initial-and-boundary-conditions">15.7.2. Parallelize both initial and boundary conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#communication">15.7.3. Communication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evolution">15.7.4. Evolution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">15.7.4.1. Exercises</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-in-parallel">15.8. Debugging in parallel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">15.9. More Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -500,9 +495,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-mpi-distributed-memory">
-<h1><span class="section-number">14. </span>Introduction to MPI (distributed memory)<a class="headerlink" href="#introduction-to-mpi-distributed-memory" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">15. </span>Introduction to MPI (distributed memory)<a class="headerlink" href="#introduction-to-mpi-distributed-memory" title="Permalink to this heading">#</a></h1>
 <section id="intro-mpi">
-<h2><span class="section-number">14.1. </span>Intro MPI<a class="headerlink" href="#intro-mpi" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.1. </span>Intro MPI<a class="headerlink" href="#intro-mpi" title="Permalink to this heading">#</a></h2>
 <p>MPI stands for Message Passing Interface. It is a standard which allows
 processes to communicate and share data across an heterogeneous setup.
 MPI is well suited for distributed memory systems, although it can also
@@ -526,7 +521,7 @@ allows you to tag every process with a given <em>rank</em>, on a problem of
 etc. In the following, we will use mostly C.</p>
 </section>
 <section id="core-mpi">
-<h2><span class="section-number">14.2. </span>Core MPI<a class="headerlink" href="#core-mpi" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.2. </span>Core MPI<a class="headerlink" href="#core-mpi" title="Permalink to this heading">#</a></h2>
 <p>It is typical to denote the rank-0 process as the master and the
 remaining process (rank &gt;= 1) as slaves. Most of the time, the slaves
 are processing several parts of the problem and then communicate back
@@ -579,8 +574,8 @@ your own communicators to isolate several sub-groups of processes.</p>
 <p>MPI<sub>Commrank</sub><br />
 Returns the actual rank of the calling process, inside the communicator
 group. The range goes from 0 to the the size minus 1.</p>
-<section id="mpigetprocessorname">
-<h3><span class="section-number">14.2.1. </span>MPI<sub>Getprocessorname</sub><a class="headerlink" href="#mpigetprocessorname" title="Link to this heading">#</a></h3>
+<section id="mpi-sub-getprocessorname-sub">
+<h3><span class="section-number">15.2.1. </span>MPI<sub>Getprocessorname</sub><a class="headerlink" href="#mpi-sub-getprocessorname-sub" title="Permalink to this heading">#</a></h3>
 <p>This retrieves the hostname of the current and is very useful for
 debugging purposes. The following example shows how to get the node name</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;mpi.h&quot;</span>
@@ -608,7 +603,7 @@ debugging purposes. The following example shows how to get the node name</p>
 </div>
 </section>
 <section id="compiling-and-running-the-mpi-program">
-<h3><span class="section-number">14.2.2. </span>Compiling and running the MPI program<a class="headerlink" href="#compiling-and-running-the-mpi-program" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.2.2. </span>Compiling and running the MPI program<a class="headerlink" href="#compiling-and-running-the-mpi-program" title="Permalink to this heading">#</a></h3>
 <p>Compilation can be done directly with the gcc compiler by using the
 appropriate flags. But there is a helper command ready to help you:
 <code class="docutils literal notranslate"><span class="pre">mpicc</span></code>. Save the previous example code into a file (here called
@@ -638,7 +633,7 @@ Hello<span class="w"> </span>from<span class="w"> </span>process<span class="w">
 </ol>
 </section>
 <section id="running-an-mpi-on-several-machines">
-<h3><span class="section-number">14.2.3. </span>Running an mpi on several machines<a class="headerlink" href="#running-an-mpi-on-several-machines" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.2.3. </span>Running an mpi on several machines<a class="headerlink" href="#running-an-mpi-on-several-machines" title="Permalink to this heading">#</a></h3>
 <p>You can run an mpi process on the same machine or in several machines,
 as follows</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">4</span><span class="w"> </span>-host<span class="w"> </span>host01,host02<span class="w"> </span>./a.out
@@ -686,13 +681,13 @@ that you can login remotely without password by runnung</p>
 </section>
 </section>
 <section id="application-numerical-integration-send-and-recv-functions">
-<h2><span class="section-number">14.3. </span>Application: Numerical Integration (Send and Recv functions)<a class="headerlink" href="#application-numerical-integration-send-and-recv-functions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.3. </span>Application: Numerical Integration (Send and Recv functions)<a class="headerlink" href="#application-numerical-integration-send-and-recv-functions" title="Permalink to this heading">#</a></h2>
 <p>To improve our understanding of MPI, and to introduce new functions, we
 will use a familiar problem to investigate: the computation of the area
 under a curve. Its easiness and familiarity allows to focus on MPI and
 its usage. Let’s introduce first the serial version.</p>
 <section id="serial-implementation-of-the-numerical-integration-by-rectangles">
-<h3><span class="section-number">14.3.1. </span>Serial implementation of the numerical integration by rectangles<a class="headerlink" href="#serial-implementation-of-the-numerical-integration-by-rectangles" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.3.1. </span>Serial implementation of the numerical integration by rectangles<a class="headerlink" href="#serial-implementation-of-the-numerical-integration-by-rectangles" title="Permalink to this heading">#</a></h3>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 
 <span class="cm">/* Problem parameters */</span>
@@ -737,8 +732,8 @@ The<span class="w"> </span>area<span class="w"> </span>from<span class="w"> </sp
 </div>
 <p>Now let’s implement an mpi solution.</p>
 </section>
-<section id="mpi-solution-point-to-point-communication-with-mpisend-and-mpirecv">
-<h3><span class="section-number">14.3.2. </span>MPI solution: Point to point communication with MPI<sub>Send</sub> and MPI<sub>Recv</sub><a class="headerlink" href="#mpi-solution-point-to-point-communication-with-mpisend-and-mpirecv" title="Link to this heading">#</a></h3>
+<section id="mpi-solution-point-to-point-communication-with-mpi-sub-send-sub-and-mpi-sub-recv-sub">
+<h3><span class="section-number">15.3.2. </span>MPI solution: Point to point communication with MPI<sub>Send</sub> and MPI<sub>Recv</sub><a class="headerlink" href="#mpi-solution-point-to-point-communication-with-mpi-sub-send-sub-and-mpi-sub-recv-sub" title="Permalink to this heading">#</a></h3>
 <p>Check: <a class="reference external" href="https://mpitutorial.com/tutorials/mpi-send-and-receive/">https://mpitutorial.com/tutorials/mpi-send-and-receive/</a></p>
 <p>This is an embarrassingly parallel problem. There are no data
 dependencies. We can partition the domain, performing partial sums per
@@ -898,11 +893,11 @@ reduction?</p>
 </section>
 </section>
 <section id="more-point-to-point-exercises">
-<h2><span class="section-number">14.4. </span>More Point to point exercises<a class="headerlink" href="#more-point-to-point-exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.4. </span>More Point to point exercises<a class="headerlink" href="#more-point-to-point-exercises" title="Permalink to this heading">#</a></h2>
 <p>Check also:
 <a class="reference external" href="http://www.archer.ac.uk/training/course-material/2017/09/mpi-york/exercises/MPP-exercises.pdf">http://www.archer.ac.uk/training/course-material/2017/09/mpi-york/exercises/MPP-exercises.pdf</a></p>
 <section id="ping-pong">
-<h3><span class="section-number">14.4.1. </span>Ping-Pong<a class="headerlink" href="#ping-pong" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.4.1. </span>Ping-Pong<a class="headerlink" href="#ping-pong" title="Permalink to this heading">#</a></h3>
 <p>Ref: Gavin, EPCC</p>
 <ul class="simple">
 <li><p>Write an MPI code for 2 processes</p></li>
@@ -921,14 +916,14 @@ reduction?</p>
 <p>Maybe repeat M times</p>
 </section>
 <section id="bandwitdh-local-and-network">
-<h3><span class="section-number">14.4.2. </span>Bandwitdh local and network<a class="headerlink" href="#bandwitdh-local-and-network" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.4.2. </span>Bandwitdh local and network<a class="headerlink" href="#bandwitdh-local-and-network" title="Permalink to this heading">#</a></h3>
 <p>Compute the bandwidth when sending data locally (same computer) and to
 other computer in the network. Plot the time taken to send the data as a
 function of the buffer size. Is the bandwidth (Mbits/s) constant? is
 there any difference between local and multimachine data sending?</p>
 </section>
 <section id="large-unit-matrix">
-<h3><span class="section-number">14.4.3. </span>Large unit matrix<a class="headerlink" href="#large-unit-matrix" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.4.3. </span>Large unit matrix<a class="headerlink" href="#large-unit-matrix" title="Permalink to this heading">#</a></h3>
 <p>Imagine a large unit matrix that is distributed among all the processes
 in horizontal layers. Each process stores only its corresponding matrix
 part, not the full matrix. Make each process fill its corresponding part
@@ -937,7 +932,7 @@ by sending each process matrix section to the master. Also plot it in
 gnupot or matplotlib</p>
 </section>
 <section id="ring-pattern">
-<h3><span class="section-number">14.4.4. </span>Ring pattern<a class="headerlink" href="#ring-pattern" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.4.4. </span>Ring pattern<a class="headerlink" href="#ring-pattern" title="Permalink to this heading">#</a></h3>
 <p>Ref: Gavin, EPCC</p>
 <ul class="simple">
 <li><p>Write an MPI code which sends a message around a ring</p></li>
@@ -953,7 +948,7 @@ all tasks? (Test with unblocking send and even/odd send receive)</p></li>
 </section>
 </section>
 <section id="collective-communications">
-<h2><span class="section-number">14.5. </span>Collective Communications<a class="headerlink" href="#collective-communications" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.5. </span>Collective Communications<a class="headerlink" href="#collective-communications" title="Permalink to this heading">#</a></h2>
 <p>Check:
 <a class="reference external" href="https://mpitutorial.com/tutorials/mpi-broadcast-and-collective-communication/">https://mpitutorial.com/tutorials/mpi-broadcast-and-collective-communication/</a></p>
 <p>If you check some of the previous code, or the integral code, we are
@@ -994,7 +989,7 @@ gathering is optimised).
 <a class="reference external" href="https://mpitutorial.com/tutorials/mpi-broadcast-and-collective-communication/">https://mpitutorial.com/tutorials/mpi-broadcast-and-collective-communication/</a>
 <a class="reference external" href="http://wgropp.cs.illinois.edu/courses/cs598-s15/lectures/lecture29.pdf">http://wgropp.cs.illinois.edu/courses/cs598-s15/lectures/lecture29.pdf</a></p>
 <section id="mpi-bcast">
-<h3><span class="section-number">14.5.1. </span>MPI Bcast<a class="headerlink" href="#mpi-bcast" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.5.1. </span>MPI Bcast<a class="headerlink" href="#mpi-bcast" title="Permalink to this heading">#</a></h3>
 <ol class="arabic">
 <li><p>Sending an array from one source to all processes</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;mpi.h&quot;</span>
@@ -1101,8 +1096,8 @@ send and recv</p>
 </li>
 </ol>
 </section>
-<section id="mpibcast-mpireduce">
-<h3><span class="section-number">14.5.2. </span>MPI<sub>Bcast</sub>, MPI<sub>Reduce</sub><a class="headerlink" href="#mpibcast-mpireduce" title="Link to this heading">#</a></h3>
+<section id="mpi-sub-bcast-sub-mpi-sub-reduce-sub">
+<h3><span class="section-number">15.5.2. </span>MPI<sub>Bcast</sub>, MPI<sub>Reduce</sub><a class="headerlink" href="#mpi-sub-bcast-sub-mpi-sub-reduce-sub" title="Permalink to this heading">#</a></h3>
 <p>In this case we will read some data in process 0 , then broadcast it to
 other processes, and finally reduce back some result (an integral , in
 this example).</p>
@@ -1183,7 +1178,7 @@ this example).</p>
 <code class="docutils literal notranslate"><span class="pre">MPI_Send</span></code>, <code class="docutils literal notranslate"><span class="pre">MPI_Recv</span></code>, <code class="docutils literal notranslate"><span class="pre">MPI_Bcast</span></code>, <code class="docutils literal notranslate"><span class="pre">MPI_Reduce</span></code>, and <code class="docutils literal notranslate"><span class="pre">MPI_Finalize</span></code>
 are the core of the MPI programming. You are now and MPI programmer.</p>
 <section id="exercises">
-<h4><span class="section-number">14.5.2.1. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">15.5.2.1. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h4>
 <ol class="arabic simple">
 <li><p>Modularize the previous integral code with functions. Basically use
 the same code as with send/recv but adapt it to use bcast/reduce.</p></li>
@@ -1204,7 +1199,7 @@ to detect percolant clusters can be parallelized.</p></li>
 </section>
 </section>
 <section id="more-examples-mpi-gather-mpi-scatter">
-<h2><span class="section-number">14.6. </span>More examples : <code class="docutils literal notranslate"><span class="pre">MPI_Gather</span></code>, <code class="docutils literal notranslate"><span class="pre">MPI_Scatter</span></code><a class="headerlink" href="#more-examples-mpi-gather-mpi-scatter" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.6. </span>More examples : <code class="docutils literal notranslate"><span class="pre">MPI_Gather</span></code>, <code class="docutils literal notranslate"><span class="pre">MPI_Scatter</span></code><a class="headerlink" href="#more-examples-mpi-gather-mpi-scatter" title="Permalink to this heading">#</a></h2>
 <p>Check:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://mpitutorial.com/tutorials/mpi-scatter-gather-and-allgather/">https://mpitutorial.com/tutorials/mpi-scatter-gather-and-allgather/</a></p></li>
@@ -1280,7 +1275,7 @@ following functions, as follows:
 </tbody>
 </table>
 <section id="collective-comms-exercises">
-<h3><span class="section-number">14.6.1. </span>Collective comms exercises<a class="headerlink" href="#collective-comms-exercises" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.6.1. </span>Collective comms exercises<a class="headerlink" href="#collective-comms-exercises" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Revisit all point-to-point comms exercises and implement them using
 collective comms if possible.</p></li>
@@ -1328,7 +1323,7 @@ as function of <span class="math notranslate nohighlight">\(N_p\)</span>.</p></l
 </section>
 </section>
 <section id="practical-example-parallel-relaxation-method">
-<h2><span class="section-number">14.7. </span>Practical example: Parallel Relaxation method<a class="headerlink" href="#practical-example-parallel-relaxation-method" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.7. </span>Practical example: Parallel Relaxation method<a class="headerlink" href="#practical-example-parallel-relaxation-method" title="Permalink to this heading">#</a></h2>
 <p>In this example we will parallelize the relaxation method by using MPI.
 We will decompose the domain, add some ghost zones and finally transmit
 some information between different processors. Our tasks will be as
@@ -1363,7 +1358,7 @@ array will be of size <span class="math notranslate nohighlight">\((N_{l} +
 following diagram illustrates the process:
 <img alt="../_images/Laplace-domain-ghostscells.png" class="centerimg50" src="../_images/Laplace-domain-ghostscells.png" /></p>
 <section id="serial-version">
-<h3><span class="section-number">14.7.1. </span>Serial version<a class="headerlink" href="#serial-version" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.7.1. </span>Serial version<a class="headerlink" href="#serial-version" title="Permalink to this heading">#</a></h3>
 <p>This version solves the Laplace equation by using the Jacbi-Gauss-Seidel
 relaxation method and prints gnuplot commands to create an animation.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
@@ -1478,7 +1473,7 @@ relaxation method and prints gnuplot commands to create an animation.</p>
 actually parallelizing:</p>
 </section>
 <section id="parallelize-both-initial-and-boundary-conditions">
-<h3><span class="section-number">14.7.2. </span>Parallelize both initial and boundary conditions<a class="headerlink" href="#parallelize-both-initial-and-boundary-conditions" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.7.2. </span>Parallelize both initial and boundary conditions<a class="headerlink" href="#parallelize-both-initial-and-boundary-conditions" title="Permalink to this heading">#</a></h3>
 <p>The folowing code shows a possible parallelization for the initial
 conditions, plus some auxiliary functions to print the matrix using
 point to poin comms:</p>
@@ -1866,7 +1861,7 @@ After<span class="w"> </span>boundary<span class="w"> </span>conditions<span cla
 </div>
 </section>
 <section id="communication">
-<h3><span class="section-number">14.7.3. </span>Communication<a class="headerlink" href="#communication" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.7.3. </span>Communication<a class="headerlink" href="#communication" title="Permalink to this heading">#</a></h3>
 <p>Here we explore how to implement the communication among the processes
 using the ring topology. Your task is to implement the communication in
 the following ways using</p>
@@ -2239,7 +2234,7 @@ the following ways using</p>
 procedure as a function of the number of process.</p>
 </section>
 <section id="evolution">
-<h3><span class="section-number">14.7.4. </span>Evolution<a class="headerlink" href="#evolution" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">15.7.4. </span>Evolution<a class="headerlink" href="#evolution" title="Permalink to this heading">#</a></h3>
 <p>In this case we will just move form the serial simple evolution to
 comms+evolution at each time step</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
@@ -2750,7 +2745,7 @@ animation after parallelizing gnuplot printing:</p>
 </pre></div>
 </div>
 <section id="id1">
-<h4><span class="section-number">14.7.4.1. </span>Exercises<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">15.7.4.1. </span>Exercises<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
 <p>Parallelize the code used on the relaxation method to solve the Poisson
 equation, including some charge densities and some ineer boundary
 conditions. Here you will need to decompose the domain, keep some ghost
@@ -2759,7 +2754,7 @@ zones, and share some info across processes to update the ghost zones.</p>
 </section>
 </section>
 <section id="debugging-in-parallel">
-<h2><span class="section-number">14.8. </span>Debugging in parallel<a class="headerlink" href="#debugging-in-parallel" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.8. </span>Debugging in parallel<a class="headerlink" href="#debugging-in-parallel" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.open-mpi.org/faq/?category=debugging">https://www.open-mpi.org/faq/?category=debugging</a></p></li>
 <li><p><a class="github reference external" href="https://github.com/Azrael3000/tmpi">Azrael3000/tmpi</a></p></li>
@@ -2770,7 +2765,7 @@ zones, and share some info across processes to update the ghost zones.</p>
 <a class="reference external" href="https://epcced.github.io/2022-04-19-archer2-intro-develop/files/gdb4hpc_exercise.c">https://epcced.github.io/2022-04-19-archer2-intro-develop/files/gdb4hpc_exercise.c</a></p>
 </section>
 <section id="more-exercises">
-<h2><span class="section-number">14.9. </span>More Exercises<a class="headerlink" href="#more-exercises" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">15.9. </span>More Exercises<a class="headerlink" href="#more-exercises" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Check the exercises on
 <a class="reference external" href="https://computing.llnl.gov/tutorials/mpi/#Exercise1">https://computing.llnl.gov/tutorials/mpi/#Exercise1</a>,
@@ -2817,7 +2812,7 @@ zones, and share some info across processes to update the ghost zones.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>Introduction to OpenMp (Shared memory)</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Introduction to OpenMp (Shared memory)</p>
       </div>
     </a>
     <a class="right-next"
@@ -2825,7 +2820,7 @@ zones, and share some info across processes to update the ghost zones.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>Ref</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Ref</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2845,49 +2840,49 @@ zones, and share some info across processes to update the ghost zones.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro-mpi">14.1. Intro MPI</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-mpi">14.2. Core MPI</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpigetprocessorname">14.2.1. MPI<sub>Getprocessorname</sub></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-the-mpi-program">14.2.2. Compiling and running the MPI program</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-an-mpi-on-several-machines">14.2.3. Running an mpi on several machines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro-mpi">15.1. Intro MPI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-mpi">15.2. Core MPI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-sub-getprocessorname-sub">15.2.1. MPI<sub>Getprocessorname</sub></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-the-mpi-program">15.2.2. Compiling and running the MPI program</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-an-mpi-on-several-machines">15.2.3. Running an mpi on several machines</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-numerical-integration-send-and-recv-functions">14.3. Application: Numerical Integration (Send and Recv functions)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-implementation-of-the-numerical-integration-by-rectangles">14.3.1. Serial implementation of the numerical integration by rectangles</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-solution-point-to-point-communication-with-mpisend-and-mpirecv">14.3.2. MPI solution: Point to point communication with MPI<sub>Send</sub> and MPI<sub>Recv</sub></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-numerical-integration-send-and-recv-functions">15.3. Application: Numerical Integration (Send and Recv functions)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-implementation-of-the-numerical-integration-by-rectangles">15.3.1. Serial implementation of the numerical integration by rectangles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-solution-point-to-point-communication-with-mpi-sub-send-sub-and-mpi-sub-recv-sub">15.3.2. MPI solution: Point to point communication with MPI<sub>Send</sub> and MPI<sub>Recv</sub></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-point-to-point-exercises">14.4. More Point to point exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ping-pong">14.4.1. Ping-Pong</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bandwitdh-local-and-network">14.4.2. Bandwitdh local and network</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#large-unit-matrix">14.4.3. Large unit matrix</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ring-pattern">14.4.4. Ring pattern</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-point-to-point-exercises">15.4. More Point to point exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ping-pong">15.4.1. Ping-Pong</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bandwitdh-local-and-network">15.4.2. Bandwitdh local and network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#large-unit-matrix">15.4.3. Large unit matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ring-pattern">15.4.4. Ring pattern</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collective-communications">14.5. Collective Communications</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-bcast">14.5.1. MPI Bcast</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpibcast-mpireduce">14.5.2. MPI<sub>Bcast</sub>, MPI<sub>Reduce</sub></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">14.5.2.1. Exercises</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples-mpi-gather-mpi-scatter">14.6. More examples : <code class="docutils literal notranslate"><span class="pre">MPI_Gather</span></code>, <code class="docutils literal notranslate"><span class="pre">MPI_Scatter</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collective-comms-exercises">14.6.1. Collective comms exercises</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-parallel-relaxation-method">14.7. Practical example: Parallel Relaxation method</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-version">14.7.1. Serial version</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelize-both-initial-and-boundary-conditions">14.7.2. Parallelize both initial and boundary conditions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#communication">14.7.3. Communication</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evolution">14.7.4. Evolution</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">14.7.4.1. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collective-communications">15.5. Collective Communications</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-bcast">15.5.1. MPI Bcast</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mpi-sub-bcast-sub-mpi-sub-reduce-sub">15.5.2. MPI<sub>Bcast</sub>, MPI<sub>Reduce</sub></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">15.5.2.1. Exercises</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-in-parallel">14.8. Debugging in parallel</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">14.9. More Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples-mpi-gather-mpi-scatter">15.6. More examples : <code class="docutils literal notranslate"><span class="pre">MPI_Gather</span></code>, <code class="docutils literal notranslate"><span class="pre">MPI_Scatter</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collective-comms-exercises">15.6.1. Collective comms exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-parallel-relaxation-method">15.7. Practical example: Parallel Relaxation method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serial-version">15.7.1. Serial version</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelize-both-initial-and-boundary-conditions">15.7.2. Parallelize both initial and boundary conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#communication">15.7.3. Communication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evolution">15.7.4. Evolution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">15.7.4.1. Exercises</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-in-parallel">15.8. Debugging in parallel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-exercises">15.9. More Exercises</a></li>
 </ul>
   </nav></div>
 

@@ -1,14 +1,15 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>5. Using software in a hpc environment &#8212; Introduction to Scientific and High Performance Computing</title>
+    <title>6. Using software in a hpc environment &#8212; Introduction to Scientific and High Performance Computing</title>
   
   
   
@@ -28,44 +29,48 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles.css?v=03b9d5b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '07-Install-Programs-From-Source/07-Install-Programs-From-Source';</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="6. Debugging" href="../09-Debugging/09-Debugging.html" />
-    <link rel="prev" title="4. Standard library of functions: math functions, containers and random numbers" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html" />
+    <link rel="next" title="7. Debugging" href="../09-Debugging/09-Debugging.html" />
+    <link rel="prev" title="5. Standard library of functions: math functions, containers and random numbers" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -159,18 +164,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -183,24 +177,25 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to scientific computing and programming tools</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../01-Introduction/01-Introduction.html">1. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">2. Errors in Floating Point Numbers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">3. Makefiles as automation tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">4. Standard library of functions: math functions, containers and random numbers</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Using software in a hpc environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">6. Debugging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">7. Unit Testing : Ensuring fix and correct behavior last</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">3. Errors in Floating Point Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">4. Makefiles as automation tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">5. Standard library of functions: math functions, containers and random numbers</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Using software in a hpc environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">7. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Ensuring fix and correct behavior last</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">8. Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">9. Profiling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">10. Numerical libraries in Matrix Problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Performance measurement for some matrix ops</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">14. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">15. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">16. HPC resource manager: Slurm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-optimization/10-optimization.html">9. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">10. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">11. Numerical libraries in Matrix Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">12. Performance measurement for some matrix ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">13. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">14. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">15. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">16. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">17. HPC resource manager: Slurm</a></li>
 </ul>
 
     </div>
@@ -445,24 +440,24 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spack-automatic-load-for-programs-and-containers">5.1. Spack: automatic load for programs and containers</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">5.1.1. Installation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-some-tools-with-spack">5.1.2. Installing some tools with spack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spack-automatic-load-for-programs-and-containers">6.1. Spack: automatic load for programs and containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">6.1.1. Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-some-tools-with-spack">6.1.2. Installing some tools with spack</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-programs-from-source">5.2. How to install programs from source</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-concepts">5.2.1. Preliminary concepts</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-version-for-already-installed-programs">5.2.2. Checking the version for already installed programs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-local-places-to-install-the-utilities">5.2.3. Preparing the local places to install the utilities</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-installation-algorithm">5.2.4. Typical installation algorithm</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop">5.2.5. Workshop</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-programs">5.2.6. Test Programs</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fftw">5.2.6.1. fftw</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c">5.2.6.2. Eigen C++</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-programs-from-source">6.2. How to install programs from source</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-concepts">6.2.1. Preliminary concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-version-for-already-installed-programs">6.2.2. Checking the version for already installed programs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-local-places-to-install-the-utilities">6.2.3. Preparing the local places to install the utilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-installation-algorithm">6.2.4. Typical installation algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop">6.2.5. Workshop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-programs">6.2.6. Test Programs</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fftw">6.2.6.1. fftw</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c">6.2.6.2. Eigen C++</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voro">5.2.7. Voro++</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-9-2">5.2.8. g++ 9.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voro">6.2.7. Voro++</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-9-2">6.2.8. g++ 9.2</a></li>
 </ul>
 </li>
 </ul>
@@ -477,7 +472,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="using-software-in-a-hpc-environment">
-<h1><span class="section-number">5. </span>Using software in a hpc environment<a class="headerlink" href="#using-software-in-a-hpc-environment" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">6. </span>Using software in a hpc environment<a class="headerlink" href="#using-software-in-a-hpc-environment" title="Permalink to this heading">#</a></h1>
 <p><a class="reference external" href="http://hpctoolkit.org/software-instructions.html">http://hpctoolkit.org/software-instructions.html</a>
 <a class="reference external" href="https://apptainer.org/docs/user/main/index.html">https://apptainer.org/docs/user/main/index.html</a></p>
 <ul class="simple">
@@ -486,7 +481,7 @@ document.write(`
 <li></li>
 </ul>
 <section id="spack-automatic-load-for-programs-and-containers">
-<h2><span class="section-number">5.1. </span>Spack: automatic load for programs and containers<a class="headerlink" href="#spack-automatic-load-for-programs-and-containers" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.1. </span>Spack: automatic load for programs and containers<a class="headerlink" href="#spack-automatic-load-for-programs-and-containers" title="Permalink to this heading">#</a></h2>
 <p><a class="reference external" href="https://spack.readthedocs.io/en/latest/">Spack</a> was designed by llnl
 and is targeted to simplify the installation and managment of HPC
 programs with many possible versions and dependencies. Check the docs at
@@ -495,7 +490,7 @@ programs with many possible versions and dependencies. Check the docs at
 . For now let’s just install it, configure it, and install some simple
 tools.</p>
 <section id="installation">
-<h3><span class="section-number">5.1.1. </span>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.1. </span>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">#</a></h3>
 <p>Following the official docs, just clone the repository</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/spack/spack.git<span class="w"> </span><span class="c1"># clones the repo</span>
 <span class="nb">cd</span><span class="w"> </span>spack
@@ -531,7 +526,7 @@ to be able to run your installed programs on several computers with
 different processors, use the flag <code class="docutils literal notranslate"><span class="pre">target=x86_64</span></code> .</p>
 </section>
 <section id="installing-some-tools-with-spack">
-<h3><span class="section-number">5.1.2. </span>Installing some tools with spack<a class="headerlink" href="#installing-some-tools-with-spack" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.2. </span>Installing some tools with spack<a class="headerlink" href="#installing-some-tools-with-spack" title="Permalink to this heading">#</a></h3>
 <p>Now let’s just install the <code class="docutils literal notranslate"><span class="pre">gsl</span></code> scientific library and some <code class="docutils literal notranslate"><span class="pre">eigen</span></code>
 alternative versions:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>info<span class="w"> </span>gsl<span class="w"> </span><span class="c1"># Get some information about versions, deps, etc</span>
@@ -576,7 +571,7 @@ programming. Is voro++ available? what about eigen?</p>
 </section>
 </section>
 <section id="how-to-install-programs-from-source">
-<h2><span class="section-number">5.2. </span>How to install programs from source<a class="headerlink" href="#how-to-install-programs-from-source" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.2. </span>How to install programs from source<a class="headerlink" href="#how-to-install-programs-from-source" title="Permalink to this heading">#</a></h2>
 <p>In this workshop we will learn how to install a program or library from
 source to the home directory of the user. This is useful when you need a
 programa but it is not available in the system you are working on. Also,
@@ -615,7 +610,7 @@ called <a class="reference external" href="https://spack.readthedocs.io/en/lates
 simplifies the installation of software and also allows to have many
 versions of the same library, something not easy done manually.</p>
 <section id="preliminary-concepts">
-<h3><span class="section-number">5.2.1. </span>Preliminary concepts<a class="headerlink" href="#preliminary-concepts" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.1. </span>Preliminary concepts<a class="headerlink" href="#preliminary-concepts" title="Permalink to this heading">#</a></h3>
 <p>It is important for you to know a little how your operating system and
 the shell look for commands. In general, the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable stores the
 directories where the shell interpreter will look for a given command.
@@ -666,7 +661,7 @@ sometimes difficult, so tools like <code class="docutils literal notranslate"><s
 this.</p>
 </section>
 <section id="checking-the-version-for-already-installed-programs">
-<h3><span class="section-number">5.2.2. </span>Checking the version for already installed programs<a class="headerlink" href="#checking-the-version-for-already-installed-programs" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.2. </span>Checking the version for already installed programs<a class="headerlink" href="#checking-the-version-for-already-installed-programs" title="Permalink to this heading">#</a></h3>
 <p>If you are used to <code class="docutils literal notranslate"><span class="pre">apt-get</span></code> or something related, you can use the
 package manager to check. But, in general, you can check the versions by
 looking at the appropriate places on your system. Typically, if you are
@@ -687,7 +682,7 @@ version by using the following</p>
 <p>where <code class="docutils literal notranslate"><span class="pre">programname</span></code> is the name of the command.</p>
 </section>
 <section id="preparing-the-local-places-to-install-the-utilities">
-<h3><span class="section-number">5.2.3. </span>Preparing the local places to install the utilities<a class="headerlink" href="#preparing-the-local-places-to-install-the-utilities" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.3. </span>Preparing the local places to install the utilities<a class="headerlink" href="#preparing-the-local-places-to-install-the-utilities" title="Permalink to this heading">#</a></h3>
 <p>In this case we will install everything under the <code class="docutils literal notranslate"><span class="pre">$HOME/local</span></code>
 subdirectory inside your home, so please create it. Remember that the
 symbol <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> means your home directory. The utilies will then create
@@ -695,7 +690,7 @@ the appropriate folders there. <strong>NOTE:</strong> Better use the <code class
 instead of <code class="docutils literal notranslate"><span class="pre">~</span></code>, which is another way to state the name of your home.</p>
 </section>
 <section id="typical-installation-algorithm">
-<h3><span class="section-number">5.2.4. </span>Typical installation algorithm<a class="headerlink" href="#typical-installation-algorithm" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.4. </span>Typical installation algorithm<a class="headerlink" href="#typical-installation-algorithm" title="Permalink to this heading">#</a></h3>
 <ol class="arabic">
 <li><p>Download the source from the project page. This normally implies
 downloading a tarball (file ending with <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> or <code class="docutils literal notranslate"><span class="pre">.tar.bz2</span></code>) .</p></li>
@@ -787,7 +782,7 @@ if your library is called libfftw, you need to write <code class="docutils liter
 </ol>
 </section>
 <section id="workshop">
-<h3><span class="section-number">5.2.5. </span>Workshop<a class="headerlink" href="#workshop" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.5. </span>Workshop<a class="headerlink" href="#workshop" title="Permalink to this heading">#</a></h3>
 <p>For each of the proposed utilities written at the beginning, follow the
 next procedure:</p>
 <ul class="simple">
@@ -804,9 +799,9 @@ compiler already installed in the system. This can be done by adding the
 flag <code class="docutils literal notranslate"><span class="pre">--program-suffix=-9</span></code> to the <code class="docutils literal notranslate"><span class="pre">configure</span></code> command.</p>
 </section>
 <section id="test-programs">
-<h3><span class="section-number">5.2.6. </span>Test Programs<a class="headerlink" href="#test-programs" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.6. </span>Test Programs<a class="headerlink" href="#test-programs" title="Permalink to this heading">#</a></h3>
 <section id="fftw">
-<h4><span class="section-number">5.2.6.1. </span>fftw<a class="headerlink" href="#fftw" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">6.2.6.1. </span>fftw<a class="headerlink" href="#fftw" title="Permalink to this heading">#</a></h4>
 <p>This is a c code. Save it as testfftw.c and compile with <code class="docutils literal notranslate"><span class="pre">gcc</span></code> instead
 of <code class="docutils literal notranslate"><span class="pre">g++</span></code> .</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// From : https://github.com/undees/fftw-example</span>
@@ -878,7 +873,7 @@ of <code class="docutils literal notranslate"><span class="pre">g++</span></code
 </div>
 </section>
 <section id="eigen-c">
-<h4><span class="section-number">5.2.6.2. </span>Eigen C++<a class="headerlink" href="#eigen-c" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">6.2.6.2. </span>Eigen C++<a class="headerlink" href="#eigen-c" title="Permalink to this heading">#</a></h4>
 <p>These are <code class="docutils literal notranslate"><span class="pre">C++</span></code> codes. Save them, compile, run and explain what they do.</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="w">    </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span>
@@ -960,7 +955,7 @@ of <code class="docutils literal notranslate"><span class="pre">g++</span></code
 </section>
 </section>
 <section id="voro">
-<h3><span class="section-number">5.2.7. </span>Voro++<a class="headerlink" href="#voro" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.7. </span>Voro++<a class="headerlink" href="#voro" title="Permalink to this heading">#</a></h3>
 <p>Use the example
 <a class="reference external" href="http://math.lbl.gov/voro%2B%2B/examples/random_points/"><a class="reference external" href="http://math.lbl.gov/voro++/examples/random_points/">http://math.lbl.gov/voro++/examples/random_points/</a></a></p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Voronoi calculation example code</span>
@@ -1026,7 +1021,7 @@ of <code class="docutils literal notranslate"><span class="pre">g++</span></code
 </div>
 </section>
 <section id="g-9-2">
-<h3><span class="section-number">5.2.8. </span>g++ 9.2<a class="headerlink" href="#g-9-2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.8. </span>g++ 9.2<a class="headerlink" href="#g-9-2" title="Permalink to this heading">#</a></h3>
 <p>Just run the command and check the version,</p>
 <p>Now run any of the special functions examples that required <code class="docutils literal notranslate"><span class="pre">-std=c++17</span></code>
 .</p>
@@ -1070,7 +1065,7 @@ of <code class="docutils literal notranslate"><span class="pre">g++</span></code
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Standard library of functions: math functions, containers and random numbers</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Standard library of functions: math functions, containers and random numbers</p>
       </div>
     </a>
     <a class="right-next"
@@ -1078,7 +1073,7 @@ of <code class="docutils literal notranslate"><span class="pre">g++</span></code
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>Debugging</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Debugging</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1098,24 +1093,24 @@ of <code class="docutils literal notranslate"><span class="pre">g++</span></code
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spack-automatic-load-for-programs-and-containers">5.1. Spack: automatic load for programs and containers</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">5.1.1. Installation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-some-tools-with-spack">5.1.2. Installing some tools with spack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spack-automatic-load-for-programs-and-containers">6.1. Spack: automatic load for programs and containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">6.1.1. Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-some-tools-with-spack">6.1.2. Installing some tools with spack</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-programs-from-source">5.2. How to install programs from source</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-concepts">5.2.1. Preliminary concepts</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-version-for-already-installed-programs">5.2.2. Checking the version for already installed programs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-local-places-to-install-the-utilities">5.2.3. Preparing the local places to install the utilities</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-installation-algorithm">5.2.4. Typical installation algorithm</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop">5.2.5. Workshop</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-programs">5.2.6. Test Programs</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fftw">5.2.6.1. fftw</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c">5.2.6.2. Eigen C++</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-install-programs-from-source">6.2. How to install programs from source</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-concepts">6.2.1. Preliminary concepts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-version-for-already-installed-programs">6.2.2. Checking the version for already installed programs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-local-places-to-install-the-utilities">6.2.3. Preparing the local places to install the utilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-installation-algorithm">6.2.4. Typical installation algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop">6.2.5. Workshop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-programs">6.2.6. Test Programs</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fftw">6.2.6.1. fftw</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eigen-c">6.2.6.2. Eigen C++</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voro">5.2.7. Voro++</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-9-2">5.2.8. g++ 9.2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voro">6.2.7. Voro++</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-9-2">6.2.8. g++ 9.2</a></li>
 </ul>
 </li>
 </ul>

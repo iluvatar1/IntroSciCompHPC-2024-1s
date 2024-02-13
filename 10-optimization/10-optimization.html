@@ -1,14 +1,15 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>8. Optimization &#8212; Introduction to Scientific and High Performance Computing</title>
+    <title>9. Optimization &#8212; Introduction to Scientific and High Performance Computing</title>
   
   
   
@@ -28,42 +29,46 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles.css?v=03b9d5b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '10-optimization/10-optimization';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '10-optimization/10-optimization';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="9. Profiling" href="../10-profiling/10-profiling.html" />
-    <link rel="prev" title="7. Unit Testing : Ensuring fix and correct behavior last" href="../09-UnitTest/09-UnitTesting.html" />
+    <link rel="next" title="10. Profiling" href="../10-profiling/10-profiling.html" />
+    <link rel="prev" title="8. Unit Testing : Ensuring fix and correct behavior last" href="../09-UnitTest/09-UnitTesting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -157,18 +162,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -181,24 +175,25 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to scientific computing and programming tools</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../01-Introduction/01-Introduction.html">1. Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">2. Errors in Floating Point Numbers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">3. Makefiles as automation tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">4. Standard library of functions: math functions, containers and random numbers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">5. Using software in a hpc environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">6. Debugging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">7. Unit Testing : Ensuring fix and correct behavior last</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../02-errorsfpnumbers/ErrorsFPNumbers.html">3. Errors in Floating Point Numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04-Makefiles/04-Makefiles.html">4. Makefiles as automation tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">5. Standard library of functions: math functions, containers and random numbers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">6. Using software in a hpc environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">7. Debugging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Ensuring fix and correct behavior last</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">9. Profiling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">10. Numerical libraries in Matrix Problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">11. Performance measurement for some matrix ops</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">12. Introduction to High Performance Computing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">13. Introduction to OpenMp (Shared memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">14. Introduction to MPI (distributed memory)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">15. Ref</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">16. HPC resource manager: Slurm</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-profiling/10-profiling.html">10. Profiling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrices-numericallibs/11-matrices-numericallibs.html">11. Numerical libraries in Matrix Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11-matrix-performance/11-matrix-performance.html">12. Performance measurement for some matrix ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12-IntroHPC/ParallelProgramming-Intro.html">13. Introduction to High Performance Computing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13-OpenMP/OpenMP-Intro.html">14. Introduction to OpenMp (Shared memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14-MPI/MPI-Intro.html">15. Introduction to MPI (distributed memory)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Cuda/cuda.html">16. Ref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15-Intro-Slurm/Slurm.html">17. HPC resource manager: Slurm</a></li>
 </ul>
 
     </div>
@@ -443,13 +438,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-flags">8.1. Compiler flags</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-layout">8.2. Memory layout</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-structures-to-use">8.3. What data structures to use?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">8.4. Blocking multiplication</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-scientific-libraries">8.5. Using scientific libraries</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-optimization-techniques">8.6. Other optimization techniques</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-resources">8.7. Other resources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-flags">9.1. Compiler flags</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-layout">9.2. Memory layout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-structures-to-use">9.3. What data structures to use?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">9.4. Blocking multiplication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-scientific-libraries">9.5. Using scientific libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-optimization-techniques">9.6. Other optimization techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-resources">9.7. Other resources</a></li>
 </ul>
             </nav>
         </div>
@@ -467,7 +462,7 @@ document.write(`
 <li><p><a class="reference external" href="https://news.ycombinator.com/item?id=29201473">https://news.ycombinator.com/item?id=29201473</a></p></li>
 </ul>
 <section class="tex2jax_ignore mathjax_ignore" id="optimization">
-<h1><span class="section-number">8. </span>Optimization<a class="headerlink" href="#optimization" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">9. </span>Optimization<a class="headerlink" href="#optimization" title="Permalink to this heading">#</a></h1>
 <p>First of all :</p>
 <p>/Programmers waste enormous amounts of time thinking about, or worrying
 about,the speed of noncritical parts of their programs, and these
@@ -481,7 +476,7 @@ Optimization can be achieved by just using compiler flags, by using
 already optimized libraries, and sometimes by being careful with our
 memory usage. Some low level techniques are better left to the compiler.</p>
 <section id="compiler-flags">
-<h2><span class="section-number">8.1. </span>Compiler flags<a class="headerlink" href="#compiler-flags" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.1. </span>Compiler flags<a class="headerlink" href="#compiler-flags" title="Permalink to this heading">#</a></h2>
 <p>See : <a class="reference external" href="https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html">https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html</a></p>
 <p>Sometimes just using compiler optimization flags with can improve
 dramatically our code performance. Normally, you want to run your code
@@ -574,7 +569,7 @@ something like</p>
 that will not respect IEEE754.</p>
 </section>
 <section id="memory-layout">
-<h2><span class="section-number">8.2. </span>Memory layout<a class="headerlink" href="#memory-layout" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.2. </span>Memory layout<a class="headerlink" href="#memory-layout" title="Permalink to this heading">#</a></h2>
 <p>The memory layout should always be taken into account since cache misses
 will greatly affect a program performance. Always measure with a
 profiler and if possible with cachegrind in order to detect possible
@@ -647,7 +642,7 @@ in the same way will benefit the cache and therefore increases our
 program performance.</p>
 </section>
 <section id="what-data-structures-to-use">
-<h2><span class="section-number">8.3. </span>What data structures to use?<a class="headerlink" href="#what-data-structures-to-use" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.3. </span>What data structures to use?<a class="headerlink" href="#what-data-structures-to-use" title="Permalink to this heading">#</a></h2>
 <p>It depends greatly from the problem. But for the typical applications of
 vector and matrix computations, we can expect that homogeneous and
 contiguous arrays are the data structures to go. In that case, it is
@@ -745,7 +740,7 @@ one-dimensional array and just model the 2D shape with smart indexes</p>
 </div>
 </section>
 <section id="blocking-multiplication">
-<h2><span class="section-number">8.4. </span>Blocking multiplication<a class="headerlink" href="#blocking-multiplication" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.4. </span>Blocking multiplication<a class="headerlink" href="#blocking-multiplication" title="Permalink to this heading">#</a></h2>
 <p>See <a class="reference external" href="https://malithjayaweera.com/2020/07/blocked-matrix-multiplication/">https://malithjayaweera.com/2020/07/blocked-matrix-multiplication/</a></p>
 <p>Blocking techniques are neat examples that show how being aware of the
 cache allows you to increase the performance dramatically. For instance,
@@ -828,7 +823,7 @@ performance advantage:</p>
 performance.</p>
 </section>
 <section id="using-scientific-libraries">
-<h2><span class="section-number">8.5. </span>Using scientific libraries<a class="headerlink" href="#using-scientific-libraries" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.5. </span>Using scientific libraries<a class="headerlink" href="#using-scientific-libraries" title="Permalink to this heading">#</a></h2>
 <p>Scientific libraries are written by people with deep knowledge of the
 computer and algorithms internals , therefore saving developer time and
 resources. One should always try to use a established scientific library
@@ -858,7 +853,7 @@ matrix, hence the huge speeedup and also the slow down when fully
 creating a copy.</p>
 </section>
 <section id="other-optimization-techniques">
-<h2><span class="section-number">8.6. </span>Other optimization techniques<a class="headerlink" href="#other-optimization-techniques" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.6. </span>Other optimization techniques<a class="headerlink" href="#other-optimization-techniques" title="Permalink to this heading">#</a></h2>
 <p>There are other techniques sometimes applied in very speficic
 situations, like</p>
 <ul class="simple">
@@ -890,7 +885,7 @@ them at some optimization levels. Therefore it is advisable to focus on
 the clarity of the program first and let the compiler do its job.</p>
 </section>
 <section id="other-resources">
-<h2><span class="section-number">8.7. </span>Other resources<a class="headerlink" href="#other-resources" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">9.7. </span>Other resources<a class="headerlink" href="#other-resources" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.agner.org/optimize/">https://www.agner.org/optimize/</a></p></li>
 </ul>
@@ -933,7 +928,7 @@ the clarity of the program first and let the compiler do its job.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>Unit Testing : Ensuring fix and correct behavior last</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Unit Testing : Ensuring fix and correct behavior last</p>
       </div>
     </a>
     <a class="right-next"
@@ -941,7 +936,7 @@ the clarity of the program first and let the compiler do its job.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">9. </span>Profiling</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>Profiling</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -961,13 +956,13 @@ the clarity of the program first and let the compiler do its job.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-flags">8.1. Compiler flags</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-layout">8.2. Memory layout</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-structures-to-use">8.3. What data structures to use?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">8.4. Blocking multiplication</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-scientific-libraries">8.5. Using scientific libraries</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-optimization-techniques">8.6. Other optimization techniques</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-resources">8.7. Other resources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-flags">9.1. Compiler flags</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-layout">9.2. Memory layout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-structures-to-use">9.3. What data structures to use?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">9.4. Blocking multiplication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-scientific-libraries">9.5. Using scientific libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-optimization-techniques">9.6. Other optimization techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-resources">9.7. Other resources</a></li>
 </ul>
   </nav></div>
 
