@@ -27,7 +27,7 @@ float Sum2(int N){
 }
 
 float RelativeDifference(float S1, float S2){
-    return abs(1-S1/S2);
+    return fabs(1-S1/S2);
 }
 
 
