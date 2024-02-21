@@ -10,7 +10,7 @@ float sumk(int k){
         sum += 0.1;
     }
 
-    return std::fabs(k/10 - sum);
+    return std::fabs(k/10.0 - sum);
 
 }
 
@@ -22,12 +22,15 @@ int main(void){
 
     int N = 1e2;
 
+    std::ofstream outfile;
+    outfile.open("data.txt");
+
     for( int i = 1; i <=N; i++){
         float val = sumk(i);
         std::cout << i << " " << val << "\n";
 
     }
 
-
+    outfile.close()
     return 0;
 }
