@@ -1,6 +1,16 @@
 _build
 **/*DS_Store
+
+##Carpeta de los archivos temporales
 .tmp.drivedownload/
 .tmp.driveupload/
+##Ejecutables de Windows y Linux 
 *.exe
+*.out
+##Archivos de los datos
+*.dat
+*.txt
+*.csv
+*.pdf
+##Carpeta de las tareas compañeros
 Tareas Compañeros/

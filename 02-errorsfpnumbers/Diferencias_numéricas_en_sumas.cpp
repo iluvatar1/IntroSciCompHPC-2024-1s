@@ -8,7 +8,7 @@ float Sum1(int N){
     float sum1 = 0.0;
 
     for (float k = 1; k <=N; ++k){
-        sum1 = sum1 + 1/k;
+        sum1 = sum1 + 1.0/k;
         //cout << "Sum2: " << sum2 << endl;
     }
     return sum1;
@@ -19,7 +19,7 @@ float Sum2(int N){
     float sum2 = 0.0;
 
     for (float k = N; k >= 1; --k){
-        sum2 = sum2 + 1/k;
+        sum2 = sum2 + 1.0/k;
         //cout << "Sum2: " << sum2 << endl;
     }
     return sum2;
