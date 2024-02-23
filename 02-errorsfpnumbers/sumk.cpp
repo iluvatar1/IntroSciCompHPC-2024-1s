@@ -27,10 +27,10 @@ int main(void){
 
     for( int i = 1; i <=N; i++){
         float val = sumk(i);
-        std::cout << i << " " << val << "\n";
+        outfile << i << " " << val << "\n"<< std::endl;
 
     }
 
-    outfile.close()
+    outfile.close();
     return 0;
 }
