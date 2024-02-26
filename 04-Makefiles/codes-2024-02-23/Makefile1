@@ -1,0 +1,50 @@
+#Bandera que se lo colva al compildor
+CXXFLAGS=-o2 -std=c++17 
+
+all: sumupdown.pdf
+
+#OBJS: Define una variable OBJS que contiene
+#la lista de archivos objetos generados a
+#partir de los archivos fuente con extensión
+#.cpp
+
+#patsubst: Sustituye la extensión de los 
+#archivos
+
+#$(patsubst %.cpp,%.o,$(wildcard *.cpp)): 
+#Busca todos los archivos con extensión .cpp
+#y les cambia la extensión a .o
+
+#Wildcard: Busca todos los archivos con
+#extensión .cpp
+OBJS = $(patsubst %.cpp,%.o,$(wildcard *.cpp))
+
+#$<:Primera dependencia
+#$^:Accede a todas las dependencias
+
+#La bandera -c: Compila y ensambla archivos pero no los
+#enlaza. Útil para construir proyectos grandes para 
+#separar la compilación de archivos y minimizar lo que
+#se recompila
+
+%.o: %.cpp
+	g++ $(CXXFLAGS) -c $< -o $@
+
+sumupdown.x: $(OBJS)
+	g++ $(CXXFLAGS) $^ -o $@
+
+# test: testsum.cpp
+# 	g++ $(CXXFLAGS) $^ -o $@
+# 	./test
+
+data.txt: sumupdown.x
+	./sumupdown.x > data.txt
+
+sumupdown.pdf: data.txt script.gp
+	gnuplot script.gp
+
+
+.PHONY: clean
+
+clean:
+	rm -f *.x *.txt *.pdf
