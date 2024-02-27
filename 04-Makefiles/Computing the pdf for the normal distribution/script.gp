@@ -2,7 +2,7 @@ set title 'Probability Density Function of Normal Distribution'
 set xlabel 'x'
 set ylabel 'F(x)'
 set term pdf
-set out "PDF_normal_distribution.pdf"
+set out "random_pdf.pdf"
 #set log y
 
 

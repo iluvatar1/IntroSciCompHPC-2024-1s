@@ -11,8 +11,8 @@ PDF_FILES = $(patsubst %.txt, %.pdf, $(DATA_FILES))  # Lista de archivos PDF gen
 all: $(PDF_FILES)
 
 # Regla para construir el programa
-$(TARGET): PDF_normal_distribution.cpp
-	$(CC) $(CFLAGS) -o $(TARGET) PDF_normal_distribution.cpp
+$(TARGET): random_pdf.cpp
+	$(CC) $(CFLAGS) -o $(TARGET) random_pdf.cpp
 
 # Regla para ejecutar el programa con semilla 1
 run_seed_1: $(TARGET)
