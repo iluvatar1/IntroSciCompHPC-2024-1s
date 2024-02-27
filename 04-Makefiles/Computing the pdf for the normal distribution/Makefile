@@ -16,15 +16,15 @@ $(TARGET): PDF_normal_distribution.cpp
 
 # Regla para ejecutar el programa con semilla 1
 run_seed_1: $(TARGET)
-	./$(TARGET) 1 1000 0 1 -5 5 10
+	./$(TARGET) 1 5000 3.5 0.4 2.7 4.6 50
 
 # Regla para ejecutar el programa con semilla 2
 run_seed_2: $(TARGET)
-	./$(TARGET) 2 1000 0 1 -5 5 10
+	./$(TARGET) 2 5000 3.5 0.4 2.7 4.6 50
 
 # Regla para ejecutar el programa con semilla 5
 run_seed_5: $(TARGET)
-	./$(TARGET) 5 1000 0 1 -5 5 10
+	./$(TARGET) 5 5000 3.5 0.4 2.7 4.6 50
 
 # Regla para generar el gráfico usando gnuplot
 %.pdf: %.txt script.gp
