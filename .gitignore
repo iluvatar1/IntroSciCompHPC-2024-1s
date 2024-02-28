@@ -7,11 +7,13 @@ _build
 ##Ejecutables de Windows y Linux 
 *.exe
 *.out
+*.x
+*.o
 ##Archivos de los datos
 *.dat
 *.txt
 *.csv
-*.pdf
+#*.pdf
 *.o
 *.x
 ##Carpeta de las tareas compañeros

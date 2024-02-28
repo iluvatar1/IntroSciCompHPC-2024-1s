@@ -47,4 +47,4 @@ sumupdown.pdf: data.txt script.gp
 .PHONY: clean
 
 clean:
-	rm -f *.x *.txt *.pdf
+	rm -f *.x *.txt *.pdf *.o

@@ -2,44 +2,27 @@
 #include <fstream>
 #include <vector>
 #include <random>
-
-void compute_pdf(int seed, int nsamples, double mu, double sigma, double xmin, double xmax, int nbins);
-
-int main(int argc, char **argv)
-{
-    if (argc != 8)
-    {
-        std::cerr << "Usage: " << argv[0] << " <seed> <nsamples> <mu> <sigma> <xmin> <xmax> <nbins>\n";
-        return 1;
-    }
-
-    const int SEED = std::atoi(argv[1]);
-    const int NSAMPLES = std::atoi(argv[2]);
-    const double MU = std::atof(argv[3]);
-    const double SIGMA = std::atof(argv[4]);
-    const double XMIN = std::atof(argv[5]);
-    const double XMAX = std::atof(argv[6]);
-    const int NBINS = std::atoi(argv[7]);
-
-    compute_pdf(SEED, NSAMPLES, MU, SIGMA, XMIN, XMAX, NBINS);
-
-    return 0;
-}
+#include "functions.h"
 
 void compute_pdf(int seed, int nsamples, double mu, double sigma, double xmin, double xmax, int nbins)
 {
-
+    //Se genera la semilla
     std::mt19937 gen(seed);
+    //Se genera la distribución normal
     std::normal_distribution<double> dis(mu, sigma);
 
-    
+    //Se crea un vector de enteros con el tamaño de los bins
     std::vector<int> histogram(nbins, 0);
 
     for (int n = 0; n < nsamples; ++n)
-    {
+    {   
+        //Se genera una distribucion con la semilla
         double r = dis(gen);
+        
+        //Se genera el histograma 
         if (r >= xmin && r <= xmax)
-        {
+        {   
+            //Se calcula el bin index
             int bin_index = static_cast<int>((r - xmin) / (xmax - xmin) * nbins);
             ++histogram[bin_index];
         }
@@ -49,9 +32,12 @@ void compute_pdf(int seed, int nsamples, double mu, double sigma, double xmin, d
     std::ofstream outfile(filename);
 
     for (int i = 0; i < nbins; ++i)
-    {
+    {   
+        //Se calcula el centro del bin
         double bin_center = xmin + (i + 0.5) * (xmax - xmin) / nbins;
+        //Se calcula el ancho del bin
         double bin_width = (xmax - xmin) / nbins;
+        //Se calcula el valor de la pdf
         double pdf_value = static_cast<double>(histogram[i]) / (nsamples * bin_width);
 
         outfile << bin_center << "\t" << pdf_value << "\n";
@@ -59,3 +45,9 @@ void compute_pdf(int seed, int nsamples, double mu, double sigma, double xmin, d
 
     outfile.close();
 }
+
+// void integrate_pdf(int seed, int nsamples, double mu, double sigma, double xmin, double xmax, int nbins){
+
+//     return 0;
+    
+// }
