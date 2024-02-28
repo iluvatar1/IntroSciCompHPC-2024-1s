@@ -8,7 +8,9 @@ set xlabel 'x'
 set ylabel 'Gamma function  '
 
 
-plot 'data.txt' w lp lw 4 ps 2 pt 4 t 'data'
+plot 'data.txt' w lp lw 0.5 ps 0.5 pt 7 t 'data'
+
+
 
 
 #Rangos para ejes x e y:

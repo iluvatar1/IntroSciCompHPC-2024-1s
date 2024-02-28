@@ -1,7 +1,7 @@
 #Bandera que se lo colva al compildor
 CXXFLAGS=-o2 -std=c++17 
 
-all: sumupdown.pdf
+all: graph.pdf
 
 # sumupdown.x: sumupdown.cpp
 # 	g++  sumupdown.cpp -o sumupdown.x
@@ -30,7 +30,7 @@ all: sumupdown.pdf
 data.txt: gamma.x
 	./gamma.x > data.txt
 
-gamma.pdf: data.txt script.gp
+graph.pdf: data.txt script.gp
 	gnuplot script.gp
 
 
