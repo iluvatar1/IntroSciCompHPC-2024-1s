@@ -12,5 +12,7 @@ _build
 *.txt
 *.csv
 *.pdf
+*.o
+*.x
 ##Carpeta de las tareas compañeros
 Tareas Compañeros/
