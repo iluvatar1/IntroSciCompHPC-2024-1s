@@ -27,10 +27,14 @@ run_seed_5: $(TARGET)
 	./$(TARGET) 5 5000 3.5 0.4 2.7 4.6 50
 
 # Regla para generar el gráfico usando gnuplot
-%.pdf: %.txt script.gp
-	gnuplot -e "inputfile='$<'; outputfile='$@'" script.gp
+plot: $(DATA_FILES) script.gp
+	gnuplot script.gp
 
+# # Regla para generar el gráfico usando gnuplot
+# %.pdf: %.txt script.gp
+# 	gnuplot  script.gp
 
+#-e "inputfile='$<'; outputfile='$@'"
 
 
 
