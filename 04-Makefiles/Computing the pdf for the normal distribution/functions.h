@@ -1,0 +1,2 @@
+void compute_pdf(int seed, int nsamples, double mu, double sigma, double xmin, double xmax, int nbins);
+//void integrate_pdf(int seed, int nsamples, double mu, double sigma, double xmin, double xmax, int nbins);

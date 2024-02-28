@@ -3,16 +3,40 @@ CFLAGS = -std=c++11
 # Compilador
 CC = g++
 # Nombre del ejecutable
-TARGET = programa
 
 DATA_FILES = random_pdf_seed_1.txt random_pdf_seed_2.txt random_pdf_seed_5.txt  # Lista de archivos de datos
-PDF_FILES = $(patsubst %.txt, %.pdf, $(DATA_FILES))  # Lista de archivos PDF generados
 
-all: $(PDF_FILES)
+# TARGET = programa
+# OBJS = $(patsubst %.cpp,%.o,$(wildcard *.cpp))
 
-# Regla para construir el programa
-$(TARGET): random_pdf.cpp
-	$(CC) $(CFLAGS) -o $(TARGET) random_pdf.cpp
+# all: $(DATA_FILES)
+
+
+# # Regla para construir el programa
+# %.o: %.cpp
+# 	$(CC) $(CFLAGS) -c $ -o $@
+
+# $(TARGET): $(OBJS)
+# 	$(CC) $(CFLAGS) $^ -o $(TARGET) random_pdf.cpp
+
+# $(TARGET): random_pdf.cpp
+# 	$(CC) $(CFLAGS) -o $(TARGET) random_pdf.cpp
+
+
+TARGET = programa
+OBJS = main.o functions.o
+
+all: $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+main.o: main.cpp functions.h
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+functions.o: functions.cpp functions.h
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 
 # Regla para ejecutar el programa con semilla 1
 run_seed_1: $(TARGET)
@@ -44,4 +68,4 @@ plot: $(DATA_FILES) script.gp
 .PHONY: clean
 
 clean:
-	rm -f $(TARGET) $(PDF_FILES)
+	rm -f $(TARGET) $(DATA_FILES)  $(TARGET) $(OBJETS) *.pdf
