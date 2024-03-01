@@ -1,0 +1,29 @@
+CXXFLAGS=-O2 -std=c++17
+
+all: sumupdown.pdf
+
+OBJS = $(patsubst %.cpp,%.o,$(wildcard *.cpp))
+
+# $< : La primera dependencia
+# $^ : Todas las dependencias
+
+%.o: %.cpp
+	g++ $(CXXFLAGS) -c $< -o $@
+
+sumupdown.x: $(OBJS)
+	g++ $(CXXFLAGS) $^ -o $@
+
+test.x: $(OBJS)
+	g++ $(CXXFLAGS) $^ -o $@
+	./test.x
+
+data.txt: sumupdown.x
+	./sumupdown.x > data.txt
+
+sumupdown.pdf: script.gp data.txt
+	gnuplot script.gp
+
+.PHONY: clean 
+
+clean: 
+	rm -f *.x *.txt *.pdf *.o
