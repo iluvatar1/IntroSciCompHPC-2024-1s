@@ -11,3 +11,8 @@ _build
 **/*zip
 **/*bz2
 **/codes
+**/codes*
+**/*.o
+**/*.x
+spack/
+.vscode
