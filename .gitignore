@@ -1,2 +1,13 @@
 _build
 **/*DS_Store
+**/*pdf
+**/*ppt
+**/*key
+**/*html
+**/*org
+**/*cpp
+**/*ipynb_checkpoints
+**/*c
+**/*zip
+**/*bz2
+**/codes
