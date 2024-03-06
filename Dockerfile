@@ -8,6 +8,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     gcc libffi-dev\
     g++ \
+    gdb \
     make \
     cmake \
     clang \
