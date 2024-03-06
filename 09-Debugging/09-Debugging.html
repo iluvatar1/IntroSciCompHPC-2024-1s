@@ -448,9 +448,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catching-a-segfault">7.3.5. Catching a segfault</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-graphical">7.3.6. Interfaces (graphical)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-exercise">7.3.7. Another exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-within-emacs">7.3.8. Debugging within emacs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modern-tools">7.3.9. Modern tools</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-to-debug">7.3.10. Examples to debug</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-man-s-profiler">7.3.8. Poor man’s profiler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-within-emacs">7.3.9. Debugging within emacs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modern-tools">7.3.10. Modern tools</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-to-debug">7.3.11. Examples to debug</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ddd-data-display-debugger">7.4. DDD : Data Display Debugger</a><ul class="nav section-nav flex-column">
@@ -941,9 +942,10 @@ the you debug.</p>
 <h3><span class="section-number">7.3.7. </span>Another exercise<a class="headerlink" href="#another-exercise" title="Permalink to this heading">#</a></h3>
 <p>Please try to help the poor code called <code class="docutils literal notranslate"><span class="pre">please_fixme.cpp</span></code>. Share your
 experiences. How many bugs did you find?</p>
-<p>#Poor man’s profiler#</p>
-<p><a class="reference external" href="http://readwrite.com/2010/11/01/using-gdb-as-a-poor-mans-profi">Example with
-gdb</a></p>
+</section>
+<section id="poor-man-s-profiler">
+<h3><span class="section-number">7.3.8. </span>Poor man’s profiler<a class="headerlink" href="#poor-man-s-profiler" title="Permalink to this heading">#</a></h3>
+<p><a class="reference external" href="http://readwrite.com/2010/11/01/using-gdb-as-a-poor-mans-profi">Example with gdb</a></p>
 <ul class="simple">
 <li><p>Get the process id:</p></li>
 </ul>
@@ -980,7 +982,7 @@ histogram of the most executed functions.</p></li>
 </ul>
 </section>
 <section id="debugging-within-emacs">
-<h3><span class="section-number">7.3.8. </span>Debugging within emacs<a class="headerlink" href="#debugging-within-emacs" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.3.9. </span>Debugging within emacs<a class="headerlink" href="#debugging-within-emacs" title="Permalink to this heading">#</a></h3>
 <p>Please check <a class="reference external" href="http://www.linuxjournal.com/article/7876">emacs gdb mode</a></p>
 <ul class="simple">
 <li><p>Open your source code with emacs.</p></li>
@@ -994,7 +996,7 @@ when inside that pane.</p></li>
 </ul>
 </section>
 <section id="modern-tools">
-<h3><span class="section-number">7.3.9. </span>Modern tools<a class="headerlink" href="#modern-tools" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.3.10. </span>Modern tools<a class="headerlink" href="#modern-tools" title="Permalink to this heading">#</a></h3>
 <ol class="arabic">
 <li><p>Python</p>
 <p>Gdb version &gt;= 7.x supports python. You can use to explore more
@@ -1056,7 +1058,7 @@ py<span class="w"> </span>plt.show<span class="o">()</span>
 </ol>
 </section>
 <section id="examples-to-debug">
-<h3><span class="section-number">7.3.10. </span>Examples to debug<a class="headerlink" href="#examples-to-debug" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.3.11. </span>Examples to debug<a class="headerlink" href="#examples-to-debug" title="Permalink to this heading">#</a></h3>
 <ul>
 <li><p>Example 1</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
@@ -1310,9 +1312,10 @@ and a main file. This will help when writing tests.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catching-a-segfault">7.3.5. Catching a segfault</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-graphical">7.3.6. Interfaces (graphical)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-exercise">7.3.7. Another exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-within-emacs">7.3.8. Debugging within emacs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modern-tools">7.3.9. Modern tools</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-to-debug">7.3.10. Examples to debug</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-man-s-profiler">7.3.8. Poor man’s profiler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-within-emacs">7.3.9. Debugging within emacs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modern-tools">7.3.10. Modern tools</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-to-debug">7.3.11. Examples to debug</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ddd-data-display-debugger">7.4. DDD : Data Display Debugger</a><ul class="nav section-nav flex-column">
