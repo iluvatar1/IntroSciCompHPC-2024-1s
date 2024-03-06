@@ -6,5 +6,7 @@ These lecture notes are a complement to the class and hopefully a good resource 
 
 [Google Collab](https://colab.research.google.com/)
 
+[Complementary presentations](https://drive.google.com/drive/folders/16na0yyeH0wru9mwkd9qzFvPXPsrYmqKI?usp=sharing)
+
 ```{tableofcontents}
 ```
