@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '09-Debugging/09-Debugging';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="8. Unit Testing : Ensuring fix and correct behavior last" href="../09-UnitTest/09-UnitTesting.html" />
+    <link rel="next" title="8. Unit Testing : Making sure your bugs don’t come back" href="../09-UnitTest/09-UnitTesting.html" />
     <link rel="prev" title="6. Using software in a hpc environment" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -181,7 +181,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">5. Standard library of functions: math functions, containers and random numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">6. Using software in a hpc environment</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Debugging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Ensuring fix and correct behavior last</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Making sure your bugs don’t come back</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
 <ul class="nav bd-sidenav">
@@ -438,34 +438,35 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">7.1. Example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sanitizers">7.2. Sanitizers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gdb-gnu-debugger">7.3. GDB (Gnu debugger)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-gdb">7.3.1. How to use gdb?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#breakpoints">7.3.2. Breakpoints</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-control">7.3.3. Execution Control</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-useful-gdb-commands">7.3.4. Other useful gdb commands</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catching-a-segfault">7.3.5. Catching a segfault</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-graphical">7.3.6. Interfaces (graphical)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-exercise">7.3.7. Another exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-man-s-profiler">7.3.8. Poor man’s profiler</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-within-emacs">7.3.9. Debugging within emacs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modern-tools">7.3.10. Modern tools</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-to-debug">7.3.11. Examples to debug</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-to-fix">7.1. Examples to fix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">7.2. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sanitizers">7.3. Sanitizers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gdb-gnu-debugger">7.4. GDB (Gnu debugger)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-gdb">7.4.1. How to use gdb?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#breakpoints">7.4.2. Breakpoints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-control">7.4.3. Execution Control</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-useful-gdb-commands">7.4.4. Other useful gdb commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catching-a-segfault">7.4.5. Catching a segfault</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ddd-data-display-debugger">7.4. DDD : Data Display Debugger</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">7.4.1. Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ddd-data-plotting-with-gnuplot">7.4.2. DDD data plotting with gnuplot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gdb-interfaces">7.5. Gdb Interfaces</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-gdb-tips">7.5.1. Other gdb tips</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-man-s-profiler">7.5.1.1. Poor man’s profiler</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-examples-to-solve">7.5. TODO Examples to solve</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valgrind">7.6. Valgrind</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-interfaces">7.6.1. Graphical Interfaces</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#as-memory-checker">7.6.2. As memory checker</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-class-todo-todo-todo-span-homework">7.7. <span class="todo TODO">TODO</span> Homework</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ddd-data-display-debugger">7.6. DDD : Data Display Debugger</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">7.6.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ddd-data-plotting-with-gnuplot">7.6.2. DDD data plotting with gnuplot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valgrind">7.7. Valgrind</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-interfaces">7.7.1. Graphical Interfaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#as-a-memory-checker">7.7.2. As a memory checker</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-class-todo-todo-todo-span-homework">7.8. <span class="todo TODO">TODO</span> Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -497,9 +498,21 @@ document.write(`
 <li><p>Debugging with GDB: <a class="reference external" href="https://news.ycombinator.com/item?id=30512302">https://news.ycombinator.com/item?id=30512302</a></p></li>
 <li><p>Reverse engineering:  <a class="github reference external" href="https://github.com/hugsy/gef">hugsy/gef</a></p></li>
 <li><p>gdb breakpoint tricks: https://news.ycombinator.com/item?id=39170901</p></li>
+<li></li>
 </ul>
+<section id="examples-to-fix">
+<h2><span class="section-number">7.1. </span>Examples to fix<a class="headerlink" href="#examples-to-fix" title="Permalink to this heading">#</a></h2>
+<p>ICTP examples</p>
+<p>Go to
+<a class="reference external" href="https://bitbucket.org/iluvatar/scientific-computing-part-01/src">ICTP-examples</a>,
+then go to debugging, then ICTP-gdb<sub>examples</sub> , and download
+each file, or just download all files compressed at <a class="reference external" href="https://bitbucket.org/iluvatar/scientific-computing-part-01/get/master.tar.bz2">example
+files</a></p>
+<p>These are more examples: <a class="reference external" href="http://www.tutorialspoint.com/gnu_debugger/gdb_debugging_examples.htm">original
+link</a></p>
+</section>
 <section id="example">
-<h2><span class="section-number">7.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.2. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
 <p>Fix the following code (first try to predict the problems and then use your current skills to catch the bug)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
@@ -530,7 +543,7 @@ document.write(`
 </div>
 </section>
 <section id="sanitizers">
-<h2><span class="section-number">7.2. </span>Sanitizers<a class="headerlink" href="#sanitizers" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.3. </span>Sanitizers<a class="headerlink" href="#sanitizers" title="Permalink to this heading">#</a></h2>
 <p>Besides the typical printing to help debugging, a first helping hand
 would the compiler sanitizers. Try recompiling the previous code using
 the sanitizer flags as</p>
@@ -545,9 +558,9 @@ the sanitizer flags as</p>
 help you find errors faster.</p>
 </section>
 <section id="gdb-gnu-debugger">
-<h2><span class="section-number">7.3. </span>GDB (Gnu debugger)<a class="headerlink" href="#gdb-gnu-debugger" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.4. </span>GDB (Gnu debugger)<a class="headerlink" href="#gdb-gnu-debugger" title="Permalink to this heading">#</a></h2>
 <section id="how-to-use-gdb">
-<h3><span class="section-number">7.3.1. </span>How to use gdb?<a class="headerlink" href="#how-to-use-gdb" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.4.1. </span>How to use gdb?<a class="headerlink" href="#how-to-use-gdb" title="Permalink to this heading">#</a></h3>
 <p>Let’s use the following c++ code, called <code class="docutils literal notranslate"><span class="pre">gdb_example_01.cpp</span></code>:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
@@ -636,7 +649,7 @@ list.</p>
 the end without any error. Now let’s get to the interesting part.</p>
 </section>
 <section id="breakpoints">
-<h3><span class="section-number">7.3.2. </span>Breakpoints<a class="headerlink" href="#breakpoints" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.4.2. </span>Breakpoints<a class="headerlink" href="#breakpoints" title="Permalink to this heading">#</a></h3>
 <p>A breakpoint is a point in your source code where you want to stop the
 execution in order to check whatever condition you want (the value of a
 variable, the change in a variable, etc), or, for example, to continue
@@ -714,7 +727,7 @@ and global variables.</p>
 </div>
 </section>
 <section id="execution-control">
-<h3><span class="section-number">7.3.3. </span>Execution Control<a class="headerlink" href="#execution-control" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.4.3. </span>Execution Control<a class="headerlink" href="#execution-control" title="Permalink to this heading">#</a></h3>
 <p>The instruction <code class="docutils literal notranslate"><span class="pre">next</span></code> tells gdb to advance in the execution order,
 which also executes completely functions and returns to the main
 function, while <code class="docutils literal notranslate"><span class="pre">step</span></code> goes inside the function step-by-step. Let’s
@@ -807,7 +820,7 @@ they the same or different? why?</p>
 </div>
 </section>
 <section id="other-useful-gdb-commands">
-<h3><span class="section-number">7.3.4. </span>Other useful gdb commands<a class="headerlink" href="#other-useful-gdb-commands" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.4.4. </span>Other useful gdb commands<a class="headerlink" href="#other-useful-gdb-commands" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">(gdb)</span> <span class="pre">bt</span></code> : Backtrace: display the program stack:</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">(gdb)</span> <span class="pre">edit</span> <span class="pre">[file:]function</span></code> : look at the program line where it is
@@ -822,7 +835,7 @@ vicinity of where it is presently stopped.</p></li>
 </ul>
 </section>
 <section id="catching-a-segfault">
-<h3><span class="section-number">7.3.5. </span>Catching a segfault<a class="headerlink" href="#catching-a-segfault" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.4.5. </span>Catching a segfault<a class="headerlink" href="#catching-a-segfault" title="Permalink to this heading">#</a></h3>
 <p>Sometimes, when you are lazy or sloppy with the memory you use, or when
 you just have bad luck (some strange problems), you could face the
 infamous <code class="docutils literal notranslate"><span class="pre">Segementation</span> <span class="pre">fault</span></code> error. Let’s see how the debugger can
@@ -899,9 +912,34 @@ is its lenght. Play with several values for <code class="docutils literal notran
 </div>
 </li>
 </ol>
+<p>Please debug this code</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>    #include &lt;iostream&gt;
+
+    int main(void)
+    {
+      //double x[10], y[5]; // imprime raro
+      double y[5], x[10]; // imprime 1
+
+      for(int ii = 0; ii &lt; 5; ++ii) {
+        y[ii] = ii +1;
+      }
+      for(int ii = 0; ii &lt; 10; ++ii) {
+        x[ii] = -(ii +1);
+      }
+
+      double z = x[10];
+      std::cout &lt;&lt; z &lt;&lt; std::endl;
+
+      return 0;
+    }
+
+    ```
+</pre></div>
+</div>
 </section>
-<section id="interfaces-graphical">
-<h3><span class="section-number">7.3.6. </span>Interfaces (graphical)<a class="headerlink" href="#interfaces-graphical" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="gdb-interfaces">
+<h2><span class="section-number">7.5. </span>Gdb Interfaces<a class="headerlink" href="#gdb-interfaces" title="Permalink to this heading">#</a></h2>
 <ol class="arabic">
 <li><p>Tui mode</p>
 <p>gdb -tui mode: Ncurses gui</p>
@@ -912,7 +950,22 @@ is its lenght. Play with several values for <code class="docutils literal notran
 press enter. You will be presented with an example command to run
 gdb, modify it as you wish. Then, emacs will be yor debugger, and
 you can move from frame to frame by using the cursor or <code class="docutils literal notranslate"><span class="pre">C-x</span> <span class="pre">o</span></code> .</p>
+<p>Please check <a class="reference external" href="http://www.linuxjournal.com/article/7876">emacs gdb mode</a></p>
+<ul class="simple">
+<li><p>Open your source code with emacs.</p></li>
+<li><p>Compile with <code class="docutils literal notranslate"><span class="pre">M-x</span> <span class="pre">compile</span></code>. <code class="docutils literal notranslate"><span class="pre">M</span></code> is the meta function. By default it
+uses make, but you can modify the compile command.</p></li>
+<li><p>Activate de debugging: <code class="docutils literal notranslate"><span class="pre">M-x</span> <span class="pre">gdb</span></code></p></li>
+<li><p>Debug. To move from one frame to another you can use either the
+mouse or the shortcut <code class="docutils literal notranslate"><span class="pre">ctrl-x</span> <span class="pre">o</span></code> . To close a pane, use <code class="docutils literal notranslate"><span class="pre">ctrl-x</span> <span class="pre">0</span></code>
+when inside that pane.</p></li>
+</ul>
 </li>
+</ol>
+<ul class="simple">
+<li></li>
+</ul>
+<ol class="arabic">
 <li><p>gdbgui</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.gdbgui.com/">https://www.gdbgui.com/</a></p></li>
@@ -937,14 +990,10 @@ the you debug.</p>
 <li><p>Online gdb
 <a class="reference external" href="https://www.onlinegdb.com/">https://www.onlinegdb.com/</a></p></li>
 </ol>
-</section>
-<section id="another-exercise">
-<h3><span class="section-number">7.3.7. </span>Another exercise<a class="headerlink" href="#another-exercise" title="Permalink to this heading">#</a></h3>
-<p>Please try to help the poor code called <code class="docutils literal notranslate"><span class="pre">please_fixme.cpp</span></code>. Share your
-experiences. How many bugs did you find?</p>
-</section>
+<section id="other-gdb-tips">
+<h3><span class="section-number">7.5.1. </span>Other gdb tips<a class="headerlink" href="#other-gdb-tips" title="Permalink to this heading">#</a></h3>
 <section id="poor-man-s-profiler">
-<h3><span class="section-number">7.3.8. </span>Poor man’s profiler<a class="headerlink" href="#poor-man-s-profiler" title="Permalink to this heading">#</a></h3>
+<h4><span class="section-number">7.5.1.1. </span>Poor man’s profiler<a class="headerlink" href="#poor-man-s-profiler" title="Permalink to this heading">#</a></h4>
 <p><a class="reference external" href="http://readwrite.com/2010/11/01/using-gdb-as-a-poor-mans-profi">Example with gdb</a></p>
 <ul class="simple">
 <li><p>Get the process id:</p></li>
@@ -980,114 +1029,82 @@ experiences. How many bugs did you find?</p>
 <li><p>Repeat previous two steps as many times as you want and make a
 histogram of the most executed functions.</p></li>
 </ul>
+<!-- ### Modern tools
+
+1.  Python
+
+    Gdb version \>= 7.x supports python. You can use to explore more
+    info about your program, pretty print data, and even plot (although
+    blocking).
+
+    To load a c++ var into a python do, inside gdb,
+
+    ``` shell
+    py my_array = gdb.parse_and_eval("my_array")
+    py print my_array.type
+    ```
+
+    Even more, to plot some data structure with matplotlib, you can as
+    follows (Based on
+    <https://blog.semicolonsoftware.de/debugging-numerical-c-c-fortran-code-with-gdb-and-numpy/>)
+
+    ``` c
+    int main(int argc, char **argv) {
+      const int nrow = 4;
+      const int ncol = 3;
+      double x[nrow * ncol];
+      for(int i = 0; i < nrow; i++) {
+        for(int j = 0; j < ncol; j++) {
+      x[i * ncol + j]  = i * j;
+        }
+      }
+      // BREAK here
+    }
+    ```
+
+    Follow the previous url to install gdb<sub>numpy</sub>.py.
+
+    Compile as
+
+    ``` shell
+    gcc ex-01.c -g -ggdb
+    ```
+
+    and now, run `gdb` and put the following commands
+
+    ``` shell
+    br 10 # sets a breakpoint
+    run # to load the program symbols
+    py import gdb_numpy
+    py x = gdb_numpy.to_array("(double *)x", shape=(4 * 3,)).reshape(4, 3)
+    py print x
+    py import matplotlib.pyplot as plt
+    py plt.imshow(x)
+    py plt.show()
+    ```
+
+    Use gdb to execute, step by step, the following code
+
+    ``` cpp
+    #include <iostream>
+    #include <cstdlib>
+
+    int main(int argc, char **argv)
+    {
+        int a;
+        a = 0;
+        std::cout << a << std::endl;
+        a = 5;
+
+        return EXIT_SUCCESS;
+    }
+
+    ``` -->
 </section>
-<section id="debugging-within-emacs">
-<h3><span class="section-number">7.3.9. </span>Debugging within emacs<a class="headerlink" href="#debugging-within-emacs" title="Permalink to this heading">#</a></h3>
-<p>Please check <a class="reference external" href="http://www.linuxjournal.com/article/7876">emacs gdb mode</a></p>
-<ul class="simple">
-<li><p>Open your source code with emacs.</p></li>
-<li><p>Compile with <code class="docutils literal notranslate"><span class="pre">M-x</span> <span class="pre">compile</span></code>. <code class="docutils literal notranslate"><span class="pre">M</span></code> is the meta function. By default it
-uses make, but you can modify the compile command.</p></li>
-<li><p>Activate de debugging: <code class="docutils literal notranslate"><span class="pre">M-x</span> <span class="pre">gdb</span></code></p></li>
-<li><p>Debug. To move from one frame to another you can use either the
-mouse or the shortcut <code class="docutils literal notranslate"><span class="pre">ctrl-x</span> <span class="pre">o</span></code> . To close a pane, use <code class="docutils literal notranslate"><span class="pre">ctrl-x</span> <span class="pre">0</span></code>
-when inside that pane.</p></li>
-<li></li>
-</ul>
-</section>
-<section id="modern-tools">
-<h3><span class="section-number">7.3.10. </span>Modern tools<a class="headerlink" href="#modern-tools" title="Permalink to this heading">#</a></h3>
-<ol class="arabic">
-<li><p>Python</p>
-<p>Gdb version &gt;= 7.x supports python. You can use to explore more
-info about your program, pretty print data, and even plot (although
-blocking).</p>
-<p>To load a c++ var into a python do, inside gdb,</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>py<span class="w"> </span><span class="nv">my_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gdb.parse_and_eval<span class="o">(</span><span class="s2">&quot;my_array&quot;</span><span class="o">)</span>
-py<span class="w"> </span>print<span class="w"> </span>my_array.type
-</pre></div>
-</div>
-<p>Even more, to plot some data structure with matplotlib, you can as
-follows (Based on
-<a class="reference external" href="https://blog.semicolonsoftware.de/debugging-numerical-c-c-fortran-code-with-gdb-and-numpy/">https://blog.semicolonsoftware.de/debugging-numerical-c-c-fortran-code-with-gdb-and-numpy/</a>)</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
-<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">nrow</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ncol</span><span class="p">];</span>
-<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nrow</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ncol</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="w">  </span><span class="c1">// BREAK here</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Follow the previous url to install gdb<sub>numpy</sub>.py.</p>
-<p>Compile as</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>ex-01.c<span class="w"> </span>-g<span class="w"> </span>-ggdb
-</pre></div>
-</div>
-<p>and now, run <code class="docutils literal notranslate"><span class="pre">gdb</span></code> and put the following commands</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>br<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="c1"># sets a breakpoint</span>
-run<span class="w"> </span><span class="c1"># to load the program symbols</span>
-py<span class="w"> </span>import<span class="w"> </span>gdb_numpy
-py<span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gdb_numpy.to_array<span class="o">(</span><span class="s2">&quot;(double *)x&quot;</span>,<span class="w"> </span><span class="nv">shape</span><span class="o">=(</span><span class="m">4</span><span class="w"> </span>*<span class="w"> </span><span class="m">3</span>,<span class="o">))</span>.reshape<span class="o">(</span><span class="m">4</span>,<span class="w"> </span><span class="m">3</span><span class="o">)</span>
-py<span class="w"> </span>print<span class="w"> </span>x
-py<span class="w"> </span>import<span class="w"> </span>matplotlib.pyplot<span class="w"> </span>as<span class="w"> </span>plt
-py<span class="w"> </span>plt.imshow<span class="o">(</span>x<span class="o">)</span>
-py<span class="w"> </span>plt.show<span class="o">()</span>
-</pre></div>
-</div>
-<p>Use gdb to execute, step by step, the following code</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
-<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</li>
-</ol>
-</section>
-<section id="examples-to-debug">
-<h3><span class="section-number">7.3.11. </span>Examples to debug<a class="headerlink" href="#examples-to-debug" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><p>Example 1</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="w">  </span><span class="c1">//double x[10], y[5]; // imprime raro</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span><span class="w"> </span><span class="c1">// imprime 1</span>
-
-<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">x</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="p">(</span><span class="n">ii</span><span class="w"> </span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</li>
-</ul>
 </section>
 </section>
 <section id="ddd-data-display-debugger">
-<h2><span class="section-number">7.4. </span>DDD : Data Display Debugger<a class="headerlink" href="#ddd-data-display-debugger" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.6. </span>DDD : Data Display Debugger<a class="headerlink" href="#ddd-data-display-debugger" title="Permalink to this heading">#</a></h2>
 <p>The <a class="reference external" href="http://www.gnu.org/software/ddd/">Data Display Debugger - ddd</a> is a
 graphical frontend for command line debuggers like gdb, dbx, jdb,
 bashdb, etc, and some modified python debugger. It easies the debug
@@ -1105,13 +1122,13 @@ option, then close it, then open, then configure other option, then
 close, etc).</p>
 </div></blockquote>
 <section id="exercise">
-<h3><span class="section-number">7.4.1. </span>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.6.1. </span>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h3>
 <p>Repeat the previous debugging exercises by using ddd. In particular, use
 the <code class="docutils literal notranslate"><span class="pre">display</span></code> and <code class="docutils literal notranslate"><span class="pre">watch</span></code>. Do you find them convenient? and what about
 <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">display</span> <span class="pre">data</span></code>?</p>
 </section>
 <section id="ddd-data-plotting-with-gnuplot">
-<h3><span class="section-number">7.4.2. </span>DDD data plotting with gnuplot<a class="headerlink" href="#ddd-data-plotting-with-gnuplot" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.6.2. </span>DDD data plotting with gnuplot<a class="headerlink" href="#ddd-data-plotting-with-gnuplot" title="Permalink to this heading">#</a></h3>
 <p>One of the killer features of ddd is its capability to actually plot the
 data with gnuplot. Let’s do an example:</p>
 <ul class="simple">
@@ -1131,21 +1148,8 @@ plotted? a line or a surface?</p></li>
 </ul>
 </section>
 </section>
-<section id="todo-examples-to-solve">
-<h2><span class="section-number">7.5. </span>TODO Examples to solve<a class="headerlink" href="#todo-examples-to-solve" title="Permalink to this heading">#</a></h2>
-<p>Let’s use ddd to explore some other exercises.</p>
-<p>ICTP examples</p>
-<p>Browse to
-<a class="reference external" href="https://bitbucket.org/iluvatar/scientific-computing-part-01/src">ICTP-examples</a>,
-then go to debugging, then ICTP-gdb<sub>examples</sub> , and download
-each file, or just download all files compressed at <a class="reference external" href="https://bitbucket.org/iluvatar/scientific-computing-part-01/get/master.tar.bz2">example
-files</a></p>
-<p>Other</p>
-<p>These are more examples: <a class="reference external" href="http://www.tutorialspoint.com/gnu_debugger/gdb_debugging_examples.htm">original
-link</a></p>
-</section>
 <section id="valgrind">
-<h2><span class="section-number">7.6. </span>Valgrind<a class="headerlink" href="#valgrind" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.7. </span>Valgrind<a class="headerlink" href="#valgrind" title="Permalink to this heading">#</a></h2>
 <p><img alt="Valgrind Logo" src="http://valgrind.org/images/valgrind-100.png" /></p>
 <p><a class="reference external" href="http://valgrind.org/">Valgrind official web page</a></p>
 <p>From Web Page: &gt; Valgrind is an instrumentation framework for building
@@ -1166,14 +1170,14 @@ X86/Android (4.0 and later), X86/Darwin and AMD64/Darwin (Mac OS X
 10.6 and 10.7, with limited support for 10.8).</p>
 </div></blockquote>
 <section id="graphical-interfaces">
-<h3><span class="section-number">7.6.1. </span>Graphical Interfaces<a class="headerlink" href="#graphical-interfaces" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">7.7.1. </span>Graphical Interfaces<a class="headerlink" href="#graphical-interfaces" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="http://valgrind.org/downloads/guis.html">Valkyrie</a></p></li>
 <li><p><a class="reference external" href="http://kcachegrind.sourceforge.net/html/Home.html">kcachegrind/qcachegrind</a></p></li>
 </ul>
 </section>
-<section id="as-memory-checker">
-<h3><span class="section-number">7.6.2. </span>As memory checker<a class="headerlink" href="#as-memory-checker" title="Permalink to this heading">#</a></h3>
+<section id="as-a-memory-checker">
+<h3><span class="section-number">7.7.2. </span>As a memory checker<a class="headerlink" href="#as-a-memory-checker" title="Permalink to this heading">#</a></h3>
 <p>In this section we will focus on valgrind as memory checker tool
 (debugging part). Therefore, we will invoke valgrind with that option:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>valgrind<span class="w"> </span>--tool<span class="o">=</span>memcheck<span class="w"> </span>--leak-check<span class="o">=</span>yes<span class="w"> </span>myprog<span class="w"> </span>arg1<span class="w"> </span>arg2
@@ -1232,7 +1236,7 @@ locate the source files. Compile <code class="docutils literal notranslate"><spa
 </section>
 </section>
 <section id="span-class-todo-todo-todo-span-homework">
-<h2><span class="section-number">7.7. </span><span class="todo TODO">TODO</span> Homework<a class="headerlink" href="#span-class-todo-todo-todo-span-homework" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">7.8. </span><span class="todo TODO">TODO</span> Homework<a class="headerlink" href="#span-class-todo-todo-todo-span-homework" title="Permalink to this heading">#</a></h2>
 <p>Modularize one of the previous codes into a header a implementation file
 and a main file. This will help when writing tests.</p>
 </section>
@@ -1282,7 +1286,7 @@ and a main file. This will help when writing tests.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">8. </span>Unit Testing : Ensuring fix and correct behavior last</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Unit Testing : Making sure your bugs don’t come back</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1302,34 +1306,35 @@ and a main file. This will help when writing tests.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">7.1. Example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sanitizers">7.2. Sanitizers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gdb-gnu-debugger">7.3. GDB (Gnu debugger)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-gdb">7.3.1. How to use gdb?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#breakpoints">7.3.2. Breakpoints</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-control">7.3.3. Execution Control</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-useful-gdb-commands">7.3.4. Other useful gdb commands</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catching-a-segfault">7.3.5. Catching a segfault</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interfaces-graphical">7.3.6. Interfaces (graphical)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-exercise">7.3.7. Another exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-man-s-profiler">7.3.8. Poor man’s profiler</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-within-emacs">7.3.9. Debugging within emacs</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modern-tools">7.3.10. Modern tools</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-to-debug">7.3.11. Examples to debug</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-to-fix">7.1. Examples to fix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">7.2. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sanitizers">7.3. Sanitizers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gdb-gnu-debugger">7.4. GDB (Gnu debugger)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-gdb">7.4.1. How to use gdb?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#breakpoints">7.4.2. Breakpoints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-control">7.4.3. Execution Control</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-useful-gdb-commands">7.4.4. Other useful gdb commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catching-a-segfault">7.4.5. Catching a segfault</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ddd-data-display-debugger">7.4. DDD : Data Display Debugger</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">7.4.1. Exercise</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ddd-data-plotting-with-gnuplot">7.4.2. DDD data plotting with gnuplot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gdb-interfaces">7.5. Gdb Interfaces</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-gdb-tips">7.5.1. Other gdb tips</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-man-s-profiler">7.5.1.1. Poor man’s profiler</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-examples-to-solve">7.5. TODO Examples to solve</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valgrind">7.6. Valgrind</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-interfaces">7.6.1. Graphical Interfaces</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#as-memory-checker">7.6.2. As memory checker</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-class-todo-todo-todo-span-homework">7.7. <span class="todo TODO">TODO</span> Homework</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ddd-data-display-debugger">7.6. DDD : Data Display Debugger</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">7.6.1. Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ddd-data-plotting-with-gnuplot">7.6.2. DDD data plotting with gnuplot</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valgrind">7.7. Valgrind</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphical-interfaces">7.7.1. Graphical Interfaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#as-a-memory-checker">7.7.2. As a memory checker</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#span-class-todo-todo-todo-span-homework">7.8. <span class="todo TODO">TODO</span> Homework</a></li>
 </ul>
   </nav></div>
 

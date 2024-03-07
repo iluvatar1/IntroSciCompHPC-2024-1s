@@ -183,7 +183,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../06-stdlib-randomnumbers/06-stdlib-randomnumbers.html">5. Standard library of functions: math functions, containers and random numbers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../07-Install-Programs-From-Source/07-Install-Programs-From-Source.html">6. Using software in a hpc environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09-Debugging/09-Debugging.html">7. Debugging</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Ensuring fix and correct behavior last</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09-UnitTest/09-UnitTesting.html">8. Unit Testing : Making sure your bugs don’t come back</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">High Performance Computing and Parallel Programming</span></p>
 <ul class="nav bd-sidenav">
@@ -690,8 +690,8 @@ $<span class="math notranslate nohighlight">\(e^{-x} = \sum_{i=0}^{\infty} (-1)^
 <section id="exercise-sum-ups-and-down">
 <h3><span class="section-number">3.5.2. </span>Exercise: Sum ups and down<a class="headerlink" href="#exercise-sum-ups-and-down" title="Permalink to this heading">#</a></h3>
 <p>Is there any computation difference between the following sums?</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e9d094b3-de02-430a-aad0-ffc4090cda61">
-<span class="eqno">(3.1)<a class="headerlink" href="#equation-e9d094b3-de02-430a-aad0-ffc4090cda61" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f88466c4-44f1-4cdc-9f15-8a8e36b72d91">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-f88466c4-44f1-4cdc-9f15-8a8e36b72d91" title="Permalink to this equation">#</a></span>\[\begin{align}
 S_{up}(N) &amp;= \sum_{n=1}^{N} \frac{1}{n},\\
 S_{down}(N) &amp;= \sum_{n=N}^{1} \frac{1}{n}.
 \end{align}\]</div>
@@ -733,8 +733,8 @@ Mathematically, this function should give 0 always. Is that true?</p>
 <section id="substractive-cancellation">
 <h3><span class="section-number">3.6.2. </span>Substractive cancellation<a class="headerlink" href="#substractive-cancellation" title="Permalink to this heading">#</a></h3>
 <p>Given <span class="math notranslate nohighlight">\(a = b-c\)</span>, then <span class="math notranslate nohighlight">\(a_c = b_c-c_c\)</span>, therefore</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9ed70e4c-b04c-4742-afdf-ac003f93ca16">
-<span class="eqno">(3.2)<a class="headerlink" href="#equation-9ed70e4c-b04c-4742-afdf-ac003f93ca16" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7a7bc501-41b9-483a-8173-4fc6c713f986">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-7a7bc501-41b9-483a-8173-4fc6c713f986" title="Permalink to this equation">#</a></span>\[\begin{align}
 a_c &amp;= a(1+\epsilon_a ) = b_c - c_c = b(1+\epsilon_b ) - c(1+\epsilon_c )\\
 \frac{a_c}{a} &amp;= 1 + \epsilon_b \frac{b}{a} - \frac{c}{a}\epsilon_c  
 \end{align}\]</div>
@@ -757,8 +757,8 @@ and
 <section id="total-errors-in-algorithms-and-their-computational-implementation">
 <h2><span class="section-number">3.7. </span>Total errors in algorithms and their computational implementation<a class="headerlink" href="#total-errors-in-algorithms-and-their-computational-implementation" title="Permalink to this heading">#</a></h2>
 <p>As you can see, there are several source for errors in computation. Some come from the mathematical approximation, , called <span class="math notranslate nohighlight">\(\epsilon_a\)</span>, and some others are intrinsic from the numerical representation, and we can call them <span class="math notranslate nohighlight">\(\epsilon_r\)</span>. Sometimes, the rounding/truncation error are modeled as a random walk, <span class="math notranslate nohighlight">\(\epsilon_r \simeq \sqrt{N} \epsilon_m\)</span>, where <span class="math notranslate nohighlight">\(\epsilon_m\)</span> is the machine precision, and <span class="math notranslate nohighlight">\(N\)</span> is the representative number of “steps”.  From here, the total error can be estimated as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-90e98e45-aca2-4ae0-a3f5-c08c409d277b">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-90e98e45-aca2-4ae0-a3f5-c08c409d277b" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-fc7412c0-6438-46df-bc79-edf917c41213">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-fc7412c0-6438-46df-bc79-edf917c41213" title="Permalink to this equation">#</a></span>\[\begin{align}
 \epsilon_{\rm tot} &amp;= \epsilon_a + \epsilon_r \\
 &amp;= \frac{\alpha}{N^\beta} + \sqrt{N} \epsilon_m.
 \end{align}\]</div>
