@@ -23,7 +23,11 @@ RUN apt-get update && \
     curl \
     unzip \
     sudo \
+    tmux \
     cpplint \
+    xfonts-100dpi \
+    ddd \
+    valgrind \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -85,6 +89,13 @@ USER ${USER}
 RUN MPLBACKEND=Agg python3 -c "import matplotlib.pyplot"
 # Setup starship
 RUN echo 'eval "$(starship init bash)"' >> ${HOME}/.bashrc
+
+# Fix permissions on .local
+USER root
+RUN mkdir ${HOME}/.local && \
+    chown -R ${NB_UID} ${HOME}/.local
+USER ${USER}
+
 
 ## Clone the source code repo
 #RUN git clone https://github.com/iluvatar1/2023-II-ProgCPP

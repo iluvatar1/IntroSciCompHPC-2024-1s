@@ -17,3 +17,5 @@ jupyterlab_vpython
 python-lsp-server
 pyright
 nb-js-diagrammers
+gdbfrontend
+gdbgui
