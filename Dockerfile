@@ -28,6 +28,7 @@ RUN apt-get update && \
     xfonts-100dpi \
     ddd \
     valgrind \
+    libspdlog-dev \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
