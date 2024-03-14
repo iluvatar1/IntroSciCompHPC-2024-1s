@@ -438,10 +438,22 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-flags">9.1. Compiler flags</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-layout">9.2. Memory layout</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-structures-to-use">9.3. What data structures to use?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">9.4. Blocking multiplication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-flags">9.1. Compiler flags</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">9.1.1. Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-layout">9.2. Memory layout</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">9.2.1. Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-structures-to-use">9.3. What data structures to use?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.3.1. Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">9.4. Blocking multiplication</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.4.1. Exercise</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-scientific-libraries">9.5. Using scientific libraries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-optimization-techniques">9.6. Other optimization techniques</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-resources">9.7. Other resources</a></li>
@@ -456,35 +468,33 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <ul class="simple">
-<li><p><a class="reference external" href="https://kristerw.github.io/2021/10/19/fast-math/">https://kristerw.github.io/2021/10/19/fast-math/</a></p></li>
-<li><p><a class="reference external" href="https://simonbyrne.github.io/notes/fastmath/">https://simonbyrne.github.io/notes/fastmath/</a></p></li>
-<li><p><a class="reference external" href="https://news.ycombinator.com/item?id=29201473">https://news.ycombinator.com/item?id=29201473</a></p></li>
-</ul>
-<section class="tex2jax_ignore mathjax_ignore" id="optimization">
+  <section class="tex2jax_ignore mathjax_ignore" id="optimization">
 <h1><span class="section-number">9. </span>Optimization<a class="headerlink" href="#optimization" title="Permalink to this heading">#</a></h1>
 <p>First of all :</p>
-<p>/Programmers waste enormous amounts of time thinking about, or worrying
-about,the speed of noncritical parts of their programs, and these
-attempts at efficiency actually have a strong negative impact when
-debugging and maintenance are considered. We should forget about small
-efficiencies, say about 97% of the time: premature optimization is the
-root of all evil. Yet we should not pass up our opportunities in that
-critical 3%./ Donald Knuth</p>
+<blockquote>
+<div><p>“Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. Yet we should not pass up our opportunities in that critical 3%.” - Donald Knuth</p>
+</div></blockquote>
 <p>First, make your program correct, then measure, then optimize.
 Optimization can be achieved by just using compiler flags, by using
 already optimized libraries, and sometimes by being careful with our
 memory usage. Some low level techniques are better left to the compiler.</p>
+<p>Some tips: <a class="reference external" href="https://news.ycombinator.com/item?id=39564632">https://news.ycombinator.com/item?id=39564632</a></p>
 <section id="compiler-flags">
 <h2><span class="section-number">9.1. </span>Compiler flags<a class="headerlink" href="#compiler-flags" title="Permalink to this heading">#</a></h2>
 <p>See : <a class="reference external" href="https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html">https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html</a></p>
+<p>Some warnings:</p>
+<ul class="simple">
+<li><p>Optimizations enabled by -ffast-math: <a class="reference external" href="https://kristerw.github.io/2021/10/19/fast-math/">https://kristerw.github.io/2021/10/19/fast-math/</a></p></li>
+<li><p>Beware of fast-math: <a class="reference external" href="https://simonbyrne.github.io/notes/fastmath/">https://simonbyrne.github.io/notes/fastmath/</a></p></li>
+<li><p>Beware of fast-math (Hackernews discussion): <a class="reference external" href="https://news.ycombinator.com/item?id=29201473">https://news.ycombinator.com/item?id=29201473</a></p></li>
+</ul>
 <p>Sometimes just using compiler optimization flags with can improve
 dramatically our code performance. Normally, you want to run your code
 through several compiler flags to check for speed ups but also for
 possible uncovered bugs.</p>
 <p>Compile without (<code class="docutils literal notranslate"><span class="pre">-O0</span></code>) and with optimization (<code class="docutils literal notranslate"><span class="pre">-O3</span></code>) the following code
-and compare their runtime:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Credits : Ivan Pulido</span>
+and compare their runtime (this is a very old c-based code but still works):</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Credits : Ivan Pulido</span>
 <span class="cm">/* Shows a way to do operations that require a specific order (e.g.,</span>
 <span class="cm"> * transpositions) while avoiding cache misses. */</span>
 
@@ -548,6 +558,7 @@ and compare their runtime:</p>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
+
 </pre></div>
 </div>
 <p>When you compile without optimization and execute, you will get
@@ -567,6 +578,10 @@ something like</p>
 </div>
 <p>Be careful when using <code class="docutils literal notranslate"><span class="pre">-O3</span></code>: it activates some unsafe math optimizations
 that will not respect IEEE754.</p>
+<section id="exercise">
+<h3><span class="section-number">9.1.1. </span>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h3>
+<p>Vary both the matrix size and the cache size to compute both times. Plot the results on two different 3d plots (in gnuplot use <code class="docutils literal notranslate"><span class="pre">splot</span></code>). Repeat for <code class="docutils literal notranslate"><span class="pre">-O0</span></code> and <code class="docutils literal notranslate"><span class="pre">-O2</span></code></p>
+</section>
 </section>
 <section id="memory-layout">
 <h2><span class="section-number">9.2. </span>Memory layout<a class="headerlink" href="#memory-layout" title="Permalink to this heading">#</a></h2>
@@ -636,10 +651,17 @@ explain why it is important to have the processed data as much time as
 possible in the cache</p>
 <p>Relative bandwidth across different cpu and computer parts. Credit:
 &lt;https://cs.brown.edu/courses/csci1310/2020/assign/labs/lab4.html</p>
-<img alt="../_images/bandwidth.png" class="centerimg50" src="../_images/bandwidth.png" />
+<img alt="../_images/bandwidth.png" class="centerimg80" src="../_images/bandwidth.png" />
 <p>Since c/c++ store matrices in row major order, then accesing the memory
 in the same way will benefit the cache and therefore increases our
 program performance.</p>
+<section id="id1">
+<h3><span class="section-number">9.2.1. </span>Exercise<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Vary again the matrix size. Is the time difference important for all sizes? plot it.</p></li>
+<li><p>Explore the effect of different optimization flags</p></li>
+</ul>
+</section>
 </section>
 <section id="what-data-structures-to-use">
 <h2><span class="section-number">9.3. </span>What data structures to use?<a class="headerlink" href="#what-data-structures-to-use" title="Permalink to this heading">#</a></h2>
@@ -718,6 +740,10 @@ one-dimensional array and just model the 2D shape with smart indexes</p>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>This is an example of a 2d array actually stored as a 1d array in memory:
+<img alt="../_images/2d-array-memory.png" class="centerimg80" src="../_images/2d-array-memory.png" /></p>
+<p>And this is the illustration of the mapping that allows us to go to/from different dimensions:
+<img alt="../_images/1d-2d-mapping.png" class="centerimg80" src="../_images/1d-2d-mapping.png" /></p>
 <p>Finally, to avoid managing manually the memory, it is much better to use
 <code class="docutils literal notranslate"><span class="pre">std::vector</span></code>,</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
@@ -738,6 +764,13 @@ one-dimensional array and just model the 2D shape with smart indexes</p>
 <span class="p">}</span>
 </pre></div>
 </div>
+<section id="id2">
+<h3><span class="section-number">9.3.1. </span>Exercise<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Test the stack program to find the maximum matrix size you can use</p></li>
+<li><p>Do the same for the last one using a vector, what is the maximum size you can reserve?</p></li>
+</ul>
+</section>
 </section>
 <section id="blocking-multiplication">
 <h2><span class="section-number">9.4. </span>Blocking multiplication<a class="headerlink" href="#blocking-multiplication" title="Permalink to this heading">#</a></h2>
@@ -821,6 +854,12 @@ performance advantage:</p>
 </div>
 <p>The second one shows how being cache friendly really helps the
 performance.</p>
+<section id="id3">
+<h3><span class="section-number">9.4.1. </span>Exercise<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Plot the time with the direct and the blocking approaches as functions of size, using <code class="docutils literal notranslate"><span class="pre">-O2</span></code>. What can you conclude?</p></li>
+</ul>
+</section>
 </section>
 <section id="using-scientific-libraries">
 <h2><span class="section-number">9.5. </span>Using scientific libraries<a class="headerlink" href="#using-scientific-libraries" title="Permalink to this heading">#</a></h2>
@@ -837,8 +876,8 @@ a traditional approach, a blocking approach , and the eigen c++ library.</p>
 Time<span class="w"> </span><span class="k">for</span><span class="w"> </span>filling:<span class="w"> </span><span class="m">3</span>.607817
 Time<span class="w"> </span><span class="k">for</span><span class="w"> </span>direct<span class="w"> </span>transposition:<span class="w"> </span><span class="m">2</span>.870691
 Time<span class="w"> </span><span class="k">for</span><span class="w"> </span>blocked<span class="w"> </span>transposition:<span class="w"> </span><span class="m">0</span>.380954
-Time<span class="w"> </span><span class="k">for</span><span class="w"> </span>transposition<span class="w"> </span>with<span class="w"> </span>eigen:<span class="w"> </span><span class="m">0</span>.000003
-Time<span class="w"> </span><span class="k">for</span><span class="w"> </span>transposition<span class="w"> </span>with<span class="w"> </span>copy<span class="w"> </span><span class="k">in</span><span class="w"> </span>eigen:<span class="w"> </span><span class="m">0</span>.000001
+Time<span class="w"> </span><span class="k">for</span><span class="w"> </span>transposition<span class="w"> </span>with<span class="w"> </span>eigen:<span class="w"> </span><span class="m">0</span>.031344
+Time<span class="w"> </span><span class="k">for</span><span class="w"> </span>transposition<span class="w"> </span>with<span class="w"> </span>copy<span class="w"> </span><span class="k">in</span><span class="w"> </span>eigen:<span class="w"> </span><span class="m">0</span>.310033
 Time<span class="w"> </span><span class="k">for</span><span class="w"> </span>transposition<span class="w"> </span>with<span class="w"> </span>full<span class="w"> </span>copy<span class="w"> </span><span class="k">in</span><span class="w"> </span>eigen:<span class="w"> </span><span class="m">3</span>.339495
 -2999.9
 -2999.9
@@ -956,10 +995,22 @@ the clarity of the program first and let the compiler do its job.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-flags">9.1. Compiler flags</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-layout">9.2. Memory layout</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-structures-to-use">9.3. What data structures to use?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">9.4. Blocking multiplication</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiler-flags">9.1. Compiler flags</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">9.1.1. Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-layout">9.2. Memory layout</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">9.2.1. Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-structures-to-use">9.3. What data structures to use?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">9.3.1. Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blocking-multiplication">9.4. Blocking multiplication</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">9.4.1. Exercise</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-scientific-libraries">9.5. Using scientific libraries</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-optimization-techniques">9.6. Other optimization techniques</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-resources">9.7. Other resources</a></li>
