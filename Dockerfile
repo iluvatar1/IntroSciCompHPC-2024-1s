@@ -29,6 +29,7 @@ RUN apt-get update && \
     ddd \
     valgrind \
     libspdlog-dev \
+    linux-perf \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -97,6 +98,15 @@ RUN mkdir ${HOME}/.local && \
     chown -R ${NB_UID} ${HOME}/.local
 USER ${USER}
 
+## NOTES for Installing perf : for ubuntu you must use
+# USER root
+# RUN sudo apt-get update && \
+#     sudo apt-get install -y linux-tools-common linux-tools-generic linux-tools-$(uname -r) && \
+#     sudo apt-get clean && \
+#     sudo rm -rf /var/lib/apt/lists/*
+## For debian:
+# RUN apt-get update && apt-get -y install linux-perf
+# USER ${USER}
 
 ## Clone the source code repo
 #RUN git clone https://github.com/iluvatar1/2023-II-ProgCPP
