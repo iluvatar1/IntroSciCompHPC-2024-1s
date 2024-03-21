@@ -439,22 +439,30 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-profile">10.1. Why profile?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-elapsed-time">10.2. Measuring elapsed time</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profilers">10.3. Profilers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gprof">10.4. gprof</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perf">10.5. perf</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-perf">10.5.1. Installing perf</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-perf">10.5.2. Using perf</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hotstop-gui-for-perf">10.5.3. Hotstop: Gui for perf</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-the-whole-running-time">10.2. Measuring the whole running time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-elapsed-time">10.3. Measuring elapsed time</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">10.3.1. Exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-with-valgrind-cachegrind-and-callgrind">10.6. Profiling with valgrind: cachegrind and callgrind</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cache-checker-cachegrind">10.6.1. Cache checker : cachegrind</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callgrind">10.6.2. Callgrind</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profilers">10.4. Profilers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gprof">10.5. gprof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perf">10.6. perf</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-perf">10.6.1. Installing perf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-perf">10.6.2. Using perf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-gui-for-perf">10.6.3. Some gui for perf</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#flamegraphs">10.6.3.1. Flamegraphs</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hotstop">10.6.3.2. Hotstop</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-performance-tools">10.7. Google Performance Tools</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">10.8. Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-with-valgrind-cachegrind-and-callgrind">10.7. Profiling with valgrind: cachegrind and callgrind</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cache-checker-cachegrind">10.7.1. Cache checker : cachegrind</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callgrind">10.7.2. Callgrind</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-performance-tools">10.8. Google Performance Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">10.9. Exercises</a></li>
 </ul>
             </nav>
         </div>
@@ -466,17 +474,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p><a class="reference external" href="https://docs.python.org/3.12/howto/perf_profiling.html">https://docs.python.org/3.12/howto/perf_profiling.html</a>
-<a class="reference external" href="https://pkolaczk.github.io/server-slower-than-a-laptop/">https://pkolaczk.github.io/server-slower-than-a-laptop/</a>
-<a class="reference external" href="http://www.brendangregg.com/flamegraphs.html">http://www.brendangregg.com/flamegraphs.html</a>
-<a class="github reference external" href="https://github.com/wolfpld/tracy">wolfpld/tracy</a> <a class="reference external" href="https://www.kdab.com/hotspot-video/">https://www.kdab.com/hotspot-video/</a></p>
-<ul class="simple">
-<li><p>https://computers-are-fast.github.io/</p></li>
-<li><p>https://github.com/wolfpld/tracy</p></li>
-<li><p>https://perfetto.dev/</p></li>
-<li><p>https://github.com/bloomberg/memray</p></li>
-</ul>
-<section class="tex2jax_ignore mathjax_ignore" id="profiling">
+  <section class="tex2jax_ignore mathjax_ignore" id="profiling">
 <h1><span class="section-number">10. </span>Profiling<a class="headerlink" href="#profiling" title="Permalink to this heading">#</a></h1>
 <p>After debugging your code and writing several tests to avoid repeating
 the same bug, you want to start optimizing it to make it fast (but
@@ -484,8 +482,8 @@ keeping it correct). To do this, you need to measure. You need to detect
 functions which take most of the time. Optimizing a function that takes
 only 5% of the time will give you only marginal benefits. Finding the
 functions that take most of the time is called profiling , and there are
-several tools ready to help you. In the following we ill learn to use
-these tools to detect the hotspots/bottlenecks in our codes.</p>
+several tools ready to help you. In the following we will learn to use
+these tools to detect the hotspots/bottlenecks in our codes. Please keep in mind tha <a class="reference external" href="https://computers-are-fast.github.io/">Computers are fast</a>, but your code might not be using all the resources in an efficient way.</p>
 <section id="why-profile">
 <h2><span class="section-number">10.1. </span>Why profile?<a class="headerlink" href="#why-profile" title="Permalink to this heading">#</a></h2>
 <p>Profiling allows you to learn how the computation time was spent and how
@@ -501,16 +499,11 @@ different functions and so on).</p>
 computation time taken by our program. The key idea then becomes finding
 where (which function/subroutine) is the computation time spent and
 attack it using optimization techniques (studied in a previous session
-of this course, check
-<a class="reference external" href="https://www.dropbox.com/s/z71cz13fzce05x7/UsualOptimization.pdf">this</a>).</p>
+of this course.</p>
 </section>
-<section id="measuring-elapsed-time">
-<h2><span class="section-number">10.2. </span>Measuring elapsed time<a class="headerlink" href="#measuring-elapsed-time" title="Permalink to this heading">#</a></h2>
-<p>The first approach is to just add timers to your code. This is a good
-practice and it is useful for a code to report the time spent on
-different parts. The following example is extracted from
-<a class="reference external" href="https://github.com/thehackerwithin/PyTrieste/tree/master/valgrind">here</a>
-and modified to make it a bit simpler:</p>
+<section id="measuring-the-whole-running-time">
+<h2><span class="section-number">10.2. </span>Measuring the whole running time<a class="headerlink" href="#measuring-the-whole-running-time" title="Permalink to this heading">#</a></h2>
+<p>Take the following code as example (from <a class="github reference external" href="https://github.com/thehackerwithin/PyTrieste/tree/master/valgrind">thehackerwithin/PyTrieste</a>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
 
@@ -550,13 +543,24 @@ and modified to make it a bit simpler:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Now let’s add some timers using the <code class="docutils literal notranslate"><span class="pre">chrono</span> <span class="pre">c++11</span></code> library (you can see
-more eamples
-<a class="reference external" href="https://www.techiedelight.com/measure-elapsed-time-program-chrono-library/">here</a>
-and <a class="reference external" href="https://en.cppreference.com/w/cpp/chrono/duration">here</a> .</p>
+<p>Read it and try to understand what it does. Now, compile and run it.</p>
+<p>If you wnant to measure the while running time against the matrix size, you can use the commands <code class="docutils literal notranslate"><span class="pre">time</span></code> or <code class="docutils literal notranslate"><span class="pre">/usr/bin/time</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>/usr/bin/time<span class="w"> </span>./a.out<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">200</span>
+</pre></div>
+</div>
+<p>This will give you the total running clock time of the program. This is useful if the code is dominated by the compiuting part, not the memoery allocation or similar things. Run it several times per size and observe the fluctuations.</p>
+<p>But, if you need to measure a more specific part of your code, it is much better to measure those parts directly.</p>
+</section>
+<section id="measuring-elapsed-time">
+<h2><span class="section-number">10.3. </span>Measuring elapsed time<a class="headerlink" href="#measuring-elapsed-time" title="Permalink to this heading">#</a></h2>
+<p>The first approach is to just add timers to your code. This is a good
+practice and it is useful for a code to report the time spent on
+different parts.  We will use the previous example and add watches at specific pointsm, using <code class="docutils literal notranslate"><span class="pre">std::chrono</span></code> (you can see
+more examples <a class="reference external" href="https://www.techiedelight.com/measure-elapsed-time-program-chrono-library/">https://www.techiedelight.com/measure-elapsed-time-program-chrono-library/</a> and <a class="reference external" href="https://en.cppreference.com/w/cpp/chrono/duration">https://en.cppreference.com/w/cpp/chrono/duration</a>. This allow to measure the <strong>clock time</strong>, not the <strong>cpu time</strong> (look for the differences…) .</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 
 <span class="cm">/*</span>
@@ -564,7 +568,7 @@ and <a class="reference external" href="https://en.cppreference.com/w/cpp/chrono
 <span class="cm">*/</span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span><span class="w"> </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">);</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span>
 <span class="p">{</span>
@@ -580,7 +584,7 @@ and <a class="reference external" href="https://en.cppreference.com/w/cpp/chrono
 <span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
 <span class="w">  </span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">long</span><span class="p">[</span><span class="n">sI</span><span class="o">*</span><span class="n">sJ</span><span class="p">];</span><span class="w"> </span><span class="c1">// double array.</span>
 <span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">  </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
+<span class="w">  </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;Memory allocation&quot;</span><span class="p">;</span>
 
 <span class="w">  </span><span class="c1">// option 1</span>
 <span class="w">  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
@@ -588,7 +592,7 @@ and <a class="reference external" href="https://en.cppreference.com/w/cpp/chrono
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sJ</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span>
 <span class="w">      </span><span class="n">arr</span><span class="p">[(</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">sJ</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
 <span class="w">  </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">  </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
+<span class="w">  </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Option 1&quot;</span><span class="p">);</span>
 
 <span class="w">  </span><span class="c1">// option 2</span>
 <span class="w">  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
@@ -596,13 +600,13 @@ and <a class="reference external" href="https://en.cppreference.com/w/cpp/chrono
 <span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sJ</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span>
 <span class="w">         </span><span class="n">arr</span><span class="p">[(</span><span class="n">j</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">sI</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
 <span class="w">  </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">  </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
+<span class="w">  </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;option 2&quot;</span><span class="p">);</span>
 
 <span class="w">  </span><span class="c1">// option 3</span>
 <span class="w">  </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
 <span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sI</span><span class="o">*</span><span class="n">sJ</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
 <span class="w">  </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">steady_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
-<span class="w">  </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
+<span class="w">  </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Option 3&quot;</span><span class="p">);</span>
 
 <span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%ld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 
@@ -610,18 +614,23 @@ and <a class="reference external" href="https://en.cppreference.com/w/cpp/chrono
 <span class="p">}</span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span><span class="w"> </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="p">)</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">print_elapsed</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">)</span>
 <span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Elapsed time in ms: &quot;</span>
 <span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="o">&gt;</span><span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">).</span><span class="n">count</span><span class="p">()</span>
 <span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Analyze the results.</p>
+<p>Compile and run it . Now you have much better results, the granularity has increased and now you know where the code is spending most of the time.  Analyze the results.</p>
+<section id="exercise">
+<h3><span class="section-number">10.3.1. </span>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h3>
+<p>Plot the time average time per option as function of the matriz size (use square matrices of size nxn, plot againts n). Explain the differences in complexity.</p>
+</section>
 </section>
 <section id="profilers">
-<h2><span class="section-number">10.3. </span>Profilers<a class="headerlink" href="#profilers" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.4. </span>Profilers<a class="headerlink" href="#profilers" title="Permalink to this heading">#</a></h2>
 <p>There are many types of profilers from many different sources, commonly,
 a profiler is associated to a compiler, so that for example, GNU (the
 community around gcc compiler) has the profiler ‘gprof’, intel
@@ -641,9 +650,16 @@ and remains relevant in the modern world.” (from Wikipedia).</p>
 <blockquote>
 <div><p><strong>FACT 2:</strong> Top 50 most influential papers on PLDI (from Wikipedia).</p>
 </div></blockquote>
+<p>Here we will check some utilities like gprof, perf, and valgrind. But please notice that there are some other alternatives like</p>
+<ul class="simple">
+<li><p>tracy: https://github.com/wolfpld/tracy</p></li>
+<li><p>Papi (Performance api), <a class="reference external" href="https://icl.utk.edu/papi/">https://icl.utk.edu/papi/</a></p></li>
+<li><p>Perfetto, a solution provided by gogole: https://perfetto.dev/</p></li>
+<li><p>memray, a python profiler : https://github.com/bloomberg/memray</p></li>
+</ul>
 </section>
 <section id="gprof">
-<h2><span class="section-number">10.4. </span>gprof<a class="headerlink" href="#gprof" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.5. </span>gprof<a class="headerlink" href="#gprof" title="Permalink to this heading">#</a></h2>
 <p>Inthe following we will use the following code as example: Example 1:
 Basic gprof (compile with <code class="docutils literal notranslate"><span class="pre">gcc</span></code>)</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">//test_gprof.c</span>
@@ -699,19 +715,20 @@ Basic gprof (compile with <code class="docutils literal notranslate"><span class
 
 </pre></div>
 </div>
-<p>Para usar gprof:</p>
-<ol class="arabic">
-<li><p>Compilar con <code class="docutils literal notranslate"><span class="pre">-pg</span></code></p>
+<p>To use gprof:</p>
+<ol class="arabic simple">
+<li><p>Compile with the flag <code class="docutils literal notranslate"><span class="pre">-pg</span></code></p></li>
+</ol>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>-Wall<span class="w"> </span>-pg<span class="w"> </span>-g<span class="w"> </span>test_gprof.c<span class="w"> </span>-o<span class="w"> </span>test_gprof
 </pre></div>
 </div>
-</li>
-<li><p>Ejecutar normalmente. Esto crea o sobreescribe un archivo <code class="docutils literal notranslate"><span class="pre">gmon.out</span></code></p>
+<ol class="arabic" start="2">
+<li><p>Execute normally. This will create or overwrite the file <code class="docutils literal notranslate"><span class="pre">gmon.out</span></code></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./test_gprof
 </pre></div>
 </div>
 </li>
-<li><p>Abrir el reporte usando</p>
+<li><p>Process the report as</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gprof<span class="w"> </span>test_gprof<span class="w"> </span>gmon.out<span class="w"> </span>&gt;<span class="w"> </span>analysis.txt
 </pre></div>
 </div>
@@ -876,10 +893,13 @@ function and its children.</p>
 </div></blockquote>
 </section>
 <section id="perf">
-<h2><span class="section-number">10.5. </span>perf<a class="headerlink" href="#perf" title="Permalink to this heading">#</a></h2>
-<p>See <a class="reference external" href="https://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html">https://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html</a></p>
+<h2><span class="section-number">10.6. </span>perf<a class="headerlink" href="#perf" title="Permalink to this heading">#</a></h2>
+<p>perf is powerful: it can instrument CPU performance counters, tracepoints, kprobes, and uprobes (dynamic tracing). It is capable of lightweight profiling. It is also included in the Linux kernel, under tools/perf, and is frequently updated and enhanced. (from https://perf.wiki.kernel.org/index.php/Main_Page)</p>
+<p>More about perf: https://www.brendangregg.com/perf.html , https://www.swift.org/documentation/server/guides/linux-perf.html</p>
+<p>It can also vbe used in toher languages, like python https://docs.python.org/3/howto/perf_profiling.html</p>
+<p>An example of fixing a program using perf: https://pkolaczk.github.io/server-slower-than-a-laptop/</p>
 <section id="installing-perf">
-<h3><span class="section-number">10.5.1. </span>Installing perf<a class="headerlink" href="#installing-perf" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">10.6.1. </span>Installing perf<a class="headerlink" href="#installing-perf" title="Permalink to this heading">#</a></h3>
 <p>Perf is a kernel module, so you will need to install it from the kernel
 source. As root, the command used to install perl in the computer room
 was</p>
@@ -889,7 +909,7 @@ was</p>
 <p>This will copy the perf executable into the path.</p>
 </section>
 <section id="using-perf">
-<h3><span class="section-number">10.5.2. </span>Using perf<a class="headerlink" href="#using-perf" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">10.6.2. </span>Using perf<a class="headerlink" href="#using-perf" title="Permalink to this heading">#</a></h3>
 <p>Perf is a hardware counter available on linux platforms.</p>
 <p>Its use is very simple: Just run, For a profile summary,</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>perf<span class="w"> </span>stat<span class="w"> </span>./a.out<span class="w"> </span>&gt;<span class="w"> </span>profile_summary
@@ -901,10 +921,16 @@ was</p>
 </pre></div>
 </div>
 </section>
-<section id="hotstop-gui-for-perf">
-<h3><span class="section-number">10.5.3. </span>Hotstop: Gui for perf<a class="headerlink" href="#hotstop-gui-for-perf" title="Permalink to this heading">#</a></h3>
-<p><a class="github reference external" href="https://github.com/KDAB/hotspot">KDAB/hotspot</a> Install with the appimage: Download
-it, make it executable, run.</p>
+<section id="some-gui-for-perf">
+<h3><span class="section-number">10.6.3. </span>Some gui for perf<a class="headerlink" href="#some-gui-for-perf" title="Permalink to this heading">#</a></h3>
+<section id="flamegraphs">
+<h4><span class="section-number">10.6.3.1. </span>Flamegraphs<a class="headerlink" href="#flamegraphs" title="Permalink to this heading">#</a></h4>
+<p>See <a class="reference external" href="https://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html">https://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html</a></p>
+</section>
+<section id="hotstop">
+<h4><span class="section-number">10.6.3.2. </span>Hotstop<a class="headerlink" href="#hotstop" title="Permalink to this heading">#</a></h4>
+<p>Please see <a class="github reference external" href="https://github.com/KDAB/hotspot">KDAB/hotspot</a>  and <a class="reference external" href="https://www.kdab.com/hotspot-video/">https://www.kdab.com/hotspot-video/</a>.</p>
+<p>Install with the appimage: Download it, make it executable, run.</p>
 <p>In the computer room you can also use spack:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>spack<span class="w"> </span>load<span class="w"> </span>hotspot-perf
 </pre></div>
@@ -912,13 +938,14 @@ it, make it executable, run.</p>
 <p>And then just use the command <code class="docutils literal notranslate"><span class="pre">hotspot</span></code> .</p>
 </section>
 </section>
+</section>
 <section id="profiling-with-valgrind-cachegrind-and-callgrind">
-<h2><span class="section-number">10.6. </span>Profiling with valgrind: cachegrind and callgrind<a class="headerlink" href="#profiling-with-valgrind-cachegrind-and-callgrind" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.7. </span>Profiling with valgrind: cachegrind and callgrind<a class="headerlink" href="#profiling-with-valgrind-cachegrind-and-callgrind" title="Permalink to this heading">#</a></h2>
 <p>Valgrind allows not only to debug a code but also to profile it. Here we
 will see how to use cachegrind, to check for cache misses, and
 callgrind, for a calling graph much like tools like perf and gprof.</p>
 <section id="cache-checker-cachegrind">
-<h3><span class="section-number">10.6.1. </span>Cache checker : cachegrind<a class="headerlink" href="#cache-checker-cachegrind" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">10.7.1. </span>Cache checker : cachegrind<a class="headerlink" href="#cache-checker-cachegrind" title="Permalink to this heading">#</a></h3>
 <blockquote>
 <div><p>From
 <a class="reference external" href="http://valgrind.org/docs/manual/cg-manual.html#cg-manual.overview">cachegrind</a></p>
@@ -1038,9 +1065,9 @@ analysis</a></p>
 </ol>
 </section>
 <section id="callgrind">
-<h3><span class="section-number">10.6.2. </span>Callgrind<a class="headerlink" href="#callgrind" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">10.7.2. </span>Callgrind<a class="headerlink" href="#callgrind" title="Permalink to this heading">#</a></h3>
 <p>Now, we are using valgrind to get a calling profile by using the tool
-<code class="docutils literal notranslate"><span class="pre">callgrind</span></code>. It is done as follows: Use the same programa as in other
+<code class="docutils literal notranslate"><span class="pre">callgrind</span></code>. It is done as follows: Use the same program as in other
 modules. First, compile with debugging enabled, something like</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gcc<span class="w"> </span>-g<span class="w"> </span>-ggdb<span class="w"> </span>name.c<span class="w"> </span>-o<span class="w"> </span>name.x<span class="w"> </span>
 </pre></div>
@@ -1074,7 +1101,7 @@ program using eigen library. In the later, it is easy to profile?</p>
 </section>
 </section>
 <section id="google-performance-tools">
-<h2><span class="section-number">10.7. </span>Google Performance Tools<a class="headerlink" href="#google-performance-tools" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.8. </span>Google Performance Tools<a class="headerlink" href="#google-performance-tools" title="Permalink to this heading">#</a></h2>
 <p>See <a class="github reference external" href="https://github.com/gperftools/gperftools">gperftools/gperftools</a></p>
 <p>From <a class="reference external" href="http://code.google.com/p/gperftools/?redir=1">Google performance
 tools</a> : These tools are
@@ -1108,7 +1135,7 @@ the cpu profiler, check <a class="reference external" href="http://google-perfto
 info</a></p>
 </section>
 <section id="exercises">
-<h2><span class="section-number">10.8. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.9. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Take <a class="reference external" href="https://bitbucket.org/iluvatar/scientific-computing-part-01/raw/9e1e2822cf7a6012b56708294eda1a5d3e0553b1/optimization/cache_lines.c">this
 code</a>
@@ -1189,22 +1216,30 @@ profile it and try to optimize it in any way.</p></li>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-profile">10.1. Why profile?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-elapsed-time">10.2. Measuring elapsed time</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profilers">10.3. Profilers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gprof">10.4. gprof</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perf">10.5. perf</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-perf">10.5.1. Installing perf</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-perf">10.5.2. Using perf</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hotstop-gui-for-perf">10.5.3. Hotstop: Gui for perf</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-the-whole-running-time">10.2. Measuring the whole running time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-elapsed-time">10.3. Measuring elapsed time</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">10.3.1. Exercise</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-with-valgrind-cachegrind-and-callgrind">10.6. Profiling with valgrind: cachegrind and callgrind</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cache-checker-cachegrind">10.6.1. Cache checker : cachegrind</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callgrind">10.6.2. Callgrind</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profilers">10.4. Profilers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gprof">10.5. gprof</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perf">10.6. perf</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-perf">10.6.1. Installing perf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-perf">10.6.2. Using perf</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-gui-for-perf">10.6.3. Some gui for perf</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#flamegraphs">10.6.3.1. Flamegraphs</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hotstop">10.6.3.2. Hotstop</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-performance-tools">10.7. Google Performance Tools</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">10.8. Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-with-valgrind-cachegrind-and-callgrind">10.7. Profiling with valgrind: cachegrind and callgrind</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cache-checker-cachegrind">10.7.1. Cache checker : cachegrind</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callgrind">10.7.2. Callgrind</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-performance-tools">10.8. Google Performance Tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">10.9. Exercises</a></li>
 </ul>
   </nav></div>
 

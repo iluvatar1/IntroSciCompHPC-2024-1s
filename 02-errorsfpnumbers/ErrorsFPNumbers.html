@@ -690,8 +690,8 @@ $<span class="math notranslate nohighlight">\(e^{-x} = \sum_{i=0}^{\infty} (-1)^
 <section id="exercise-sum-ups-and-down">
 <h3><span class="section-number">3.5.2. </span>Exercise: Sum ups and down<a class="headerlink" href="#exercise-sum-ups-and-down" title="Permalink to this heading">#</a></h3>
 <p>Is there any computation difference between the following sums?</p>
-<div class="amsmath math notranslate nohighlight" id="equation-07b16c62-4887-4164-a88c-860dd6293707">
-<span class="eqno">(3.1)<a class="headerlink" href="#equation-07b16c62-4887-4164-a88c-860dd6293707" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-97c73da0-b2db-40b4-bf42-030be01ac69d">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-97c73da0-b2db-40b4-bf42-030be01ac69d" title="Permalink to this equation">#</a></span>\[\begin{align}
 S_{up}(N) &amp;= \sum_{n=1}^{N} \frac{1}{n},\\
 S_{down}(N) &amp;= \sum_{n=N}^{1} \frac{1}{n}.
 \end{align}\]</div>
@@ -733,8 +733,8 @@ Mathematically, this function should give 0 always. Is that true?</p>
 <section id="substractive-cancellation">
 <h3><span class="section-number">3.6.2. </span>Substractive cancellation<a class="headerlink" href="#substractive-cancellation" title="Permalink to this heading">#</a></h3>
 <p>Given <span class="math notranslate nohighlight">\(a = b-c\)</span>, then <span class="math notranslate nohighlight">\(a_c = b_c-c_c\)</span>, therefore</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0bb4c3ab-819e-43cf-ae4f-0c15e51cd29c">
-<span class="eqno">(3.2)<a class="headerlink" href="#equation-0bb4c3ab-819e-43cf-ae4f-0c15e51cd29c" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-99faa5c4-fac1-4622-bd5b-cebfa2d18434">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-99faa5c4-fac1-4622-bd5b-cebfa2d18434" title="Permalink to this equation">#</a></span>\[\begin{align}
 a_c &amp;= a(1+\epsilon_a ) = b_c - c_c = b(1+\epsilon_b ) - c(1+\epsilon_c )\\
 \frac{a_c}{a} &amp;= 1 + \epsilon_b \frac{b}{a} - \frac{c}{a}\epsilon_c  
 \end{align}\]</div>
@@ -757,8 +757,8 @@ and
 <section id="total-errors-in-algorithms-and-their-computational-implementation">
 <h2><span class="section-number">3.7. </span>Total errors in algorithms and their computational implementation<a class="headerlink" href="#total-errors-in-algorithms-and-their-computational-implementation" title="Permalink to this heading">#</a></h2>
 <p>As you can see, there are several source for errors in computation. Some come from the mathematical approximation, , called <span class="math notranslate nohighlight">\(\epsilon_a\)</span>, and some others are intrinsic from the numerical representation, and we can call them <span class="math notranslate nohighlight">\(\epsilon_r\)</span>. Sometimes, the rounding/truncation error are modeled as a random walk, <span class="math notranslate nohighlight">\(\epsilon_r \simeq \sqrt{N} \epsilon_m\)</span>, where <span class="math notranslate nohighlight">\(\epsilon_m\)</span> is the machine precision, and <span class="math notranslate nohighlight">\(N\)</span> is the representative number of “steps”.  From here, the total error can be estimated as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-142e8ef9-482b-4068-b343-c3e2acb801f2">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-142e8ef9-482b-4068-b343-c3e2acb801f2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-42a5aeaa-917f-4bde-8337-98bc83ce7681">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-42a5aeaa-917f-4bde-8337-98bc83ce7681" title="Permalink to this equation">#</a></span>\[\begin{align}
 \epsilon_{\rm tot} &amp;= \epsilon_a + \epsilon_r \\
 &amp;= \frac{\alpha}{N^\beta} + \sqrt{N} \epsilon_m.
 \end{align}\]</div>
