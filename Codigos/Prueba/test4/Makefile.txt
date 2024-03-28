@@ -1,0 +1,18 @@
+SHELL:=/bin/bash
+
+all : vector_main.x
+
+%.x : %.o vector_ops.o
+	g++ $^ -o $@
+
+test_average.x : vector_test.o vector_ops.o
+	g++ $^ -o $@
+
+test : test_average.x
+	./test_average.x
+
+%.o : %.cpp
+	g++ -c $<
+
+clean:
+	rm -f *.o *.x
